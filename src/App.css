@@ -1,24 +1,40 @@
-.fondo{
-  background: #485563;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.fondo{background: #1CD8D2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #93EDC7, #1CD8D2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
 }
 
+.fondoima{
 
-
-.fondoBarra{background: #5433FF;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, #5433FF);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #A5FECB, #20BDFF, #5433FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
+background-color: azure;
 
 
 }
 
+.fondoBarra{background: #283048; 
+
+}
+
+.letra1{
 
 
+color: rgba(250, 250, 250, 0.986);
+
+font-family: 'Enriqueta', serif;
+
+}
+
+.sube{
+position: relative;
+top: -6px;
+
+
+}
 .letra{
-
+color: rgba(250, 250, 250, 0.986);
 font-size: 25px;
+margin: 23px;
+
+font-family: 'Enriqueta', serif;
 
 }
