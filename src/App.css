@@ -11,9 +11,24 @@ background-color: azure;
 
 }
 
-.fondoBarra{background: #283048; 
+.fondoBarra{
+
+
+
+	background: #283048; 
 
 }
+
+
+.fondoB{
+
+
+
+	background: rgb(255, 255, 255); 
+
+}
+
+
 
 .letra1{
 
@@ -24,9 +39,17 @@ font-family: 'Enriqueta', serif;
 
 }
 
+
+.e{
+
+
+transition: 400ms;
+background-color: black;
+}
+
 .sube{
 position: relative;
-top: -6px;
+top: 4px;
 
 
 }
