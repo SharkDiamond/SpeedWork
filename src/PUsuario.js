@@ -76,7 +76,7 @@ const Elemento=(
 return (
 
 
-<div className="fondoBarra container rounded p-2 text-center container" >
+<div className="fondoBarra  rounded p-2 text-center container" >
       
 <img src={user} onClick={this.Entra}  width="102px"  height="102px" className="text-center"/>
 

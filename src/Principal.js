@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import InformeG from "./InformeG";
 import PUsuario from "./PUsuario";
 import ReportesDia from "./ReportesDia";
-
+import RedesSociales from "./RedesSociales";
 export default class Principal extends Component {
     render() {
         return (
@@ -11,9 +11,6 @@ export default class Principal extends Component {
                 
 
                 <div className="row m-3">
-
-   
-
 
 <div className="col-8">
 
@@ -34,15 +31,13 @@ export default class Principal extends Component {
 
 <div className="row m-3">
 
-<div className="col-8">
-
+<div className="col-4">
+<RedesSociales/>
 </div>
 
 <div className="col-4">
 
-
-
-
+<PUsuario/>
 
 </div>
 
@@ -58,10 +53,6 @@ export default class Principal extends Component {
 
 
 </div>
-
-
-
-
 
 
             </div>
