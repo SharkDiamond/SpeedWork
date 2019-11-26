@@ -12,8 +12,8 @@ super();
 this.state={
 Clientes:"Cantidad De Clientes",
 Reportes:"Cantidad De Reportes",
-Visitas:"Cantidad De visitas",
-mostrar:2
+Visitas:"Cantidad De Visitas",
+mostrar:0
 
 
 }
@@ -98,10 +98,8 @@ else if(this.state.mostrar!=0){
 <div className="container fondoBarra  rounded text-center p-4">
 
 
+<MD muestra={this.state.mostrar} enviaFuncion={this.cambia}/>
 
-<MD muestra={this.state.mostrar}/>
-<button className="btn bg-white" onClick={this.cambia} id={0}>Volver</button>
-    
 </div>
 
     )

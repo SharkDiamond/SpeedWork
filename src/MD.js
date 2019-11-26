@@ -12,11 +12,107 @@ export default class MD extends Component {
        if (this.props.muestra==1) {
            
         return (
-            <div className="container-fluid fondo">
-                
+            <div className="container-fluid">
+               
+<h1 className="letrageneral display-4 font-weight-bold d-inline">Clientes</h1>
 
-<h1>Clientes</h1>
+<button className="btn bg-white boton float-right" id={0} onClick={this.props.enviaFuncion}>Volver</button>
 
+
+<br/>
+<br/>
+
+<div className="row justify-content-center">
+
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Enero</p>
+</div>
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Febrero</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Marzo</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Abril</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Mayo</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Junio</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Julio</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Agosto</p>
+</div>
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Septiembre</p>
+</div>
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Octubre</p>
+</div>
+
+
+
+
+</div>
+
+
+<div className="row align-items-end izquierda">
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white  font-weight-bold">Noviembre</p>
+</div>
+
+
+<div className="col-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Diciembre</p>
+</div>
+
+
+
+</div>
 
             </div>
         )
@@ -27,56 +123,103 @@ export default class MD extends Component {
        else if(this.props.muestra==2) {
            
         return (
-            <div className="container-fluid fondo rounded">
-                
+            <div className="container-fluid">
+                 
+<h1 className="letrageneral display-4 font-weight-bold d-inline">Reportes</h1>
 
-<h1 className="display-4">Reportes</h1>
-
-<div className="row p-4">
-
-<div className="col-12   rounded ">
-<table className="table table-dark">
-<thead>
-<tr>
-<th>Id</th>
-<th>Nombre</th>
-<th>Estado</th>
-<th>Departamento</th>
-<th>Fecha</th>
-</tr>
-
-</thead>
-
-<tbody>
-<tr>
-
-<td>123</td>
-      <td>Instalacion Laureles</td>
-      <td>Abierto</td>
-      <td>Instalaciones</td>
-      <td>14-7-2019</td>
-</tr>
-<tr>
-
-<td>124</td>
-      <td>Remocion Jose Nuñez</td>
-      <td>Cerrado</td>
-      <td>Busqueda</td>
-      <td>17-7-2019</td>
-</tr>
+<button className="btn bg-white boton float-right" id={0} onClick={this.props.enviaFuncion}>Volver</button>
 
 
-</tbody>
+<br/>
+<br/>
+
+<div className="row justify-content-center">
 
 
 
 
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Enero</p>
+</div>
 
-</table>
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Febrero</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Marzo</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Abril</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Mayo</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Junio</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Julio</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Agosto</p>
+</div>
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Septiembre</p>
+</div>
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Octubre</p>
+</div>
+
+
+
 
 </div>
 
 
+<div className="row align-items-end izquierda">
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white  font-weight-bold">Noviembre</p>
+</div>
+
+
+<div className="col-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Diciembre</p>
+</div>
 
 
 
@@ -93,16 +236,116 @@ export default class MD extends Component {
        else if(this.props.muestra==3) {
            
         return (
-            <div className="container-fluid fondo">
+            <div className="container-fluid">
                 
+ 
+<h1 className="letrageneral display-4 font-weight-bold d-inline">Visitas</h1>
 
-<h1>Visitas</h1>
+<button className="btn bg-white boton float-right" id={0} onClick={this.props.enviaFuncion}>Volver</button>
+
+
+<br/>
+<br/>
+
+<div className="row justify-content-center">
+
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Enero</p>
+</div>
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Febrero</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Marzo</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Abril</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Mayo</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Junio</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Julio</p>
+</div>
+
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Agosto</p>
+</div>
+
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Septiembre</p>
+</div>
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Octubre</p>
+</div>
+
+
+
+
+</div>
+
+
+<div className="row align-items-end izquierda">
+
+<div className="col-2 mr-2">
+<p className="text-white">0</p>
+<p className="text-white  font-weight-bold">Noviembre</p>
+</div>
+
+
+<div className="col-2">
+<p className="text-white">0</p>
+<p className="text-white font-weight-bold">Diciembre</p>
+</div>
+
+
+
+</div>
 
 
             </div>
         )
 
        }
+
+
 
 
 

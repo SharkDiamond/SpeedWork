@@ -20,6 +20,15 @@ background-color: azure;
 }
 
 
+.boton{
+
+position: relative;
+
+top:22px;
+
+}
+
+
 .margen{
 
 
@@ -36,10 +45,16 @@ margin: 2px;
 }
 
 
+.izquierda{
+position: relative;
+right: -65px;
+
+}
+
 
 .letra1{
 
-
+transition: 1000ms;
 color: rgba(250, 250, 250, 0.986);
 
 font-family: 'Enriqueta', serif;
@@ -66,5 +81,16 @@ font-size: 25px;
 margin: 23px;
 
 font-family: 'Enriqueta', serif;
+
+}
+
+
+.letrageneral{
+
+color: white;
+
+font-family: 'Enriqueta', serif;
+
+
 
 }
