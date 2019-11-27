@@ -11,11 +11,35 @@ background-color: azure;
 
 }
 
+
+.grande{
+transition: 100ms;
+
+height: 295px;
+
+}
+
+.mostrarr{
+transition: 100ms;
+
+
+}
+
+
+.pequeño{
+transition: 200ms;
+
+height:119px;
+
+}
+
+
+
 .fondoBarra{
 
 
 
-	background: #283048; 
+background: #283048; 
 
 }
 

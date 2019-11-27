@@ -17,8 +17,9 @@ super();
 this.state={
 
 
-Ver:"d-none"
 
+animacion:"pequeño fondoBarra  rounded p-2 text-center container",
+Ver:"d-none"
 }
 
 
@@ -26,12 +27,27 @@ Ver:"d-none"
 
 
    
-Entra=()=>{
+actualiza=()=>{
 
     this.setState({
+
 Ver:""
 
     })
+
+
+}
+
+
+Entra=()=>{
+
+    this.setState({
+
+animacion:"grande fondoBarra  rounded p-2 text-center container"
+    })
+
+
+setTimeout(this.actualiza, 50);
 
 
 }
@@ -40,8 +56,8 @@ Sale=()=>{
 
 
   this.setState({
-    Ver:"d-none"
-
+    Ver:"d-none",
+animacion:"pequeño fondoBarra  rounded p-2 text-center container"
     })
 
 
@@ -62,7 +78,7 @@ const Elemento=(
 
 <a><p className="h4 cambialista text-danger">Cerrar Sesion</p></a>
 
-<button className="btn fondoB" onClick={this.Sale}>Ocultar</button>
+<button className="btn fondoB bg-white" onClick={this.Sale}>Ocultar</button>
 <br/>
 
 </div>
@@ -76,7 +92,7 @@ const Elemento=(
 return (
 
 
-<div className="fondoBarra  rounded p-2 text-center container" >
+<div className={this.state.animacion}>
       
 
 

@@ -56,7 +56,7 @@ constructor(){
             <p className="h1 cambialista text-warning">Reportes Del Dia</p>
             
            
-            <button className="btn fondoB" onClick={this.Sale}>Ocultar</button>
+            <button className="btn fondoB bg-white" onClick={this.Sale}>Ocultar</button>
             <br/>
             
             </div>

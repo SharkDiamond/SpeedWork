@@ -10,7 +10,7 @@ export default class Principal extends Component {
             <div className="container-fluid">
                 
 
-                <div className="row m-3">
+                <div className="row m-3 justify-content-center">
 
 <div className="col-8">
 
@@ -20,19 +20,15 @@ export default class Principal extends Component {
 
 </div>
    
-<div className="col-4">
-<PUsuario/>
-<br/>
-<ReportesDia/>
-</div>
+
 
   
     </div>
 
-<div className="row m-3">
+<div className="row m-3 justify-content-center">
 
 <div className="col-4">
-<RedesSociales/>
+<ReportesDia/>
 </div>
 
 <div className="col-4">

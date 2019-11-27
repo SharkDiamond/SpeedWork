@@ -76,7 +76,7 @@ mostrar:retornaid
     if (this.state.mostrar==0) {
         
         return (
-            <div className="container fondoBarra  rounded text-center p-4" onMouseEnter={this.entra} onMouseOut={this.sale}>
+            <div className="container fondoBarra  rounded text-center p-4" onClick={this.entra} onMouseOut={this.sale}>
                 
 
 <h1 className="letra1 display-4  d-inline font-weight-bold" onClick={this.cambia} id={1}>{this.state.Clientes}</h1>
