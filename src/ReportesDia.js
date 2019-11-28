@@ -10,7 +10,7 @@ constructor(){
     
     this.state={
     
-    
+    anima:"pequeño container fondoBarra  rounded text-center p-2",
     Ver:"d-none"
     
     }
@@ -18,15 +18,27 @@ constructor(){
     
     }
     
+
+
+actualiza=()=>{
+
+    this.setState({
+
+Ver:""
+
+    })
+    }
     
        
     Entra=()=>{
     
         this.setState({
-    Ver:""
-    
+       anima:"grande container fondoBarra  rounded text-center p-2",
+
         })
     
+setTimeout(this.actualiza, 50);
+
     
     }
     
@@ -34,6 +46,7 @@ constructor(){
     
     
       this.setState({
+          anima:"pequeño container fondoBarra  rounded text-center p-2",
         Ver:"d-none"
     
         })
@@ -55,7 +68,11 @@ constructor(){
             <div className={this.state.Ver}>
             <p className="h1 cambialista text-warning">Reportes Del Dia</p>
             
-           
+           <ol className="colorlista">
+<li>Visitas Naguabo</li>
+<li>Instalacion Nuevo Orden</li>
+<li>Desintalacion en el Hatillo</li>
+           </ol>
             <button className="btn fondoB bg-white" onClick={this.Sale}>Ocultar</button>
             <br/>
             
@@ -69,7 +86,7 @@ constructor(){
 
 
         return (
-            <div className="container fondoBarra  rounded text-center p-2">
+            <div className={this.state.anima}>
                 
                       
 <img src={dia} onClick={this.Entra}  width="102px"  height="102px" className="text-center"/>
