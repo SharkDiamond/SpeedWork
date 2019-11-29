@@ -12,6 +12,30 @@ background-color: azure;
 }
 
 
+.girar{
+
+transition: 500ms;
+
+transform: rotate(360deg);
+
+
+}
+
+
+.alreves{
+
+
+transition: 500ms;
+
+transform: rotate(-360deg);
+
+
+
+
+
+}
+
+
 .grande{
 transition: 100ms;
 

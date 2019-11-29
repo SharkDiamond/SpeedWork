@@ -44,7 +44,7 @@ mostrar:0
             
 Clientes:"Cantidad De Clientes",
 Reportes:"Cantidad De Reportes",
-Visitas:"Cantidad De visitas"
+Visitas:"Cantidad De Visitas"
 
 
                 

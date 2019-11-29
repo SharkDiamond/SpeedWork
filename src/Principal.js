@@ -21,6 +21,12 @@ export default class Principal extends Component {
 </div>
    
 
+<div className="col-1">
+
+<RedesSociales/>
+
+
+</div>
 
   
     </div>
@@ -37,6 +43,11 @@ export default class Principal extends Component {
 
 </div>
 
+
+
+<div className="col-1">
+
+</div>
 
 
 
