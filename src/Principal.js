@@ -10,10 +10,9 @@ export default class Principal extends Component {
             <div className="container-fluid">
                 
 
-                <div className="row m-3 justify-content-center">
+                <div className="row  ml-3 mb-3 mr-3  justify-content-center">
 
 <div className="col-8">
-
 
 <InformeG/>
 

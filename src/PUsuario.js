@@ -19,14 +19,15 @@ this.state={
 
 
 animacion:"pequeño fondoBarra  rounded p-2 text-center container",
-Ver:"d-none"
+Ver:"d-none",
+ov:false
 }
 
 
 }
 
 
-   
+
 actualiza=()=>{
 
     this.setState({
@@ -34,37 +35,47 @@ actualiza=()=>{
 Ver:""
 
     })
+    }
+    
 
 
-}
+Mostrar=()=>{
 
 
-Entra=()=>{
+if (this.state.ov==false) {
 
-    this.setState({
 
+this.setState({
+
+
+ov:true,
 animacion:"grande fondoBarra  rounded p-2 text-center container"
-    })
+
+
+
+})
 
 
 setTimeout(this.actualiza, 50);
 
+}
+
+else if (this.state.ov==true) {
+
+
+this.setState({
+
+
+ov:false,
+animacion:"pequeño fondoBarra  rounded p-2 text-center container",
+Ver:"d-none"
+
+})
+
 
 }
 
-Sale=()=>{
-
-
-  this.setState({
-    Ver:"d-none",
-animacion:"pequeño fondoBarra  rounded p-2 text-center container"
-    })
-
-
-
-
 }
-
 
    
     render() {
@@ -78,9 +89,6 @@ const Elemento=(
 
 <a><p className="h4 cambialista text-danger">Cerrar Sesion</p></a>
 
-<button className="btn fondoB bg-white" onClick={this.Sale}>Ocultar</button>
-<br/>
-
 </div>
   
             
@@ -91,13 +99,12 @@ const Elemento=(
 
 return (
 
-
 <div className={this.state.animacion}>
       
 
 
 
-<img src={user} onClick={this.Entra}  width="102px"  height="102px" className="text-center"/>
+<img src={user} onClick={this.Mostrar}  width="102px"  height="102px" className="text-center"/>
 
  
 {Elemento}
@@ -105,15 +112,7 @@ return (
             </div>
 
     )
-
-
-
-
-
-
-
-
-           
+      
     }
 
 }

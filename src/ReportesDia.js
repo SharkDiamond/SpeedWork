@@ -11,7 +11,8 @@ constructor(){
     this.state={
     
     anima:"pequeño container fondoBarra  rounded text-center p-2",
-    Ver:"d-none"
+    Ver:"d-none",
+    ov:false
     
     }
     
@@ -57,8 +58,43 @@ setTimeout(this.actualiza, 50);
     }
     
     
-   
-   
+   Mostrar=()=>{
+
+
+if (this.state.ov==false) {
+
+
+this.setState({
+
+
+ov:true,
+anima:"grande fondoBarra  rounded p-2 text-center container"
+
+
+
+})
+
+
+setTimeout(this.actualiza, 50);
+
+}
+
+else if (this.state.ov==true) {
+
+
+this.setState({
+
+
+ov:false,
+anima:"pequeño fondoBarra  rounded p-2 text-center container",
+Ver:"d-none"
+
+})
+
+
+}
+
+  } 
    
     render() {
 
@@ -72,10 +108,7 @@ setTimeout(this.actualiza, 50);
 <li>Visitas Naguabo</li>
 <li>Instalacion Nuevo Orden</li>
 <li>Desintalacion en el Hatillo</li>
-           </ol>
-            <button className="btn fondoB bg-white" onClick={this.Sale}>Ocultar</button>
-            <br/>
-            
+           </ol>   
             </div>
               
                         
@@ -89,7 +122,7 @@ setTimeout(this.actualiza, 50);
             <div className={this.state.anima}>
                 
                       
-<img src={dia} onClick={this.Entra}  width="102px"  height="102px" className="text-center"/>
+<img src={dia} onClick={this.Mostrar}  width="102px"  height="102px" className=""/>
 
  
 {Elemento}
