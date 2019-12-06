@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import dia from "./dia.png";
+import React, { Component } from 'react';
+import dia from "./imagenes/dia.png";
 export default class ReportesDia extends Component {
    
    
@@ -102,7 +102,7 @@ Ver:"d-none"
         const Elemento=(
 
             <div className={this.state.Ver}>
-            <p className="h1 cambialista text-warning">Reportes Del Dia</p>
+            <p className="h1 cambialista text-warning font-weight-bold">Reportes Del Dia</p>
             
            <ol className="colorlista">
 <li>Visitas Naguabo</li>

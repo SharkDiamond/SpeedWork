@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './App.css';
 
-import user from "./user.png";
+import user from "./imagenes/user.png";
 
 
 
@@ -83,11 +83,11 @@ Ver:"d-none"
 const Elemento=(
 
 <div className={this.state.Ver}>
-<p className="h1 cambialista text-success">Gabriel Arispe</p>
+<p className="h1  text-success font-weight-bold">Gabriel Arispe</p>
 
-<a href="https://www.youtube.com/watch?v=1GtZbkvCZfM"><p className="h4 cambialista">Cambiar Datos</p></a>
+<a href="https://www.youtube.com/watch?v=1GtZbkvCZfM"><p className="h4 font-weight-bold">Cambiar Datos</p></a>
 
-<a><p className="h4 cambialista text-danger">Cerrar Sesion</p></a>
+<a><p className="h4  text-danger font-weight-bold">Cerrar Sesion</p></a>
 
 </div>
   

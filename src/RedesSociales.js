@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import "./App.css";
-import colaboracion from "./colaboracion.png";       
-import facebook from "./facebook.png";
-import instagram from "./instagram.png";
-import gorjeo from "./gorjeo.png";
+import colaboracion from "./imagenes/colaboracion.png";       
+import facebook from "./imagenes/facebook.png";
+import instagram from "./imagenes/instagram.png";
+import gorjeo from "./imagenes/gorjeo.png";
 
 export default class RedesSociales extends Component {
  

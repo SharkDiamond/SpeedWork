@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import conversacion from "./conversacion.png";
-import conexion from "./conexion.png";
-import analisis from "./analisis.png";
-import reloj from "./reloj.png";
+import conversacion from "./imagenes/conversacion.png";
+import analisis from "./imagenes/analisis.png";
+import conexion from "./imagenes/conexion.png";
+import reloj from "./imagenes/reloj.png";
+
+
+
 export default class Barra extends Component {
 
   
