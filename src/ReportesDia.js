@@ -31,31 +31,7 @@ Ver:""
     }
     
        
-    Entra=()=>{
     
-        this.setState({
-       anima:"grande container fondoBarra  rounded text-center p-2",
-
-        })
-    
-setTimeout(this.actualiza, 50);
-
-    
-    }
-    
-    Sale=()=>{
-    
-    
-      this.setState({
-          anima:"pequeño container fondoBarra  rounded text-center p-2",
-        Ver:"d-none"
-    
-        })
-    
-    
-    
-    
-    }
     
     
    Mostrar=()=>{
@@ -68,7 +44,7 @@ this.setState({
 
 
 ov:true,
-anima:"grande fondoBarra  rounded p-2 text-center container"
+anima:"grande fondoBarra  rounded p-2  text-center container"
 
 
 

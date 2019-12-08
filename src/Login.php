@@ -62,7 +62,7 @@ background: #283048;
 
 
 
-<h1 class="text-center text-white font-weight-bold" style="font-family:Enriqueta;">SpeedWork</h1>
+<h1 class="text-center text-white font-weight-bold" style="font-family:arial;">SpeedWork</h1>
 
 <form action="Verificacion.php" method="post">
 

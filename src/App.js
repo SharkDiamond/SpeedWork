@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Barra from "./Barra";
 import Principal from "./Principal";
+import Clientes from "./Clientes";
 function App() {
   return (
     <div className="fondo">
@@ -11,7 +12,7 @@ function App() {
 
     <br/>
     <br/>
-   <Principal/>
+   <Clientes/>
 
 
 
