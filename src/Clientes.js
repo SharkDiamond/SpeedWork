@@ -62,7 +62,7 @@ return (
 <div className="row p-3 fondoBarra rounded">
 
 
-<div className="col-2 bg-dark rounded p-3">
+<div className="col-2 rounded p-3 border">
 <div className="text-center">
 <img src={vip} width="80px" heigh="80px" className=""/>
      
@@ -78,13 +78,22 @@ return (
 
 
 
-<div className="col-4 bg-danger ">
+<div className="col-4  ">
 <br/>
 <Iclientes Titulo="VIP" Cantidad={500}/>
 </div>
 
 
-<div className="col-6 fondoBarra text-center p-2 rounded bg-primary">
+<div className="col-6 fondoBarra text-center  rounded  p-3 border">
+
+<h1 className="text-white font-weight-bold mt-3">Cantidad Total De Clientes</h1>
+
+<h1 className="text-white">500</h1>
+
+<h1 className="text-white font-weight-bold">Clientes Cancelados</h1>
+
+<h1 className="text-white ">200</h1>
+
 
 
 </div>
