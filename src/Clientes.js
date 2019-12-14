@@ -108,7 +108,7 @@ return (
 <div className="col-12">
 <br/>
 
-<h1 className="text-center display-4 text-white">Perfil</h1>
+<h1 className="text-center display-4 text-white ">Perfil</h1>
 <br/>
 <br/>
 <br/>
