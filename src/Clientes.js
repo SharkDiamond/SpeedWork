@@ -14,7 +14,11 @@ constructor(){
     super();
     
     this.state={
-tipoCliente:"VIP"    
+tipoCliente:"VIP",
+primera:"fondominibarra",
+segunda:"",
+tercera:""
+
 
     }
     
@@ -50,13 +54,56 @@ tipoCliente:"VIP"
 
 cambiacliente=(etiqueta)=>{
 
+if (etiqueta.target.id==="VIP") {
 
 this.setState({
 
-tipoCliente:etiqueta.target.id
-
+tipoCliente:etiqueta.target.id,
+primera:"fondominibarra",
+segunda:"",
+tercera:""
 
 })
+
+
+
+}
+
+
+else if (etiqueta.target.id==="Comercial") {
+
+
+this.setState({
+
+tipoCliente:etiqueta.target.id,
+primera:"",
+segunda:"fondominibarra",
+tercera:""
+
+})
+
+
+
+}
+
+else if (etiqueta.target.id==="Residencial") {
+
+
+this.setState({
+
+tipoCliente:etiqueta.target.id,
+primera:"",
+segunda:"",
+tercera:"fondominibarra"
+
+})
+
+
+
+}
+
+
+
 
 
 }
@@ -76,28 +123,28 @@ return (
 <div className="row p-3 fondoBarra rounded">
 
 
-<div className="col-2 rounded p-3 border">
+<div className="col-2 rounded p-3 ">
 <div className="text-center">
-<img src={vip} width="80px" heigh="80px" className="" id="VIP" onClick={this.cambiacliente}/>
+
+
+
+<img src={vip} width="80px" heigh="80px" className={this.state.primera} id="VIP" onClick={this.cambiacliente}/>
      
 
-<img src={tienda} width="80px" heigh="80px" className="" id="Comercial" onClick={this.cambiacliente}/>
+<img src={tienda} width="80px" heigh="80px" className={this.state.segunda} id="Comercial" onClick={this.cambiacliente}/>
 
      
 
-<img src={casa} width="80px" heigh="80px" id="Residencial" onClick={this.cambiacliente}/>
+<img src={casa} width="80px" heigh="80px" className={this.state.tercera} id="Residencial" onClick={this.cambiacliente}/>
 
    </div>
 </div>
 
 
 
-<div className="col-4  ">
-<br/>
-<Iclientes Titulo={this.state.TipoCliente} Cantidad={500}/>
 
-</div>
 <div className="col-6 fondoBarra text-center  rounded  p-3 border">
+
 
 <h1 className="text-white font-weight-bold mt-3">Cantidad Total De Clientes</h1>
 <h1 className="text-white">500</h1>
@@ -109,6 +156,14 @@ return (
 
 
 </div>
+
+
+<div className="col-4  ">
+<br/>
+<Iclientes Titulo={this.state.tipoCliente} />
+
+</div>
+
 
      </div>
       

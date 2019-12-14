@@ -12,7 +12,7 @@ constructor(){
     super();
     
     this.state={
-    
+    eleccion:"ID"
 
     }
     
@@ -20,7 +20,17 @@ constructor(){
     }
     
 
+cambia=(etiqueta)=>{
 
+this.setState({
+
+
+eleccion:etiqueta.target.value
+
+})
+
+
+}
    
     render() {
 
@@ -34,12 +44,23 @@ return (
 <div className="col-12 ">  
 
 
-<h1 className="text-white letra1 p-2 text-center">{this.props.Titulo}</h1>
+<h1 className="text-white letra1 p-2 text-center font-weight-bold">{this.props.Titulo}</h1>
 
 <form className="mb-1 mt-1 text-center">
 
 
-<input type="text" placeholder="Nombre o ID"/> 
+<input type="text" placeholder={this.state.eleccion}/> 
+<br/>
+<br/>
+<select className="seleccion" onClick={this.cambia} >
+<option value="ID">ID</option>
+
+<option value="Nombre">Nombre</option>
+
+<option value="Telefono">Telefono</option>
+</select>
+
+
 
 <br/>
 
