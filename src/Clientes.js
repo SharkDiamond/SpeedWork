@@ -14,7 +14,7 @@ constructor(){
     super();
     
     this.state={
-    
+tipoCliente:"VIP"    
 
     }
     
@@ -48,6 +48,20 @@ constructor(){
 
 */
 
+cambiacliente=(etiqueta)=>{
+
+
+this.setState({
+
+tipoCliente:etiqueta.target.id
+
+
+})
+
+
+}
+
+
 
    
     render() {
@@ -64,14 +78,14 @@ return (
 
 <div className="col-2 rounded p-3 border">
 <div className="text-center">
-<img src={vip} width="80px" heigh="80px" className=""/>
+<img src={vip} width="80px" heigh="80px" className="" id="VIP" onClick={this.cambiacliente}/>
      
 
-<img src={tienda} width="80px" heigh="80px" className=""/>
+<img src={tienda} width="80px" heigh="80px" className="" id="Comercial" onClick={this.cambiacliente}/>
 
      
 
-<img src={casa} width="80px" heigh="80px" />
+<img src={casa} width="80px" heigh="80px" id="Residencial" onClick={this.cambiacliente}/>
 
    </div>
 </div>
@@ -80,14 +94,12 @@ return (
 
 <div className="col-4  ">
 <br/>
-<Iclientes Titulo="VIP" Cantidad={500}/>
+<Iclientes Titulo={this.state.TipoCliente} Cantidad={500}/>
+
 </div>
-
-
 <div className="col-6 fondoBarra text-center  rounded  p-3 border">
 
 <h1 className="text-white font-weight-bold mt-3">Cantidad Total De Clientes</h1>
-
 <h1 className="text-white">500</h1>
 
 <h1 className="text-white font-weight-bold">Clientes Cancelados</h1>
