@@ -44,7 +44,7 @@ return (
 <div className="col-12 ">  
 
 
-<h1 className="text-white letra1 p-2 text-center font-weight-bold">{this.props.Titulo}</h1>
+<h1 className="text-white letra1 p-2 text-center font-weight-bold" onClick={this.props.pasafuncion}>{this.props.Titulo}</h1>
 
 <form className="mb-1 mt-1 text-center">
 
@@ -64,9 +64,7 @@ return (
 
 <br/>
 
-<input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn"/>
-
-
+<input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn" onClick={this.props.pasafuncion}/>
 
 </form>
 

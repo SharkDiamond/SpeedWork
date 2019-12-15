@@ -18,7 +18,10 @@ constructor(){
 tipoCliente:"VIP",
 primera:"fondominibarra",
 segunda:"",
-tercera:""
+tercera:"",
+primerafila:false,
+segundafila:false,
+veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none"
 
 
     }
@@ -64,11 +67,11 @@ primera:"fondominibarra",
 segunda:"",
 tercera:""
 
-})
-
+});
 
 
 }
+
 
 
 else if (etiqueta.target.id==="Comercial") {
@@ -111,12 +114,134 @@ tercera:"fondominibarra"
 
 
 
+
+
+
+ver=(e)=>{
+
+//quesevea col-4  pt-3 cajaminip rounded fondoBarra
+
+var segundacolumna=document.getElementById("perfil");
+
+var componente=document.getElementById("componenteperfil");
+
+
+if (this.state.segundafila==false) {
+
+this.setState({
+
+
+segundafila:true,
+veri:"quitar"
+
+})
+
+
+segundacolumna.className="quesevea col-4  pt-3 cajaminip rounded fondoBarra";
+
+
+setTimeout(()=>{
+
+
+componente.className="";
+
+
+},300);
+
+
+
+}
+
+else if (this.state.segundafila==true) {
+
+
+this.setState({
+
+
+segundafila:false
+
+
+})
+
+
+
+
+
+componente.className="d-none";
+
+
+
+segundacolumna.className="quitar";
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+}
+
+
+
+ver2=()=>{
+
+var fila=document.getElementById("resultado");
+
+
+
+if (this.state.primerafila==false) {
+
+this.setState({
+
+
+primerafila:true
+
+
+})
+
+
+fila.className="quesevea col-6 fondoBarra rounded";
+
+
+
+
+}
+
+
+if (this.state.primerafila==true) {
+
+this.setState({
+
+
+primerafila:false
+
+
+})
+
+
+fila.className=" quitar";
+
+}
+
+
+
+}
+
+
+
    
     render() {
 
 return (
 
-            <div className="container border p-3 rounded">
+            <div className="container  p-3 rounded">
 
 
 
@@ -147,7 +272,7 @@ return (
 <div className="col-6 fondoBarra text-center  rounded  p-3 border">
 
 
-<h1 className="text-white font-weight-bold mt-3">Cantidad Total De Clientes</h1>
+<h1 className="text-white font-weight-bold mt-3" >Cantidad Total De Clientes</h1>
 <h1 className="text-white">500</h1>
 
 <h1 className="text-white font-weight-bold">Clientes Cancelados</h1>
@@ -161,7 +286,7 @@ return (
 
 <div className="col-4  ">
 <br/>
-<Iclientes Titulo={this.state.tipoCliente} />
+<Iclientes Titulo={this.state.tipoCliente} pasafuncion={this.ver2}/>
 
 </div>
 
@@ -175,23 +300,23 @@ return (
 
 
 
-<div className="col-6 fondoBarra rounded">
+<div className="quitar" id="resultado">
 <br/>
 
-<h1 className="text-center display-4 text-white ">Resultados</h1>
+<h1 className="text-center display-4 text-white font-weight-bold">Resultados</h1>
 <br/>
-<br/>
-<br/>
+
+<ul><li className="text-warning h4 font-weight-bold" onClick={this.ver}>Medical Cannbis</li></ul>
 
 <br/>
 
 </div>
 
 
-<div className="col-4  pt-3 cajaminip rounded fondoBarra">
-
-<Miniperfil/>
-
+<div className="quitar"  id="perfil">
+<div className="d-none" id="componenteperfil">
+<Miniperfil  />
+</div>
 
 </div>
 

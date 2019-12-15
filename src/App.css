@@ -8,6 +8,27 @@
 }
 
 
+
+
+.quitar{
+visibility:hidden !important;
+transition: 400ms;
+
+}
+
+
+.quesevea{
+transition: 600ms;
+
+
+
+
+
+
+}
+
+
+
 .fondominibarra{
 
 transition: 600ms;
