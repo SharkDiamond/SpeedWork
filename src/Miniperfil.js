@@ -26,7 +26,7 @@ constructor(){
 
 return (
 
-            <div className="m-2" align="center">
+            <div className="" align="center">
 
 <div class="card  mb-3 minip bg-white" >
   <div class="card-header bg-transparent border-primary"><h3 className="font-weight-bold">Medical Cannabis</h3></div>

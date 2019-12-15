@@ -188,7 +188,7 @@ return (
 </div>
 
 
-<div className="col-4   cajaminip rounded fondoBarra">
+<div className="col-4  pt-3 cajaminip rounded fondoBarra">
 
 <Miniperfil/>
 
