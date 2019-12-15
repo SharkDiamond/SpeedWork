@@ -11,7 +11,7 @@ function App() {
     <Barra/>
 
     <br/>
-    <br/>
+
    <Clientes/>
 
 

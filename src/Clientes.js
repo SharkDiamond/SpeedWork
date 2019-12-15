@@ -4,6 +4,7 @@ import Iclientes from "./Iclientes.js";
 import vip from "./imagenes/vip.png";
 import tienda from "./imagenes/tienda.png";
 import casa from "./imagenes/casa.png";
+import Miniperfil from "./Miniperfil.js";
 
 export default class Clientes extends Component {
    
@@ -170,17 +171,27 @@ return (
 
 
 
-<div className="row fondoBarra mt-4 rounded">
+<div className="row  mt-4 rounded justify-content-center">
 
-<div className="col-12">
-<br/>
 
-<h1 className="text-center display-4 text-white ">Perfil</h1>
-<br/>
-<br/>
+
+<div className="col-6 fondoBarra rounded">
 <br/>
 
+<h1 className="text-center display-4 text-white ">Resultados</h1>
 <br/>
+<br/>
+<br/>
+
+<br/>
+
+</div>
+
+
+<div className="col-4   cajaminip rounded fondoBarra">
+
+<Miniperfil/>
+
 
 </div>
 
