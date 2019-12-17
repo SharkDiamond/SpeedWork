@@ -4,15 +4,30 @@ import './App.css';
 import Barra from "./Barra";
 import Principal from "./Principal";
 import Clientes from "./Clientes";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+
+
 function App() {
   return (
     <div className="fondo">
-    
-    <Barra/>
+    <Router>
+  <Barra/>
 
     <br/>
+ 
 
-   <Clientes/>
+<Route path="/" exact component={Principal}/>
+
+<Route path="/Clientes" exact component={Clientes}/>
+
+    </Router>
+  
+
+
+
+
 
 
 
