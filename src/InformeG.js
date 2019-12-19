@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
 import MD from "./MD.js";
-
+import axios from "axios";
 
 export default class InformeG extends Component {
     
@@ -21,8 +21,7 @@ mostrar:0
 
 
     }
-    entra=()=>{
-
+ entra=()=>{
 
         this.setState({
         
@@ -69,7 +68,26 @@ mostrar:retornaid
 }
 
 
+ componentWillMount(){
 
+
+axios.get('http://localhost:8080/restback/index.php/Peticion/i/a/1/format/json')
+  .then(function (response) {
+  
+alert(""+response);
+
+   
+  })
+  .catch(function (error) {
+    // handle error
+    console.log("PROBLEMAS");
+  })
+  .finally(function () {
+   
+  });
+
+
+}
     render() {
        
        
