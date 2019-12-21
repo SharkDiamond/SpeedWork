@@ -1,8 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
-//require APPPATH. 'libraries/REST_controller.php';
+
      require APPPATH . 'libraries/REST_Controller.php';
 
 class Peticion extends REST_Controller {
@@ -15,8 +18,10 @@ class Peticion extends REST_Controller {
        }  
 
 
+
+
   public function i_get(){
-           $r = array('a' => 1,"b"=>2,"c"=>3);
+           $r = array('a' => 50,"b"=>40,"c"=>1000);
            $this->response($r); 
        }
    

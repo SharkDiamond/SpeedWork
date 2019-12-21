@@ -23,14 +23,32 @@ mostrar:0
     }
  entra=()=>{
 
-        this.setState({
+
+
+   axios.get('http://localhost:8080/restback/index.php/Peticion/i?format=json')
+  .then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
+
+
+this.setState({
+
+Clientes:response.data.a,
+ Reportes:response.data.b,
+Visitas:response.data.c
+
+})
+
+
+
+  })
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+
+    console.log(error);
+    alert(error);
+  });
+
         
-            Clientes:12,
-            Reportes:23,
-            Visitas:59
-            
-            
-            })
         
         
         }
@@ -68,26 +86,38 @@ mostrar:retornaid
 }
 
 
- componentWillMount(){
+ componentDidMount(){
 
 
-axios.get('http://localhost:8080/restback/index.php/Peticion/i/a/1/format/json')
-  .then(function (response) {
-  
-alert(""+response);
+/*
+   axios.get('http://localhost:8080/restback/index.php/Peticion/i?format=json')
+  .then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
 
-   
+
+this.setState({
+
+Clientes:response.data.a
+
+})
+
+
+
   })
-  .catch(function (error) {
-    // handle error
-    console.log("PROBLEMAS");
-  })
-  .finally(function () {
-   
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+
+    console.log(error);
+    alert(error);
   });
+*/
+
 
 
 }
+
+
+
     render() {
        
        
