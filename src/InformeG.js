@@ -32,9 +32,9 @@ mostrar:0
 
 this.setState({
 
-Clientes:response.data.a,
- Reportes:response.data.b,
-Visitas:response.data.c
+Clientes:response.data.CLIENTES,
+ Reportes:response.data.REPORTES,
+Visitas:response.data.VISITAS
 
 })
 

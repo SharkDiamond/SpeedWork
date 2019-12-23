@@ -29,14 +29,16 @@ CREATE TABLE `Clientes` (
   `Direccion` varchar(80) NOT NULL,
   `Telefono` bigint(20) NOT NULL,
   `CorreoElectronicoCliente` varchar(70) NOT NULL,
-  `ReporteCliente` int(11) NOT NULL,
+  `ReporteCliente` int(11) DEFAULT NULL,
   `Tipo` int(11) NOT NULL,
+  `FechaCreacionPerfil` date NOT NULL,
+  `EstadoCliente` tinyint(1) NOT NULL,
   PRIMARY KEY (`idClientes`),
   KEY `ReporteCliente` (`ReporteCliente`),
   KEY `Tipo` (`Tipo`),
   CONSTRAINT `Clientes_ibfk_1` FOREIGN KEY (`ReporteCliente`) REFERENCES `Reportes` (`idReporte`),
   CONSTRAINT `Clientes_ibfk_2` FOREIGN KEY (`Tipo`) REFERENCES `TipoCliente` (`idTipoCliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +47,7 @@ CREATE TABLE `Clientes` (
 
 LOCK TABLES `Clientes` WRITE;
 /*!40000 ALTER TABLE `Clientes` DISABLE KEYS */;
+INSERT INTO `Clientes` VALUES (2,'Nacho','Lopez','Calle Merida',3434365,'nachosfsf@gmail.com',NULL,3,'2019-12-23',1);
 /*!40000 ALTER TABLE `Clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +89,7 @@ CREATE TABLE `Departamentos` (
   `idDepartamento` int(11) NOT NULL AUTO_INCREMENT,
   `NombreDepartamento` varchar(45) NOT NULL,
   PRIMARY KEY (`idDepartamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,6 +98,7 @@ CREATE TABLE `Departamentos` (
 
 LOCK TABLES `Departamentos` WRITE;
 /*!40000 ALTER TABLE `Departamentos` DISABLE KEYS */;
+INSERT INTO `Departamentos` VALUES (1,'Visitas');
 /*!40000 ALTER TABLE `Departamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-22  2:18:26
+-- Dump completed on 2019-12-23 17:34:45
