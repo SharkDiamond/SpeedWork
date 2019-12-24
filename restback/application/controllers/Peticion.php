@@ -26,7 +26,7 @@ class Peticion extends REST_Controller {
 
 
 
-  public function i_get(){
+  public function General_get(){
       //GENERO LA CONSULA PARA OBTENER TODOS LOS CLIENTES
 $consulta1=$this->db->query("select * from Clientes");
   
