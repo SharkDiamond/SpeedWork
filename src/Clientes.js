@@ -5,6 +5,9 @@ import vip from "./imagenes/vip.png";
 import tienda from "./imagenes/tienda.png";
 import casa from "./imagenes/casa.png";
 import Miniperfil from "./Miniperfil.js";
+import axios from "axios";
+
+
 
 export default class Clientes extends Component {
    
@@ -21,12 +24,18 @@ segunda:"",
 tercera:"",
 primerafila:false,
 segundafila:false,
-veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none"
+veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none",
+cantidad:0,
+cancelados:0
 
 
     }
     
     
+
+this.PEDIR=this.PEDIR.bind(this);
+
+
     }
     
 
@@ -56,6 +65,170 @@ veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none"
 
 */
 
+
+
+PEDIR(tipo){
+
+
+
+switch(tipo){
+
+case "VIP":
+
+axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesVip?format=json').then((respuesta)=>{
+
+
+
+this.setState({
+
+cantidad:respuesta.data.CANTIDAD,
+cancelados:respuesta.data.CANCELADOS
+
+
+
+
+})
+
+
+
+}).catch((error)=>{
+
+
+
+alert("ERROR");
+
+
+}
+
+
+
+
+);
+
+break;
+
+case "Comercial":
+
+
+axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesComerciales?format=json').then((respuesta)=>{
+
+
+
+this.setState({
+
+cantidad:respuesta.data.CANTIDAD,
+cancelados:respuesta.data.CANCELADOS
+
+
+
+
+})
+
+
+
+}).catch((error)=>{
+
+
+
+alert("ERROR");
+
+
+}
+
+
+
+
+);
+
+break;
+
+
+case "Residencial":
+
+axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesResidenciales?format=json').then((respuesta)=>{
+
+
+
+this.setState({
+
+cantidad:respuesta.data.CANTIDAD,
+cancelados:respuesta.data.CANCELADOS
+
+
+
+
+})
+
+
+
+
+}).catch((error)=>{
+
+
+
+alert("ERROR");
+
+
+}
+
+
+
+
+);
+
+
+
+break;
+
+
+
+}
+
+
+
+
+}
+
+
+componentDidMount(){
+
+
+axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesVip?format=json').then((respuesta)=>{
+
+
+
+this.setState({
+
+cantidad:respuesta.data.CANTIDAD,
+cancelados:respuesta.data.CANCELADOS
+
+
+
+
+})
+
+
+
+
+}).catch((error)=>{
+
+
+
+alert("ERROR");
+
+
+}
+
+
+
+
+);
+
+
+
+}
+
+
 cambiacliente=(etiqueta)=>{
 
 if (etiqueta.target.id==="VIP") {
@@ -68,6 +241,11 @@ segunda:"",
 tercera:""
 
 });
+
+this.PEDIR(etiqueta.target.id);
+
+
+console.log(this.state.cantidad);
 
 
 }
@@ -87,6 +265,11 @@ tercera:""
 })
 
 
+this.PEDIR(etiqueta.target.id);
+
+
+console.log(this.state.cantidad);
+
 
 }
 
@@ -102,6 +285,10 @@ tercera:"fondominibarra"
 
 })
 
+
+
+
+this.PEDIR(etiqueta.target.id);
 
 
 }
@@ -273,11 +460,11 @@ return (
 
 
 <h1 className="text-white font-weight-bold mt-3" >Cantidad Total De Clientes</h1>
-<h1 className="text-white">500</h1>
+<h1 className="text-white">{this.state.cantidad}</h1>
 
 <h1 className="text-white font-weight-bold">Clientes Cancelados</h1>
 
-<h1 className="text-white ">200</h1>
+<h1 className="text-white ">{this.state.cancelados}</h1>
 
 
 

@@ -25,7 +25,7 @@ mostrar:0
 
 
 
-   axios.get('http://localhost:8080/restback/index.php/Peticion/i?format=json')
+   axios.get('http://localhost:8080/restback/index.php/Peticion/General?format=json')
   .then((response) => {
     //RESPUESTA SI TODO SALE BIEN
 
