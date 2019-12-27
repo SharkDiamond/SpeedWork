@@ -50,6 +50,28 @@ $resultado = array('CLIENTES' => $consulta1->num_rows(),"REPORTES"=>$consulta2->
    
 
 
+public function ClientesEnMes_get(){
+
+for ($i=1; $i<=12; $i++) { 
+
+
+$consulta=$this->db->query("select * from Clientes where MONTH(FechaCreacionPerfil)=" . $i . " and EstadoCliente=true");
+
+
+$valorarreglo=$i-1;
+
+$MESESVALORES[$valorarreglo]=$consulta->num_rows();
+
+
+}
+
+$MESES = array('Enero'=>$MESESVALORES[0],"Febrero"=>$MESESVALORES[1],"Marzo"=>$MESESVALORES[2],"Abril"=>$MESESVALORES[3],"Mayo"=>$MESESVALORES[4],"Junio"=>$MESESVALORES[5],"Julio"=>$MESESVALORES[6],"Agosto"=>$MESESVALORES[7],"Septiembre"=>$MESESVALORES[8],"Octubre"=>$MESESVALORES[9],"Noviembre"=>$MESESVALORES[10],"Diciembre"=>$MESESVALORES[11]);
+
+$this->response($MESES);
+
+
+}
+
 public function ObtenerClientesVip_get(){
 
 
