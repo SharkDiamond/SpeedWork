@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import dia from "./imagenes/dia.png";
+import axios from "axios";
+
+
+
 export default class ReportesDia extends Component {
    
    
@@ -12,7 +16,8 @@ constructor(){
     
     anima:"pequeño container fondoBarra  rounded text-center p-2",
     Ver:"d-none",
-    ov:false
+    ov:false,
+    reportes:"Nada Al Momento"
     
     }
     
@@ -31,7 +36,31 @@ Ver:""
     }
     
        
-    
+    componentDidMount(){
+axios.get("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json")
+  .then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
+
+
+this.setState({
+
+
+reportes:response.data
+
+
+})
+
+
+  })
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+
+    console.log(error);
+    alert(error);
+  });
+
+
+} 
     
     
    Mostrar=()=>{
@@ -39,7 +68,31 @@ Ver:""
 
 if (this.state.ov==false) {
 
+axios.get("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json")
+  .then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
 
+
+this.setState({
+
+
+ov:true,
+anima:"grande fondoBarra  rounded p-2  text-center container",
+reportes:response.data
+
+
+})
+
+
+  })
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+
+    console.log(error);
+    alert(error);
+  });
+
+/*
 this.setState({
 
 
@@ -49,9 +102,9 @@ anima:"grande fondoBarra  rounded p-2  text-center container"
 
 
 })
+*/
 
-
-setTimeout(this.actualiza, 50);
+setTimeout(this.actualiza, 80);
 
 }
 
@@ -81,9 +134,9 @@ Ver:"d-none"
             <p className="h1 cambialista text-warning font-weight-bold">Reportes Del Dia</p>
             
            <ol className="colorlista">
-<li>Visitas Naguabo</li>
-<li>Instalacion Nuevo Orden</li>
-<li>Desintalacion en el Hatillo</li>
+<li>{this.state.reportes.Primero}</li>
+<li>{this.state.reportes.Segundo}</li>
+<li>{this.state.reportes.Tercero}</li>
            </ol>   
             </div>
               

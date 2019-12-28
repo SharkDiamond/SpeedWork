@@ -50,12 +50,12 @@ $resultado = array('CLIENTES' => $consulta1->num_rows(),"REPORTES"=>$consulta2->
    
 
 
-public function ClientesEnMes_get(){
-
+public function EnviaDatosMes($sentencia){
+ 
 for ($i=1; $i<=12; $i++) { 
 
 
-$consulta=$this->db->query("select * from Clientes where MONTH(FechaCreacionPerfil)=" . $i . " and EstadoCliente=true");
+$consulta=$this->db->query($sentencia . $i);
 
 
 $valorarreglo=$i-1;
@@ -70,7 +70,30 @@ $MESES = array('Enero'=>$MESESVALORES[0],"Febrero"=>$MESESVALORES[1],"Marzo"=>$M
 $this->response($MESES);
 
 
+//CIERRO LA CONEXION
+           $this->db->close();
+
+
 }
+
+
+
+public function ClientesEnMes_get(){
+
+$this->EnviaDatosMes("select * from Clientes where MONTH(FechaCreacionPerfil)=");
+
+}
+
+
+
+public function ReportesEnMes_get(){
+
+$this->EnviaDatosMes("select * from Reportes where MONTH(FechaCreacion)=");
+
+}
+
+
+
 
 public function ObtenerClientesVip_get(){
 
@@ -132,6 +155,80 @@ $this->response($datos);
 
 }
 
+
+
+public function ultimosReportes_get(){
+//select NombreReporte from Reportes where Estado=true LIMIT 3
+
+$reportes=$this->db->query("select NombreReporte from Reportes where Estado=true LIMIT 3");
+$cuenta=0;
+
+
+foreach ($reportes->result_array() as  $v) {
+
+
+$NR[$cuenta]= $v["NombreReporte"];
+
+$cuenta++;
+
+}
+
+if (isset($NR[0])) {
+
+
+$data = array('Primero' => $NR[0]);
+
+
+
+$this->response($data);
+
+
+
+//CIERRO LA CONEXION
+           $this->db->close();
+}
+
+if (isset($NR[0],$NR[1])) {
+
+
+$data = array('Primero' => $NR[0],"Segundo"=>$NR[1]);
+
+
+
+$this->response($data);
+
+
+
+//CIERRO LA CONEXION
+           $this->db->close();
+
+
+
+}
+
+
+ if (isset($NR[0],$NR[1],$NR[2])) {
+
+  
+$data = array('Primero' => $NR[0],"Segundo"=>$NR[1],"Tercero"=>$NR[2]);
+
+
+
+$this->response($data);
+
+
+
+//CIERRO LA CONEXION
+           $this->db->close();
+
+
+
+}
+
+
+
+
+}
 
 
 

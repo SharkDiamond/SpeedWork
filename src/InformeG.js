@@ -13,7 +13,8 @@ this.state={
 Clientes:"Cantidad De Clientes",
 Reportes:"Cantidad De Reportes",
 Visitas:"Cantidad De Visitas",
-mostrar:0
+mostrar:0,
+Meses:null
 
 
 }
@@ -74,10 +75,50 @@ cambia=(p)=>{
 
     const retornaid=p.target.id;
 
+
+ const mes=["","ClientesEnMes","ReportesEnMes","VisitasEnMes"];
+
+
+axios.get("http://localhost:8080/restback/index.php/Peticion/" + mes[retornaid] + "?format=json")
+  .then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
+
+
 this.setState({
 
+mostrar:retornaid,
+Meses:response.data
+
+
+})
+
+console.table(this.state.Meses);
+
+  })
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+
+    console.log(error);
+    alert(error);
+  });
+
+
+
+
+
+
+}
+
+
+
+Vuelve=(etiqueta)=>{
+  const retornaid=etiqueta.target.id;
+
+
+this.setState({
 
 mostrar:retornaid
+
 
 
 })
@@ -146,7 +187,7 @@ else if(this.state.mostrar!=0){
 <div className="container fondoBarra  rounded text-center p-4">
 
 
-<MD muestra={this.state.mostrar} enviaFuncion={this.cambia}/>
+<MD muestra={this.state.mostrar} enviaFuncion={this.Vuelve} EnviaDatos={this.state.Meses}/>
 
 </div>
 
