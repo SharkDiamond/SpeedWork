@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import dia from "./imagenes/dia.png";
 
-
+import axios from "axios";
 
 export default class Iclientes extends Component {
    
@@ -12,14 +12,18 @@ constructor(){
     super();
     
     this.state={
-    eleccion:"ID"
+    eleccion:"ID",
+    datobusqueda:"",
+cliente:1
 
     }
     
-    
+this.AsignarDatos=this.AsignarDatos.bind(this);
+   
+
     }
     
-
+//Para lo del placesholder
 cambia=(etiqueta)=>{
 
 this.setState({
@@ -31,6 +35,101 @@ eleccion:etiqueta.target.value
 
 
 }
+
+
+//ASIGNAR AL ESTADO EL VALOR DEL FORMULARIO
+
+AsignarDatos(etiqueta){
+
+const valor=etiqueta.target.value;
+this.setState({
+
+datobusqueda:valor
+
+
+
+})
+
+console.log(this.state.datobusqueda);
+
+
+}
+
+componentWillReceiveProps(nextProps){
+
+    if(nextProps.Titulo=="VIP"){
+
+
+        this.setState({
+        
+        cliente:1
+        
+        
+        })
+        
+        
+        }
+        
+        else if(nextProps.Titulo=="Comercial"){
+        
+        this.setState({
+        
+        cliente:2
+        
+        
+        }) 
+        
+        
+        }
+        
+        else if(nextProps.Titulo=="Residencial"){ 
+        
+        this.setState({
+        
+        cliente:3
+        
+        
+        }) 
+        
+        
+        }
+        
+
+}
+
+
+onSubmit= async (e)=>{
+
+e.preventDefault();
+
+await axios.post("http://localhost:8080/restback/index.php/Clientes/Resultados",{
+Tipo:this.state.cliente,
+dato:this.state.datobusqueda,
+campo:this.state.eleccion
+
+}).then((respuesta)=>{
+
+//SI TODO SALE BIEN
+alert("Se Envio");
+
+console.table(respuesta.data);
+
+
+this.props.enviarResultados(respuesta.data);
+
+
+}).catch((error)=>{
+
+//SI OCURRE UN PROBLEMA
+
+alert("problemas");
+console.log(error);
+});
+
+}
+
+
+
    
     render() {
 
@@ -44,15 +143,18 @@ return (
 <div className="col-12 ">  
 
 
-<h1 className="text-white letra1 p-2 text-center font-weight-bold" onClick={this.props.pasafuncion}>{this.props.Titulo}</h1>
-
-<form className="mb-1 mt-1 text-center">
+<h1 className="text-white letra1 p-2 text-center font-weight-bold" onClick={this.props.pasafuncion} >{this.props.Titulo}</h1>
 
 
-<input type="text" placeholder={this.state.eleccion}/> 
+
+
+<form className="mb-1 mt-1 text-center" onSubmit={this.onSubmit}>
+
+
+<input type="text" placeholder={this.state.eleccion} id="datobusqueda" name="datobusqueda" onChange={this.AsignarDatos} value={this.state.datobusqueda}/> 
 <br/>
 <br/>
-<select className="seleccion" onClick={this.cambia} >
+<select className="seleccion" onClick={this.cambia} id="filtrobusqueda" name="filtrobusqueda">
 <option value="ID">ID</option>
 
 <option value="Nombre">Nombre</option>
@@ -64,7 +166,7 @@ return (
 
 <br/>
 
-<input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn" onClick={this.props.pasafuncion}/>
+<input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn" />
 
 </form>
 

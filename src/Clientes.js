@@ -26,7 +26,8 @@ primerafila:false,
 segundafila:false,
 veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none",
 cantidad:0,
-cancelados:0
+cancelados:0,
+resultadosbusqueda:[]
 
 
     }
@@ -34,7 +35,7 @@ cancelados:0
     
 
 this.PEDIR=this.PEDIR.bind(this);
-
+this.ObteniendoResultados=this.ObteniendoResultados.bind(this);
 
     }
     
@@ -224,6 +225,22 @@ alert("ERROR");
 
 );
 
+
+
+}
+
+
+ObteniendoResultados(result){
+
+
+
+this.setState({
+
+
+resultadosbusqueda:result
+
+
+});
 
 
 }
@@ -473,7 +490,7 @@ return (
 
 <div className="col-4  ">
 <br/>
-<Iclientes Titulo={this.state.tipoCliente} pasafuncion={this.ver2}/>
+<Iclientes Titulo={this.state.tipoCliente} pasafuncion={this.ver2} enviarResultados={this.ObteniendoResultados}/>
 
 </div>
 
@@ -493,7 +510,18 @@ return (
 <h1 className="text-center display-4 text-white font-weight-bold">Resultados</h1>
 <br/>
 
-<ul><li className="text-warning h4 font-weight-bold" onClick={this.ver}>Medical Cannbis</li></ul>
+<ul>
+
+{
+
+this.state.resultadosbusqueda.map((elementos)=>{return <li className="text-warning h4 font-weight-bold">{elementos.Nombre}</li>
+
+})
+
+}
+
+</ul>
+
 
 <br/>
 

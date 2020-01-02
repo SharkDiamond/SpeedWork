@@ -23,7 +23,7 @@ super();
   render() {
 
         return (
-            <div className=" container-fluid fondoBarra ">
+            <div className=" container-fluid fondoBarra fixed-top">
  <nav class="navbar navbar-expand-lg">
 
  <Link  className="nav-link sube h1 font-weight-bold letra1" to="./">SpeedWork</Link>
