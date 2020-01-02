@@ -27,7 +27,8 @@ segundafila:false,
 veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none",
 cantidad:0,
 cancelados:0,
-resultadosbusqueda:[]
+resultadosbusqueda:[],
+perfiles:[]
 
 
     }
@@ -36,35 +37,10 @@ resultadosbusqueda:[]
 
 this.PEDIR=this.PEDIR.bind(this);
 this.ObteniendoResultados=this.ObteniendoResultados.bind(this);
-
+this.ver=this.ver.bind(this);
     }
     
 
-    /*
-
-
-<div className="col-4">
-<Iclientes Titulo="Comerciales" Cantidad={800}/>
-</div>
-
-<div className="col-4">
-<Iclientes Titulo="Residenciales" Cantidad={4000}/>
-</div>
-
-</div>
-
-
-<img src={vip} width="200px" heigh="200px" className="mr-1"/>
-
-<img src={tienda} width="200px" heigh="200px" className="mr-1"/>
-
-<img src={casa} width="200px" heigh="200px" />
-
-
-
-
-
-*/
 
 
 
@@ -318,6 +294,31 @@ this.PEDIR(etiqueta.target.id);
 
 
 
+clienteElegido=(e)=>{
+
+
+const nombre=e.target.id;
+
+const datoBuscado=this.state.resultadosbusqueda.filter(function (datos) {
+
+return datos.idClientes==nombre;
+
+
+  });
+
+
+this.setState({
+
+
+perfiles:datoBuscado
+
+})
+
+
+this.ver();
+
+}
+
 
 
 
@@ -419,21 +420,6 @@ fila.className="quesevea col-6 fondoBarra rounded";
 }
 
 
-if (this.state.primerafila==true) {
-
-this.setState({
-
-
-primerafila:false
-
-
-})
-
-
-fila.className=" quitar";
-
-}
-
 
 
 }
@@ -514,7 +500,18 @@ return (
 
 {
 
-this.state.resultadosbusqueda.map((elementos)=>{return <li className="text-warning h4 font-weight-bold">{elementos.Nombre}</li>
+this.state.resultadosbusqueda.map((elementos)=>{
+
+if (elementos=="No Hay Resultados") {
+
+
+return <li className="text-danger h4 font-weight-bold">No hay resultado</li>
+
+}
+
+ return <li className="text-warning h4 font-weight-bold" onClick={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
+
+
 
 })
 
@@ -530,7 +527,7 @@ this.state.resultadosbusqueda.map((elementos)=>{return <li className="text-warni
 
 <div className="quitar"  id="perfil">
 <div className="d-none" id="componenteperfil">
-<Miniperfil  />
+<Miniperfil  datos={this.state.perfiles}/>
 </div>
 
 </div>

@@ -44,7 +44,7 @@ CREATE TABLE `Clientes` (
 
 LOCK TABLES `Clientes` WRITE;
 /*!40000 ALTER TABLE `Clientes` DISABLE KEYS */;
-INSERT INTO `Clientes` VALUES (1,'Gabriel','Arispe','Calle Carvajal casa 14-60 centro','8565677','gabrielarispe24@gmail.com',3,'2020-01-20',1),(2,'Sergio','Sanchez','Urbanizacion Alto Barinas Norte','645678931','sergiosanchez@gmail.com',3,'2020-02-20',1),(3,'Janmarie','Lopez','Calle Humacao secto Obelizco','5868456','lopezjanma@gmail.com',2,'2020-03-12',1),(4,'Janmarie','L','Calle roberto suarez','2344567','pumagaraje@gmail.com',1,'2020-04-23',1),(5,'EL Sazon',NULL,'Centro Comercial las delicias','47485924','sazon@hotmail.com',2,'2020-05-15',1),(6,'Liberty Express',NULL,'Centro Avenida 24 de diciembre','4748245','express@gmail.com',1,'2020-06-13',1),(7,'Cristian','Ferrer','Urbanizacion Los Azules','7489245','ferrer@gmail.com',3,'2020-07-18',1),(8,'Luna','Azuaje','Avenida Olimpia Sector Centro','74595769','luna123@gmail.com',3,'2020-08-26',1),(9,'Ferreteria TodoMachete',NULL,'Centro Comercial Cima Alta','64828459','todo@hotmail.com',1,'2020-09-01',1),(10,'Los Paseos44',NULL,'Edificion Roble11','3435657','44paseos@gmail.com',2,'2020-10-16',1),(11,'David','Sanchez','Ciudad Varyna Casa d-39','63845378','sanchezdavid44@gmail.com',3,'2020-11-19',1),(12,'Roberto','Suarez','Calle Merida casa 34','74353596','SuarezRobeto@gmail.com',3,'2020-12-20',1);
+INSERT INTO `Clientes` VALUES (1,'Gabriel','Arispe','Calle Carvajal casa 14-60 centro','8565677','gabrielarispe24@gmail.com',3,'2020-01-20',1),(2,'Sergio','Sanchez','Urbanizacion Alto Barinas Norte','645678931','sergiosanchez@gmail.com',3,'2020-02-20',1),(3,'Janmarie','Lopez','Calle Humacao secto Obelizco','5868456','lopezjanma@gmail.com',2,'2020-03-12',1),(4,'Janmarie','L','Calle roberto suarez','2344567','pumagaraje@gmail.com',1,'2020-04-23',1),(5,'EL Sazon',NULL,'Centro Comercial las delicias','47485924','sazon@hotmail.com',2,'2020-05-15',1),(6,'Liberty Express',NULL,'Centro Avenida 24 de diciembre','4748245','express@gmail.com',1,'2020-06-13',1),(7,'Cristian','Ferrer','Urbanizacion Los Azules','7489245','ferrer@gmail.com',3,'2020-07-18',1),(8,'Luna','Azuaje','Avenida Olimpia Sector Centro','74595769','luna123@gmail.com',3,'2020-08-26',1),(9,'Ferreteria TodoMachete',NULL,'Centro Comercial Cima Alta','64828459','todo@hotmail.com',1,'2020-09-01',1),(10,'Los Paseos44',NULL,'Edificion Roble11','3435657','44paseos@gmail.com',2,'2020-10-16',1),(11,'David','Sanchez','Ciudad Varyna Casa d-39','63845378','sanchezdavid44@gmail.com',3,'2020-11-19',1),(12,'Licencia California',NULL,'Avenida los caobos casa-3','5676578','calilicencia@gmail.com',1,'2020-12-19',1);
 /*!40000 ALTER TABLE `Clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +112,7 @@ CREATE TABLE `Reportes` (
   `Estado` tinyint(1) NOT NULL,
   `FechaCreacion` datetime NOT NULL,
   `PertenenciaDepartamento` int(11) NOT NULL,
-  `ComentariosUsuarios` int(11) NOT NULL,
+  `ComentariosUsuarios` int(11) DEFAULT NULL,
   `RfCliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`idReporte`),
   KEY `PertenenciaDepartamento` (`PertenenciaDepartamento`),
@@ -121,7 +121,7 @@ CREATE TABLE `Reportes` (
   CONSTRAINT `Reportes_ibfk_1` FOREIGN KEY (`PertenenciaDepartamento`) REFERENCES `Departamentos` (`idDepartamento`),
   CONSTRAINT `Reportes_ibfk_2` FOREIGN KEY (`ComentariosUsuarios`) REFERENCES `Comentarios` (`NumeroComentario`),
   CONSTRAINT `Reportes_ibfk_3` FOREIGN KEY (`RfCliente`) REFERENCES `Clientes` (`idClientes`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,6 +130,7 @@ CREATE TABLE `Reportes` (
 
 LOCK TABLES `Reportes` WRITE;
 /*!40000 ALTER TABLE `Reportes` DISABLE KEYS */;
+INSERT INTO `Reportes` VALUES (1,'G2 SIN SERVICIO',1,'2020-02-12 00:00:00',1,NULL,NULL),(2,'G78 SIN SERVICIO',1,'2020-02-12 00:00:00',1,NULL,NULL),(3,'G78 SIN SERVICIO fdfdv',1,'2020-02-12 00:00:00',1,NULL,NULL);
 /*!40000 ALTER TABLE `Reportes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,4 +222,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-27 11:58:11
+-- Dump completed on 2020-01-02 11:33:05

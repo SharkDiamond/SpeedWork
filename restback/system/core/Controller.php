@@ -51,6 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Controller {
 
+
+
 	/**
 	 * Reference to the CI singleton
 	 *
@@ -81,6 +83,7 @@ class CI_Controller {
 		{
 			$this->$var =& load_class($class);
 		}
+
 
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();

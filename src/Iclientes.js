@@ -75,7 +75,7 @@ componentWillReceiveProps(nextProps){
         this.setState({
         
         cliente:2
-        
+       
         
         }) 
         
@@ -110,12 +110,26 @@ campo:this.state.eleccion
 }).then((respuesta)=>{
 
 //SI TODO SALE BIEN
-alert("Se Envio");
 
-console.table(respuesta.data);
+if (respuesta.data) {
 
 
 this.props.enviarResultados(respuesta.data);
+
+
+} 
+
+else {
+
+var nhr=["No Hay Resultados"];
+
+
+this.props.enviarResultados(nhr);
+
+
+
+
+}
 
 
 }).catch((error)=>{
@@ -143,7 +157,7 @@ return (
 <div className="col-12 ">  
 
 
-<h1 className="text-white letra1 p-2 text-center font-weight-bold" onClick={this.props.pasafuncion} >{this.props.Titulo}</h1>
+<h1 className="text-white letra1 p-2 text-center font-weight-bold">{this.props.Titulo}</h1>
 
 
 
@@ -166,7 +180,7 @@ return (
 
 <br/>
 
-<input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn" />
+<input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn" onClick={this.props.pasafuncion} />
 
 </form>
 
