@@ -28,7 +28,7 @@ veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none",
 cantidad:0,
 cancelados:0,
 resultadosbusqueda:[],
-perfiles:[]
+perfiles:null
 
 
     }
@@ -296,33 +296,38 @@ this.PEDIR(etiqueta.target.id);
 
 clienteElegido=(e)=>{
 
+   
 
-const nombre=e.target.id;
-
-const datoBuscado=this.state.resultadosbusqueda.filter(function (datos) {
+/*
+var datoBuscado=this.state.resultadosbusqueda.filter(function (datos) {
 
 return datos.idClientes==nombre;
 
 
   });
+*/
+    
+    this.setState({
 
 
-this.setState({
+        perfiles:e.target.id
+        
+        })
+        
+        
+        
+        console.log(this.state.perfiles);
+        
+        this.ver();
 
 
-perfiles:datoBuscado
-
-})
-
-
-this.ver();
 
 }
 
 
 
 
-ver=(e)=>{
+ver(e){
 
 //quesevea col-4  pt-3 cajaminip rounded fondoBarra
 
@@ -357,35 +362,7 @@ componente.className="";
 
 }
 
-else if (this.state.segundafila==true) {
 
-
-this.setState({
-
-
-segundafila:false
-
-
-})
-
-
-
-
-
-componente.className="d-none";
-
-
-
-segundacolumna.className="quitar";
-
-
-
-
-
-
-
-
-}
 
 
 
@@ -527,7 +504,7 @@ return <li className="text-danger h4 font-weight-bold">No hay resultado</li>
 
 <div className="quitar"  id="perfil">
 <div className="d-none" id="componenteperfil">
-<Miniperfil  datos={this.state.perfiles}/>
+<Miniperfil  idFiltro={this.state.perfiles}/>
 </div>
 
 </div>

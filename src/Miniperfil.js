@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import dia from "./imagenes/dia.png";
 
-
+import axios from "axios";
 
 export default class Miniperfil extends Component {
    
@@ -14,30 +14,54 @@ constructor(){
     this.state={
    numero:null,
    nombre:"",
-Direccion:""
+Direccion:"",
+dr:[]
+    }
+    this.imprime=this.imprime.bind(this);
+    
     }
     
-    
-    }
-    
-imprime=()=>{
+    async imprime(){
+console.log(this.props.idFiltro);
+  
+await axios.post("http://localhost:8080/restback/index.php/Clientes/RM",{
+number:this.props.idFiltro
 
-this.props.datos.map((e)=>{
+}).then((respuesta)=>{
 
+//SI TODO SALE BIEN
 this.setState({
 
-numero:e.Telefono,
-nombre:e.Nombre,
-Direccion:e.Direccion
-
+dr:respuesta.data
 
 })
 
 
+this.state.dr.forEach(element => {
+ 
+
+this.setState({
+
+nombre:element.Nombre,
+Direccion:element.Direccion,
+numero:element.Telefono
+
+})
 
 });
 
+setTimeout(20,this.imprime());
 
+
+}).catch((error)=>{
+
+//SI OCURRE UN PROBLEMA
+
+alert("problemas");
+console.log(error);
+});
+   
+    
 
 
 
@@ -46,28 +70,19 @@ Direccion:e.Direccion
 
 
 
-componentDidMount(){
-
-
-this.props.datos.map((e)=>{
-
-this.setState({
-
-
-numero:e.Telefono,
-nombre:e.Nombre,
-Direccion:e.Direccion
+async componentDidMount(){
 
 
 
-})
 
 
-
-});
 
   
 }
+
+
+
+
 
    
     render() {
@@ -76,11 +91,11 @@ return (
 
             <div className="" align="center">
 
-<div class="card  mb-3 minip bg-white" >
-  <div class="card-header bg-transparent border-primary"><h3 className="font-weight-bold">{this.state.Nombre}</h3></div>
+<div class="card  mb-3 minip bg-white"  onClick={this.imprime}>
+  <div class="card-header bg-transparent border-primary"><h3 className="font-weight-bold">{this.state.nombre}</h3></div>
   <div class="card-body text-success">
-    <h5 class="card-title font-weight-bold text-primary" onClick={this.imprime}>Numeros De Telefono</h5>
-    <p class="card-text text-dark font-weight-bold" >{this.state.Telefono}</p>
+    <h5 class="card-title font-weight-bold text-primary">Numeros De Telefono</h5>
+    <p class="card-text text-dark font-weight-bold" >{this.state.numero}</p>
       <h5 class="card-title font-weight-bold text-primary">Direccion</h5>
     <p class="card-text text-dark font-weight-bold">{this.state.Direccion}</p>
 
