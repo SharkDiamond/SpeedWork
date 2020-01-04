@@ -20,6 +20,7 @@ dr:[]
     this.imprime=this.imprime.bind(this);
     
     }
+
     
     async imprime(){
 console.log(this.props.idFiltro);
@@ -69,22 +70,10 @@ console.log(error);
 }
 
 
-
-async componentDidMount(){
-
-
-
-
+//COLOCAR LOS METODOS DE ACTUALIZACION
 
 
   
-}
-
-
-
-
-
-   
     render() {
 
 return (

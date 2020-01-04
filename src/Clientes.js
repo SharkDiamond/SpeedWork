@@ -34,19 +34,20 @@ perfiles:null
     }
     
     
+//CODIGO PARA PODER USAR THIS EN LOS METODOS
 
 this.PEDIR=this.PEDIR.bind(this);
 this.ObteniendoResultados=this.ObteniendoResultados.bind(this);
 this.ver=this.ver.bind(this);
+
+
     }
     
 
 
-
+//METODO PARA PEDIR  LOS DATOS DE LAS CANTIDADES DE CLIENTES TANTO ACTIVOS COMO CANCELADOS
 
 PEDIR(tipo){
-
-
 
 switch(tipo){
 
@@ -166,6 +167,7 @@ break;
 
 }
 
+//METODO  QUE SE EJECUTA LUEGO DE QUE SE RENDERICE EL COMPONENTE FATA EL ASYNC Y EL AWAIT
 
 componentDidMount(){
 
@@ -292,21 +294,13 @@ this.PEDIR(etiqueta.target.id);
 
 }
 
-
+//METODO QUE SE EJECUTA CUANDO SE HACE CLICK SOBRE UN ELEMENTO DE LA LISTA
 
 clienteElegido=(e)=>{
 
    
 
-/*
-var datoBuscado=this.state.resultadosbusqueda.filter(function (datos) {
 
-return datos.idClientes==nombre;
-
-
-  });
-*/
-    
     this.setState({
 
 
