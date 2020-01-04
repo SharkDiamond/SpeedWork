@@ -22,11 +22,11 @@ dr:[]
     }
 
     
-    async imprime(){
+    async imprime(Nuevo){
 console.log(this.props.idFiltro);
   
 await axios.post("http://localhost:8080/restback/index.php/Clientes/RM",{
-number:this.props.idFiltro
+number:Nuevo
 
 }).then((respuesta)=>{
 
@@ -58,8 +58,11 @@ setTimeout(20,this.imprime());
 
 //SI OCURRE UN PROBLEMA
 
-alert("problemas");
-console.log(error);
+//alert("problemas con miniperfil imprime");
+//console.log(error);
+
+
+
 });
    
     
@@ -71,6 +74,21 @@ console.log(error);
 
 
 //COLOCAR LOS METODOS DE ACTUALIZACION
+
+
+
+componentWillReceiveProps(nextProps){
+
+
+
+this.imprime(nextProps.idFiltro);
+
+
+}
+
+
+
+
 
 
   

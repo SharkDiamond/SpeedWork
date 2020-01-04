@@ -15,7 +15,6 @@ function App() {
     <Router>
   <Barra/>
 
-    <br/>
  
     <br/>
 

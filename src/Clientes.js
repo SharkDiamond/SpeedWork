@@ -462,12 +462,13 @@ return (
 
 
 <div className="quitar" id="resultado">
+
 <br/>
 
 <h1 className="text-center display-4 text-white font-weight-bold">Resultados</h1>
 <br/>
 
-<ul>
+<ul className="">
 
 {
 
@@ -480,7 +481,7 @@ return <li className="text-danger h4 font-weight-bold">No hay resultado</li>
 
 }
 
- return <li className="text-warning h4 font-weight-bold" onClick={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
+ return  <li className=" text-warning h4 font-weight-bold border-right border-success" onMouseEnter={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
 
 
 
