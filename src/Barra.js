@@ -35,7 +35,7 @@ super();
 
       </li>
       <li class="nav-item">
-        <a class="nav-link font-weight-bold letra" href="#"><img  src={conexion} width="62px" height="62px" className=" mr-2"/>Departamentos</a>
+       <Link  className="nav-link font-weight-bold letra" to="./Departamentos"><img  src={conexion} width="62px" height="62px" className="mr-2"/>Departamentos</Link>
       </li>
       <li class="nav-item">
         <a class="nav-link font-weight-bold letra" href="#"><img  src={analisis} width="62px" height="62px" className="  mr-2"/>Reportes</a>

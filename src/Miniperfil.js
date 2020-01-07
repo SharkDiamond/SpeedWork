@@ -73,10 +73,10 @@ setTimeout(20,this.imprime());
 }
 
 
-//COLOCAR LOS METODOS DE ACTUALIZACION
+//COLOCAR EL METODO DE ACTUALIZACION
 
 
-
+//RECIBIENDO LA NUEVA PROPIEDAD
 componentWillReceiveProps(nextProps){
 
 

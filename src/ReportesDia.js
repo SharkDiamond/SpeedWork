@@ -131,13 +131,13 @@ Ver:"d-none"
         const Elemento=(
 
             <div className={this.state.Ver}>
-            <p className="h1 cambialista text-warning font-weight-bold">Reportes Del Dia</p>
+            <p className="h1 cambialista colorVerde font-weight-bold">Reportes Del Dia</p>
             
-           <ol className="colorlista">
+           <ul className="text-white font-weight-bold">
 <li>{this.state.reportes.Primero}</li>
 <li>{this.state.reportes.Segundo}</li>
 <li>{this.state.reportes.Tercero}</li>
-           </ol>   
+           </ul>   
             </div>
               
                         

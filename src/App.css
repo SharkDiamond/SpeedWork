@@ -1,9 +1,13 @@
 
 
 
-.fondo{background: #1CD8D2;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #93EDC7, #1CD8D2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.fondo{
+
+  background: #ffffff;  /* fallback for old browsers */
+ 
+
+   /* background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2); Chrome 10-25, Safari 5.1-6 */
+  /*  background: linear-gradient(to right, #93EDC7, #1CD8D2);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
 }
 
@@ -28,12 +32,18 @@ transition: 600ms;
 }
 
 
+.colorVerde{
+
+  color:  #12dd9a;
+
+}
+
 
 .fondominibarra{
 
 transition: 600ms;
 
-background: orange;
+background: #12dd9a;
 
 
 border-radius: 50px;
@@ -150,7 +160,7 @@ height:119px;
 
 
 
-background: #283048; 
+background: #040815; 
 
 }
 

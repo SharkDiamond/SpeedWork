@@ -4,6 +4,7 @@ import './App.css';
 import Barra from "./Barra";
 import Principal from "./Principal";
 import Clientes from "./Clientes";
+import Departamentos from "./Departamentos";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -36,6 +37,7 @@ function App() {
 
 <Route path="/Clientes" exact component={Clientes}/>
 
+<Route path="/Departamentos" exact component={Departamentos}/>
     </Router>
   
 

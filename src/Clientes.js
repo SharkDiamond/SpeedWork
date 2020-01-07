@@ -481,7 +481,7 @@ return <li className="text-danger h4 font-weight-bold">No hay resultado</li>
 
 }
 
- return  <li className=" text-warning h4 font-weight-bold border-right border-success" onMouseEnter={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
+ return  <li className=" colorVerde h4 font-weight-bold border-right border-success" onMouseEnter={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
 
 
 
