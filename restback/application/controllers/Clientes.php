@@ -48,7 +48,7 @@ public function ObtenerClientesComerciales_get(){
 
 
 
-$CantidadClientesComerciales=$this->db->query("select * from Clientes where Tipo=2");
+$CantidadClientesComerciales=$this->db->query("select * from Clientes where Tipo=2 and EstadoCliente=true");
 
 $CantidadClientesComercialesCancelados=$this->db->query("select * from Clientes where EstadoCliente=false and Tipo=2");
 
@@ -68,7 +68,7 @@ public function ObtenerClientesResidenciales_get(){
 
 
 
-$CantidadClientesResidenciales=$this->db->query("select * from Clientes where Tipo=3");
+$CantidadClientesResidenciales=$this->db->query("select * from Clientes where Tipo=3 and EstadoCliente=true");
 
 $CantidadClientesResidencialesCancelados=$this->db->query("select * from Clientes where EstadoCliente=false and Tipo=3");
 
@@ -89,7 +89,7 @@ public function ObtenerClientesVip_get(){
 
 
 
-$CantidadClientesVip=$this->db->query("select * from Clientes where Tipo=1");
+$CantidadClientesVip=$this->db->query("select * from Clientes where Tipo=1 and EstadoCliente=true");
 
 $CantidadClientesVipCancelados=$this->db->query("select * from Clientes where EstadoCliente=false and Tipo=1");
 
@@ -131,7 +131,15 @@ $this->response($valores);
 }
 
 
+public function RM_post(){
 
+  $datos = json_decode(file_get_contents("php://input"), true); 
+
+  $consulta=$this->db->query("select * from Clientes where idClientes=" . $datos["number"]);
+
+  $this->response($consulta->result_Array());
+
+}
 
 
 public function Resultados_post(){
