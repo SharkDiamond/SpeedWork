@@ -31,7 +31,7 @@ axios.get("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?for
 this.setState({
 
 
-reportes:response.data
+Datos:response.data
 
 
 })
@@ -65,16 +65,26 @@ render(){
 <input type="submit" value="Buscar" />
 </form>
 
+{
+this.state.Datos.map(function (Elementos) {
+  
+return(
+<div className="bg-white  rounded p-1 text-center mt-3 mb-2" onClick={this.props.ActualizaTabla} id={Elementos.NombreDepartamento}>
 
-<div className="bg-white  rounded p-1 text-center mt-3 mb-2">
-
-<h1 className="d-inline mr-4 " >Instalaciones</h1>
+<h1 className="d-inline mr-4">{Elementos.NombreDepartamento}</h1>
 
 
-<h1 className="d-inline fondoBarra  colorVerde rounded">30</h1>
+<h1 className="d-inline fondoBarra  colorVerde rounded">{Elementos.Cantidad}</h1>
 
 
 </div>
+)
+
+  
+})
+
+}
+
 
 
 

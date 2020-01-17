@@ -15,15 +15,43 @@ super();
 
 this.state={
 
-id:[],
-nombre:[],
-fecha:[]
+Datos:[]
 
 }
 
-
+this.actualiza=this.actualiza.bind(this);
 }
 
+
+//ACTUALIZAR LA TABLA 
+actualiza(e){
+
+var NombreDepartamento=e.target.id;
+
+axios.post("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json",{Departamento:NombreDepartamento})
+.then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
+
+
+this.setState({
+
+
+Datos:response.data
+
+
+})
+
+
+  })
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+
+    console.log(error);
+    alert(error);
+  });
+
+
+}
 
 
   
@@ -48,14 +76,23 @@ return (
       <th scope="col" className="text-white">Cliente</th>
     </tr>
   </thead>
+  {
+this.state.Datos.map((Elemento)=>{
+
+return(
   <tbody>
     <tr>
-      <th scope="row" Style="color:orange;">1</th>
-      <td className="text-primary">Mark</td>
-      <td className="text-primary">Otto</td>
-      <td className="text-primary">@mdo</td>
+      <th scope="row" Style="color:orange;">{Elemento.Id}</th>
+      <td className="text-primary">{Elemento.Nombre}</td>
+      <td className="text-primary">{Elemento.Fecha}</td>
+      <td className="text-primary">{Elemento.Cliente}</td>
     </tr>
   </tbody>
+)
+
+})
+
+  }
 </table>
 
 
@@ -65,7 +102,7 @@ return (
 
 
 
-<Lista/>
+<Lista ActualizaTabla={this.actualiza}/>
 
 
 
