@@ -12,18 +12,38 @@ super();
 this.state={
 
 
-Datos:[]
+Datos:[],
+elegido:""
 
 
 }
 
+ this.Envia=this.Envia.bind(this);
 
 }
 
 
 
-   componentDidMount(){
-axios.get("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json")
+
+Envia(e){
+
+
+
+this.setState({
+
+elegido:e.target.id
+
+
+})
+
+this.props.actualizatabla(this.state.elegido);
+
+}
+
+
+
+  componentDidMount(){
+axios.get("http://localhost:8080/restback/index.php/Departamentos/DepartamentosListado?format=json")
   .then((response) => {
     //RESPUESTA SI TODO SALE BIEN
 
@@ -35,7 +55,7 @@ Datos:response.data
 
 
 })
-
+console.table(this.state.Datos);
 
   })
   .catch((error) => {
@@ -53,6 +73,7 @@ Datos:response.data
 
 render(){
 
+
   return (
  
    
@@ -69,12 +90,12 @@ render(){
 this.state.Datos.map(function (Elementos) {
   
 return(
-<div className="bg-white  rounded p-1 text-center mt-3 mb-2" onClick={this.props.ActualizaTabla} id={Elementos.NombreDepartamento}>
+<div className="bg-white  rounded p-1 text-center mt-3 mb-2"  id={Elementos.NombreDepartamento}>
 
-<h1 className="d-inline mr-4">{Elementos.NombreDepartamento}</h1>
+<h1 className="d-inline mr-4 " >{Elementos[0].NombreDepartamento}</h1>
 
 
-<h1 className="d-inline fondoBarra  colorVerde rounded">{Elementos.Cantidad}</h1>
+<h1 className="d-inline fondoBarra  colorVerde rounded" >{Elementos[0].Cantidad}</h1>
 
 
 </div>

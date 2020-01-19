@@ -24,11 +24,11 @@ this.actualiza=this.actualiza.bind(this);
 
 
 //ACTUALIZAR LA TABLA 
-actualiza(e){
+actualiza(etiqueta){
 
-var NombreDepartamento=e.target.id;
+/*
 
-axios.post("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json",{Departamento:NombreDepartamento})
+axios.post("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json",{Departamento:etiqueta.target.id})
 .then((response) => {
     //RESPUESTA SI TODO SALE BIEN
 
@@ -50,7 +50,7 @@ Datos:response.data
     alert(error);
   });
 
-
+*/
 }
 
 
@@ -102,7 +102,7 @@ return(
 
 
 
-<Lista ActualizaTabla={this.actualiza}/>
+<Lista actualizatabla={this.actualiza()}/>
 
 
 
