@@ -180,7 +180,7 @@ Clientes:response.data.a
     }   
     
 
-else if(this.state.mostrar!=0){
+else if(this.state.mostrar!==0){
 
     return(
 

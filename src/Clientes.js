@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import dia from "./imagenes/dia.png";
+
 import Iclientes from "./Iclientes.js";
 import vip from "./imagenes/vip.png";
 import tienda from "./imagenes/tienda.png";
@@ -158,6 +158,8 @@ alert("ERROR");
 
 break;
 
+default:
+alert("Ningun Caso");
 
 
 }
@@ -330,7 +332,7 @@ var segundacolumna=document.getElementById("perfil");
 var componente=document.getElementById("componenteperfil");
 
 
-if (this.state.segundafila==false) {
+if (this.state.segundafila===false) {
 
 this.setState({
 
@@ -372,7 +374,7 @@ var fila=document.getElementById("resultado");
 
 
 
-if (this.state.primerafila==false) {
+if (this.state.primerafila===false) {
 
 this.setState({
 
@@ -415,14 +417,14 @@ return (
 
 
 
-<img src={vip} width="80px" heigh="80px" className={this.state.primera} id="VIP" onClick={this.cambiacliente}/>
+<img src={vip} width="80px" heigh="80px" className={this.state.primera} alt="" id="VIP" onClick={this.cambiacliente}/>
      
 
-<img src={tienda} width="80px" heigh="80px" className={this.state.segunda} id="Comercial" onClick={this.cambiacliente}/>
+<img src={tienda} width="80px" heigh="80px" className={this.state.segunda} alt="" id="Comercial" onClick={this.cambiacliente}/>
 
      
 
-<img src={casa} width="80px" heigh="80px" className={this.state.tercera} id="Residencial" onClick={this.cambiacliente}/>
+<img src={casa} width="80px" heigh="80px" className={this.state.tercera} alt="" id="Residencial" onClick={this.cambiacliente}/>
 
    </div>
 </div>
@@ -474,7 +476,7 @@ return (
 
 this.state.resultadosbusqueda.map((elementos)=>{
 
-if (elementos=="No Hay Resultados") {
+if (elementos==="No Hay Resultados") {
 
 
 return <li className="text-danger h4 font-weight-bold">No hay resultado</li>

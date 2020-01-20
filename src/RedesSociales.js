@@ -42,7 +42,7 @@ animacion:""
 
 Gira=()=>{
 
-if (this.state.ov==false) {
+if (this.state.ov===false) {
 
  this.setState({
 
@@ -56,7 +56,7 @@ ov:true
 
 }
 
-else if (this.state.ov==true) {
+else if (this.state.ov===true) {
 
 this.setState({
 
@@ -81,12 +81,12 @@ ov:false
 const ICONOS=(
 <div className={this.state.ver}>
 
-<a href="https://www.facebook.com/"><img src={facebook}  width="60px"  height="60px" className="mt-1"/></a>
+<a href="https://www.facebook.com/"><img src={facebook} alt="" width="60px"  height="60px" className="mt-1"/></a>
 
 
-<a href=""><img src={instagram}  width="60px"  height="60px" className="mt-2"/></a>
+<a href="INSTAGRAM"><img src={instagram} alt="" width="60px"  height="60px" className="mt-2"/></a>
 
-<a href=""><img src={gorjeo}   width="60px"  height="60px" className="mt-2 mb-1"/></a>
+<a href="TWITTER"><img src={gorjeo} alt=""  width="60px"  height="60px" className="mt-2 mb-1"/></a>
 
 </div>
 	);
@@ -96,7 +96,7 @@ const ICONOS=(
             <div className="fondoBarra  rounded p-2 text-center container">
        
 
-<img src={colaboracion}  onClick={this.Gira} width="74px"  height="74px" className={this.state.animacion}/>
+<img src={colaboracion} alt="" onClick={this.Gira} width="74px"  height="74px" className={this.state.animacion}/>
 
  {ICONOS}
 

@@ -38,6 +38,8 @@ function App() {
 <Route path="/Clientes" exact component={Clientes}/>
 
 <Route path="/Departamentos" exact component={Departamentos}/>
+<Route path="/Agenda" exact component={Departamentos}/>
+<Route path="/Reportes" exact component={Departamentos}/>
     </Router>
   
 

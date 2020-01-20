@@ -90,9 +90,9 @@ render(){
 this.state.Datos.map(function (Elementos) {
   
 return(
-<div className="bg-white  rounded p-1 text-center mt-3 mb-2"  id={Elementos.NombreDepartamento}>
+<div className="bg-white  rounded p-1 text-center mt-3 mb-2">
 
-<h1 className="d-inline mr-4 " >{Elementos[0].NombreDepartamento}</h1>
+<h1 className="d-inline mr-4 " onClick={this.props.actualizatabla} id={Elementos[0].NombreDepartamento}>{Elementos[0].NombreDepartamento}</h1>
 
 
 <h1 className="d-inline fondoBarra  colorVerde rounded" >{Elementos[0].Cantidad}</h1>

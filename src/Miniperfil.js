@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import dia from "./imagenes/dia.png";
+
 
 import axios from "axios";
 

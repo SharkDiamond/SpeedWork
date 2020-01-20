@@ -66,7 +66,7 @@ reportes:response.data
    Mostrar=()=>{
 
 
-if (this.state.ov==false) {
+if (this.state.ov===false) {
 
 axios.get("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json")
   .then((response) => {
@@ -108,7 +108,7 @@ setTimeout(this.actualiza, 80);
 
 }
 
-else if (this.state.ov==true) {
+else if (this.state.ov===true) {
 
 
 this.setState({
@@ -151,7 +151,7 @@ Ver:"d-none"
             <div className={this.state.anima}>
                 
                       
-<img src={dia} onClick={this.Mostrar}  width="102px"  height="102px" className=""/>
+<img src={dia} onClick={this.Mostrar}  width="102px" alt="" height="102px" className=""/>
 
  
 {Elemento}

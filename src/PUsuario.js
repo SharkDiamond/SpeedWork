@@ -42,7 +42,7 @@ Ver:""
 Mostrar=()=>{
 
 
-if (this.state.ov==false) {
+if (this.state.ov===false) {
 
 
 this.setState({
@@ -60,7 +60,7 @@ setTimeout(this.actualiza, 50);
 
 }
 
-else if (this.state.ov==true) {
+else if (this.state.ov===true) {
 
 
 this.setState({
@@ -85,9 +85,9 @@ const Elemento=(
 <div className={this.state.Ver}>
 <p className="h1  text-success font-weight-bold">Gabriel Arispe</p>
 
-<a href="https://www.youtube.com/watch?v=1GtZbkvCZfM"><p className="h4 font-weight-bold">Cambiar Datos</p></a>
+<a href="CAMBIAR DATOS"><p className="h4 font-weight-bold">Cambiar Datos</p></a>
 
-<a><p className="h4  text-danger font-weight-bold">Cerrar Sesion</p></a>
+<a href="MATAR SESION"><p className="h4  text-danger font-weight-bold">Cerrar Sesion</p></a>
 
 </div>
   
@@ -104,7 +104,7 @@ return (
 
 
 
-<img src={user} onClick={this.Mostrar}  width="102px"  height="102px" className="text-center"/>
+<img src={user} onClick={this.Mostrar} alt=""  width="102px"  height="102px" className="text-center"/>
 
  
 {Elemento}

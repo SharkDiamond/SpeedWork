@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import dia from "./imagenes/dia.png";
+
 
 import axios from "axios";
 
@@ -57,7 +57,7 @@ console.log(this.state.datobusqueda);
 
 componentWillReceiveProps(nextProps){
 
-    if(nextProps.Titulo=="VIP"){
+    if(nextProps.Titulo==="VIP"){
 
 
         this.setState({
@@ -70,7 +70,7 @@ componentWillReceiveProps(nextProps){
         
         }
         
-        else if(nextProps.Titulo=="Comercial"){
+        else if(nextProps.Titulo==="Comercial"){
         
         this.setState({
         
@@ -82,7 +82,7 @@ componentWillReceiveProps(nextProps){
         
         }
         
-        else if(nextProps.Titulo=="Residencial"){ 
+        else if(nextProps.Titulo==="Residencial"){ 
         
         this.setState({
         

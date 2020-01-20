@@ -26,31 +26,11 @@ this.actualiza=this.actualiza.bind(this);
 //ACTUALIZAR LA TABLA 
 actualiza(etiqueta){
 
-/*
-
-axios.post("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json",{Departamento:etiqueta.target.id})
-.then((response) => {
-    //RESPUESTA SI TODO SALE BIEN
+var prueba=etiqueta.target.id;
 
 
-this.setState({
+alert(prueba);
 
-
-Datos:response.data
-
-
-})
-
-
-  })
-  .catch((error) => {
-//RESPUESTA SI HAY ALGUN ERROR
-
-    console.log(error);
-    alert(error);
-  });
-
-*/
 }
 
 
