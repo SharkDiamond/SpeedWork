@@ -74,27 +74,31 @@ return (
     <tr>
       <th scope="col" className="text-white">ID</th>
       <th scope="col" className="text-white">Nombre</th>
-      <th scope="col" className="text-white">Fecha</th>
+      <th scope="col" className="text-white">Fecha De Creacion</th>
       <th scope="col" className="text-white">Cliente</th>
     </tr>
   </thead>
+   <tbody>
   {
 this.state.Datos.map((Elemento)=>{
 
 return(
-  <tbody key={Elemento.Id}>
-    <tr>
-      <th scope="row" Style="color:orange;">{Elemento.idReporte}</th>
-      <td className="text-primary">{Elemento.NombreReporte}</td>
-      <td className="text-primary">{Elemento.FechaCreacion}</td>
-      <td className="text-primary">{Elemento.RfCliente}</td>
+ 
+    <tr key={Elemento.Id}>
+      <th scope="row" Style="color:orange;">{Elemento.idReporte}<button className="btn btn-outline-success ml-1">Ver</button></th>
+ 
+      <td className="text-primary align-middle">{Elemento.NombreReporte}</td>
+      <td className="text-primary align-middle">{Elemento.FechaCreacion}</td>
+      <td className="text-primary align-middle">{Elemento.RfCliente}</td>
+   
     </tr>
-  </tbody>
+ 
 )
 
 })
 
   }
+   </tbody>
 </table>
 
 
