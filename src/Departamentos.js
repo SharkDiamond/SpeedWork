@@ -15,22 +15,47 @@ super();
 
 this.state={
 
-Datos:[]
-
-}
-
-this.actualiza=this.actualiza.bind(this);
-}
-
-
-//ACTUALIZAR LA TABLA 
-actualiza(valor){
-
-alert(valor.target.value);
+Datos:[],
+t:1
 
 }
 
 
+}
+
+
+
+actualiza=(DepartamentoNombre)=>{
+
+console.log(DepartamentoNombre);
+
+
+axios.post("http://localhost:8080/restback/index.php/Departamentos/EnviarDatos",{numero:DepartamentoNombre}).then((respuesta)=>{
+
+//SI TODO SALE BIEN
+
+
+this.setState({
+
+Datos:respuesta.data
+
+
+})
+
+
+
+}).catch((error)=>{
+
+//SI OCURRE UN PROBLEMA
+
+alert("problemas");
+console.log(error);
+});
+
+
+
+
+}
   
     render() {
 
@@ -57,12 +82,12 @@ return (
 this.state.Datos.map((Elemento)=>{
 
 return(
-  <tbody>
+  <tbody key={Elemento.Id}>
     <tr>
-      <th scope="row" Style="color:orange;">{Elemento.Id}</th>
-      <td className="text-primary">{Elemento.Nombre}</td>
-      <td className="text-primary">{Elemento.Fecha}</td>
-      <td className="text-primary">{Elemento.Cliente}</td>
+      <th scope="row" Style="color:orange;">{Elemento.idReporte}</th>
+      <td className="text-primary">{Elemento.NombreReporte}</td>
+      <td className="text-primary">{Elemento.FechaCreacion}</td>
+      <td className="text-primary">{Elemento.RfCliente}</td>
     </tr>
   </tbody>
 )
@@ -79,7 +104,7 @@ return(
 
 
 
-<Lista actualizatabla={this.actualiza()}/>
+<Lista actualizatabla={this.actualiza}/>
 
 
 

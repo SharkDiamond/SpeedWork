@@ -28,7 +28,11 @@ elegido:""
 Envia(e){
 
 
-console.log(e.target.id);
+
+this.props.actualizatabla(e.target.id);
+
+
+
 
 }
 
@@ -84,7 +88,7 @@ this.state.Datos.map(Elementos => {
 return(
 <div className="bg-white  rounded p-1 text-center mt-3 mb-2" key={Elementos[0].NombreDepartamento}>
 
-<h1 className="d-inline mr-4 " onClick={()=>this.Envia()} id={Elementos[0].NombreDepartamento}>{Elementos[0].NombreDepartamento}</h1>
+<h1 className="d-inline mr-4 " onClick={this.Envia} id={Elementos[0].idDepartamento}>{Elementos[0].NombreDepartamento}</h1>
 
 
 <h1 className="d-inline fondoBarra  colorVerde rounded" >{Elementos[0].Cantidad}</h1>
