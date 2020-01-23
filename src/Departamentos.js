@@ -24,12 +24,9 @@ this.actualiza=this.actualiza.bind(this);
 
 
 //ACTUALIZAR LA TABLA 
-actualiza(etiqueta){
+actualiza(valor){
 
-var prueba=etiqueta.target.id;
-
-
-alert(prueba);
+alert(valor.target.value);
 
 }
 
