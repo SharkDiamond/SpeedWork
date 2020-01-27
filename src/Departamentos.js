@@ -20,7 +20,8 @@ this.state={
 Datos:[],
 t:1,
 ClaseTabla:"table fondoBarra",
-VerReporte:false
+VerReporte:false,
+REPORTEID:null
 
 }
 
@@ -32,13 +33,14 @@ MostrarReporte=(e)=>{
 
 this.setState({
 
-
 ClaseTabla:"d-none",
+REPORTEID:e.target.id,
 VerReporte:true
-
 })
 
-console.log(e.target.id);
+
+
+
 
 }
 
@@ -123,7 +125,7 @@ return(
    </tbody>
 </table>
 
-<Reporte ver={this.state.VerReporte}/>
+<Reporte ver={this.state.VerReporte} idbusqueda={this.state.REPORTEID}/>
 
 
 </div>
