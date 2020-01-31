@@ -11,7 +11,7 @@ super();
 
 this.state={
 
-FechaCreacion:"",
+FechaC:"",
 Nombre:"",
 Comentarios:[]
 
@@ -19,14 +19,66 @@ Comentarios:[]
 
 }
 
+this.Peticion=this.Peticion.bind(this);
+
+}
 
 
+
+Peticion(Dato){
+
+
+
+axios.post("http://localhost:8080/restback/index.php/Departamentos/TituloReporte",{IDentificador:Dato}).then((respuesta)=>{
+
+//SI TODO SALE BIEN
+
+
+
+
+
+respuesta.data.map((elemento)=>{
+
+this.setState({
+
+Nombre:elemento.NombreReporte,
+FechaC:elemento.FechaCreacion
+
+
+})
+
+
+});
+
+console.log(respuesta.data.NombreReporte);
+
+
+}).catch((error)=>{
+
+//SI OCURRE UN PROBLEMA
+
+alert("problemas");
+console.log(error);
+});
+
+
+
+
+
+}
+
+componentDidUpdate(prevProps, prevState){
+
+if (this.props.idbusqueda!==prevProps.idbusqueda) {
+
+	this.Peticion(this.props.idbusqueda);
 }
 
 
 
 
 
+}
 
 
 
@@ -43,29 +95,10 @@ if (this.props.ver===true) {
    
 <div className="fondoBarra rounded p-3">
 
-<h1 className="mr-3" align="right" Style="color:orange;">{this.state.FechaCreacion}</h1>
+<h1 className="mr-3" align="right" Style="color:white;">{this.state.FechaC}</h1>
 
 <h1 className="display-4 text-primary mb-4" align="center">{this.state.Nombre}</h1>
 
-
-{
-  //ALGORITMO PARA MOSTRAR TODOS LOS COMENTARIOS DEL REPORTE
-this.state.Comentarios.map((Elemento,indice)=>{
-return(
-
-<div className="bg-white mb-3  rounded pt-3 pl-3 pr-3" key={indice}>
-<h1 className="h4">{Elemento.comentario}</h1>
-<p className="font-weight-bold pb-2 mr-3" align="right">{Elemento.NombreUsuario}<span Style="color: #26926b ;">{Elemento.fechacomentario}</span></p>
-</div>
-
-)
-
-}
-
-
-)
-
-}
 
 
 
