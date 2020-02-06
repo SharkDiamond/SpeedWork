@@ -128,6 +128,8 @@ $this->response($valores);
 
 
 
+//CIERRO LA CONEXION
+           $this->db->close();
 }
 
 
@@ -138,6 +140,11 @@ public function RM_post(){
   $consulta=$this->db->query("select * from Clientes where idClientes=" . $datos["number"]);
 
   $this->response($consulta->result_Array());
+
+
+
+//CIERRO LA CONEXION
+           $this->db->close();
 
 }
 
@@ -182,6 +189,8 @@ if ($consulta->num_rows()>0) {
 $this->response($consulta->result());
 
 
+//CIERRO LA CONEXION
+           $this->db->close();
 }
 
 else{
@@ -192,6 +201,8 @@ $this->response($r);
 
 
 
+//CIERRO LA CONEXION
+           $this->db->close();
 
 }
 
