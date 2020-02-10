@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
-
+import Reporte from "./Reporte";
 export default class Lista extends Component  {
   
 constructor(){
@@ -19,7 +19,7 @@ elegido:""
 }
 
  this.Envia=this.Envia.bind(this);
-
+this.actua=this.actua.bind(this);
 }
 
 
@@ -36,7 +36,31 @@ this.props.actualizatabla(e.target.id);
 
 }
 
+ actua(){
+axios.get("http://localhost:8080/restback/index.php/Departamentos/DepartamentosListado?format=json")
+  .then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
 
+
+this.setState({
+
+
+Datos:response.data
+
+
+})
+console.table(this.state.Datos);
+
+  })
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+
+    console.log(error);
+    //alert(error);
+  });
+
+
+}
 
   componentDidMount(){
 axios.get("http://localhost:8080/restback/index.php/Departamentos/DepartamentosListado?format=json")
@@ -58,7 +82,7 @@ console.table(this.state.Datos);
 //RESPUESTA SI HAY ALGUN ERROR
 
     console.log(error);
-    alert(error);
+    //alert(error);
   });
 
 
@@ -73,7 +97,7 @@ render(){
   return (
  
    
-<div className=" col-4">
+<div className=" col-4 ">
 <div className="fondoBarra p-3 rounded">
 <form className="text-center mt-3">
 
@@ -102,7 +126,7 @@ return(
 
 }
 
-
+<Reporte ver={false} actualizaLista={this.actua()}/>
 
 
 </div>

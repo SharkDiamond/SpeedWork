@@ -14,7 +14,9 @@ this.state={
 FechaC:"",
 Nombre:"",
 Comentarios:[],
-describe:""
+describe:"",
+ac:null,
+cerradooabierto:""
 
 
 
@@ -23,6 +25,8 @@ describe:""
 this.Peticion=this.Peticion.bind(this);
 //this.enviaComentario=this.enviaComentario.bind(this);
 this.AsignarDatos=this.AsignarDatos.bind(this);
+this.MostrarAbiertoOCerrado=this.MostrarAbiertoOCerrado.bind(this);
+//this.AbrirOCerrarReporte=this.AbrirOCerrarReporte.bind(this);
 }
 
 AsignarDatos(etiqueta){
@@ -41,12 +45,100 @@ console.log(this.state.describe);
 
 }
 
+MostrarAbiertoOCerrado(){
+
+if (this.state.ac==1) {
+
+this.setState({
+
+cerradooabierto:"Cerrar"
+
+
+})
+
+
+} else if(this.state.ac==0){
+this.setState({
+
+cerradooabierto:"Abrir"
+
+
+})
+
+}
+
+}
+
+
+AbrirOCerrarReporte=()=>{
+
+if(this.state.ac==true) {
+
+axios.post("http://localhost:8080/restback/index.php/Departamentos/AbirCerrarReporte",{cambia:false,reporte:this.props.idbusqueda}).then((respuesta)=>{
+
+
+
+
+this.setState({
+ac:false
+
+})
+this.MostrarAbiertoOCerrado();
+console.log(this.state.cerradooabierto);
+this.props.actualizaLista();
+
+}).catch((error)=>{
+
+//SI OCURRE UN PROBLEMA
+
+//alert("problemas");
+console.log(error);
+});
+
+
+} else {
+
+
+axios.post("http://localhost:8080/restback/index.php/Departamentos/AbirCerrarReporte",{cambia:true,reporte:this.props.idbusqueda}).then((respuesta)=>{
+
+
+this.MostrarAbiertoOCerrado();
+console.log(this.state.cerradooabierto);
+this.setState({
+ac:true
+
+})
+this.MostrarAbiertoOCerrado();
+this.props.actualizaLista();
+
+}).catch((error)=>{
+
+//SI OCURRE UN PROBLEMA
+
+
+console.log(error);
+});
+
+
+
+}
+
+}
+
+
 
 enviaComentario= async (e)=>{
 
 e.preventDefault();
-await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearComentario",{comentario:this.state.describe}).then((respuesta)=>{
-alert("se ejecuto");
+await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearComentario",{comentario:this.state.describe,reporte:this.props.idbusqueda}).then((respuesta)=>{
+
+
+this.setState({
+
+Comentarios:respuesta.data
+
+})
+
 
 console.log(respuesta);
 
@@ -55,7 +147,7 @@ console.log(respuesta);
 
 //SI OCURRE UN PROBLEMA
 
-alert("problemas");
+//alert("problemas");
 console.log(error);
 });
 
@@ -79,13 +171,16 @@ respuesta.data.map((elemento)=>{
 this.setState({
 
 Nombre:elemento.NombreReporte,
-FechaC:elemento.FechaCreacion
+FechaC:elemento.FechaCreacion,
+ac:elemento.Estado
 
 
 })
 
-
+console.log(elemento.Estado);
 });
+
+this.MostrarAbiertoOCerrado();
 
 console.log(respuesta.data.NombreReporte);
 
@@ -94,7 +189,7 @@ console.log(respuesta.data.NombreReporte);
 
 //SI OCURRE UN PROBLEMA
 
-alert("problemas");
+//alert("problemas");
 console.log(error);
 });
 
@@ -119,7 +214,7 @@ console.log();
 
 //SI OCURRE UN PROBLEMA
 
-alert("problemas");
+//alert("problemas");
 console.log(error);
 });
 
@@ -174,11 +269,17 @@ return <div className="bg-white p-3 m-3 rounded"><h4 className="d-block">{elemen
 
 
 <div className="fondoBarra p-3 rounded">
-<form onSubmit={this.enviaComentario}>
+<form onSubmit={this.enviaComentario} className="d-inline">
 <textarea name="message" rows="5" cols="90"  onChange={this.AsignarDatos} className="ml-3"></textarea>
 
-<input type="submit" className="btn bg-white ml-3 mt-2" value="Enviar"  />
+<input type="submit" className="btn bg-white ml-3 mt-2 " value="Enviar"  />
+
+
+
 </form>
+
+
+<button className="btn bg-white ml-3 mt-2" onClick={this.AbrirOCerrarReporte}>{this.state.cerradooabierto}</button>
 
 
 </div>
