@@ -57,13 +57,16 @@ DROP TABLE IF EXISTS `Comentarios`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Comentarios` (
   `NumeroComentario` int(11) NOT NULL AUTO_INCREMENT,
-  `DescripcionComentario` varchar(500) NOT NULL,
-  `FechaCreacion` datetime NOT NULL,
+  `DescripcionComentarios` varchar(500) NOT NULL,
+  `FechaCreacion` datetime DEFAULT CURRENT_TIMESTAMP,
   `Creador` varchar(45) NOT NULL,
+  `NumeroReporte` int(11) NOT NULL,
   PRIMARY KEY (`NumeroComentario`),
+  KEY `NumeroReporte` (`NumeroReporte`),
   KEY `Creador` (`Creador`),
-  CONSTRAINT `Comentarios_ibfk_1` FOREIGN KEY (`Creador`) REFERENCES `Usuarios` (`NombreUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `Comentarios_ibfk_1` FOREIGN KEY (`NumeroReporte`) REFERENCES `Reportes` (`idReporte`),
+  CONSTRAINT `Comentarios_ibfk_2` FOREIGN KEY (`Creador`) REFERENCES `Usuarios` (`NombreUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +75,7 @@ CREATE TABLE `Comentarios` (
 
 LOCK TABLES `Comentarios` WRITE;
 /*!40000 ALTER TABLE `Comentarios` DISABLE KEYS */;
+INSERT INTO `Comentarios` VALUES (4,'Mala se?al se remite a visita','2020-05-16 00:00:00','Gabriel1722',1),(5,'Cliente visitado se alineo la antena se dejo con se?al de -66 dbm','2020-05-16 00:00:00','Gabriel1722',1),(8,'Problemas serios de capacidad','2020-02-10 00:01:53','Gabriel1722',1),(9,'dfnsdfnsfin','2020-02-10 00:08:24','Gabriel1722',1),(10,'ME llamo gabriel','0000-00-00 00:00:00','Gabriel1722',1),(11,'$datos[\"comentario\"]','0000-00-00 00:00:00','Gabriel1722',1),(12,'ME llamo jose','0000-00-00 00:00:00','Gabriel1722',1),(13,'ME llamo jose','0000-00-00 00:00:00','Gabriel1722',1),(14,'ME llamo josejndfdnfjdf','0000-00-00 00:00:00','Gabriel1722',1),(15,'Se realizo ts con el cliente y el servicio subio\n','0000-00-00 00:00:00','Gabriel1722',1),(16,'SDSDS','0000-00-00 00:00:00','Gabriel1722',1),(17,'no y que','0000-00-00 00:00:00','Gabriel1722',1),(18,'dfdfdfdf','0000-00-00 00:00:00','Gabriel1722',1),(19,'DFDFDFF','0000-00-00 00:00:00','Gabriel1722',1),(20,'DFSFSDFDSF','0000-00-00 00:00:00','Gabriel1722',1),(21,'FDFDFF','2017-07-05 00:00:00','Gabriel1722',1),(22,'cvcvcvcv','0000-00-00 00:00:00','Gabriel1722',1),(23,'cvcv','0000-00-00 00:00:00','Gabriel1722',1),(24,'xxxxxxxxxxxxxxxxxxxxxxxxxxx','0000-00-00 00:00:00','Gabriel1722',1),(25,'aaaaaaaaaaaaaaaaaaaaaaaaaa','0000-00-00 00:00:00','Gabriel1722',1),(26,'wwwwwwwwwwwwwwwwww','0000-00-00 00:00:00','Gabriel1722',1),(27,'rrrrrrrrrrrrrrrrrrr','0000-00-00 00:00:00','Gabriel1722',1),(28,'idnfdifndifd','2020-02-10 01:08:37','Gabriel1722',1);
 /*!40000 ALTER TABLE `Comentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +90,7 @@ CREATE TABLE `Departamentos` (
   `idDepartamento` int(11) NOT NULL AUTO_INCREMENT,
   `NombreDepartamento` varchar(45) NOT NULL,
   PRIMARY KEY (`idDepartamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +99,7 @@ CREATE TABLE `Departamentos` (
 
 LOCK TABLES `Departamentos` WRITE;
 /*!40000 ALTER TABLE `Departamentos` DISABLE KEYS */;
-INSERT INTO `Departamentos` VALUES (1,'Visitas'),(2,'Clientes');
+INSERT INTO `Departamentos` VALUES (1,'Visitas'),(2,'Clientes'),(4,'Instalaciones');
 /*!40000 ALTER TABLE `Departamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,16 +116,13 @@ CREATE TABLE `Reportes` (
   `Estado` tinyint(1) NOT NULL,
   `FechaCreacion` datetime NOT NULL,
   `PertenenciaDepartamento` int(11) NOT NULL,
-  `ComentariosUsuarios` int(11) DEFAULT NULL,
-  `RfCliente` int(11) DEFAULT NULL,
+  `RfCliente` int(11) NOT NULL,
   PRIMARY KEY (`idReporte`),
   KEY `PertenenciaDepartamento` (`PertenenciaDepartamento`),
-  KEY `ComentariosUsuarios` (`ComentariosUsuarios`),
   KEY `RfCliente` (`RfCliente`),
   CONSTRAINT `Reportes_ibfk_1` FOREIGN KEY (`PertenenciaDepartamento`) REFERENCES `Departamentos` (`idDepartamento`),
-  CONSTRAINT `Reportes_ibfk_2` FOREIGN KEY (`ComentariosUsuarios`) REFERENCES `Comentarios` (`NumeroComentario`),
-  CONSTRAINT `Reportes_ibfk_3` FOREIGN KEY (`RfCliente`) REFERENCES `Clientes` (`idClientes`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  CONSTRAINT `Reportes_ibfk_2` FOREIGN KEY (`RfCliente`) REFERENCES `Clientes` (`idClientes`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +131,7 @@ CREATE TABLE `Reportes` (
 
 LOCK TABLES `Reportes` WRITE;
 /*!40000 ALTER TABLE `Reportes` DISABLE KEYS */;
-INSERT INTO `Reportes` VALUES (1,'G2 SIN SERVICIO',1,'2020-02-12 00:00:00',1,NULL,NULL),(2,'G78 SIN SERVICIO',1,'2020-02-12 00:00:00',1,NULL,NULL),(3,'G78 SIN SERVICIO fdfdv',1,'2020-02-12 00:00:00',1,NULL,NULL);
+INSERT INTO `Reportes` VALUES (1,'SIn servicio Guayama',1,'2020-02-17 00:00:00',1,1);
 /*!40000 ALTER TABLE `Reportes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,17 +191,18 @@ DROP TABLE IF EXISTS `Usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Usuarios` (
+  `IdUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `NombreUsuario` varchar(45) NOT NULL,
+  `Contraseña` varchar(45) NOT NULL,
   `Nombre` varchar(45) NOT NULL,
   `Apellido` varchar(45) NOT NULL,
-  `Correo` varchar(80) NOT NULL,
-  `Edad` int(11) NOT NULL,
-  `Contraseña` varchar(45) NOT NULL,
-  `TipoUsuario` int(11) NOT NULL,
+  `TipoDeUsuario` int(11) NOT NULL,
+  `Sexo` varchar(1) NOT NULL,
   PRIMARY KEY (`NombreUsuario`),
-  KEY `TipoUsuario` (`TipoUsuario`),
-  CONSTRAINT `Usuarios_ibfk_1` FOREIGN KEY (`TipoUsuario`) REFERENCES `TipoUsuarios` (`idTipoUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `id` (`IdUsuario`),
+  KEY `Tipo` (`TipoDeUsuario`),
+  CONSTRAINT `Usuarios_ibfk_1` FOREIGN KEY (`TipoDeUsuario`) REFERENCES `TipoUsuarios` (`idTipoUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,7 +211,7 @@ CREATE TABLE `Usuarios` (
 
 LOCK TABLES `Usuarios` WRITE;
 /*!40000 ALTER TABLE `Usuarios` DISABLE KEYS */;
-INSERT INTO `Usuarios` VALUES ('Franco456','Franco','Angel','gabiarispe@gmail.com',20,'vuela33',1),('Gabriel1722','Gabriel','Arispe','gabrielarispe24@gmail.com',20,'tiburon69',2);
+INSERT INTO `Usuarios` VALUES (1,'Gabriel1722','wwwaaa12','Gabriel','Arispe',1,'M');
 /*!40000 ALTER TABLE `Usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -222,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-02 11:33:05
+-- Dump completed on 2020-02-10  1:11:20

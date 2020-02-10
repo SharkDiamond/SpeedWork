@@ -91,6 +91,45 @@ $this->db->close();
 
 }
 
+public function Comentarios_post(){
+
+
+
+$datos = json_decode(file_get_contents("php://input"), true); 
+
+$CONSULTA = $this->db->query("SELECT DescripcionComentarios,FechaCreacion,Creador FROM Comentarios where NumeroReporte=" . $datos["IDentificador"]);
+
+
+$this->response($CONSULTA->result());
+
+$this->db->close();
+
+
+}
+
+
+
+public function CrearComentario_post(){
+	
+
+$datos = json_decode(file_get_contents("php://input"), true); 
+
+$e="17-06-1999";
+	
+$data = array(
+        'NumeroComentario'=>'',
+        'DescripcionComentarios'=>'' . $datos["comentario"],
+        'Creador'=>'Gabriel1722',
+        'NumeroReporte'=>'1'
+);
+
+$this->db->insert('Comentarios', $data);
+
+
+
+}
+
+
 
 
 
