@@ -97,15 +97,10 @@ render(){
   return (
  
    
-<div className=" col-4 ">
+<div className=" col-4">
 <div className="fondoBarra p-3 rounded">
-<form className="text-center mt-3">
 
-<input type="text" placeholder="Buscar Departameto" className="mb-2 mt-2 mr-2"/>
-
-<input type="submit" value="Buscar" />
-</form>
-
+<h1 className="font-weight-bold text-center text-primary">Departamentos</h1>
 {
 this.state.Datos.map(Elementos => {
   
