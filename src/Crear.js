@@ -69,11 +69,11 @@ render(){
 <div className="col-4">
 <form className="text-center">
 <h1 className="text-danger font-weight-bold">Reporte</h1>
-<input type="text" />
+<input type="text" placeholder="Nombre"/>
 
-<input type="text" />
 
-<input type="text" />
+
+<input type="submit" />
 
 </form>
 

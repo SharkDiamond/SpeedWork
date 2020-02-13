@@ -236,6 +236,14 @@ top: 4px;
 
 
 }
+
+.subebotonlista{
+
+position: relative;
+top: -7px;
+
+}
+
 .letra{
 	transition: 500ms;
 color: rgba(250, 250, 250, 0.986);

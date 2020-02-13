@@ -13,13 +13,16 @@ this.state={
 
 
 Datos:[],
-elegido:""
+elegido:"",
+Mostrar:true,
+crear:""
 
 
 }
 
  this.Envia=this.Envia.bind(this);
 this.actua=this.actua.bind(this);
+this.AsignarDatos=this.AsignarDatos.bind(this);
 }
 
 
@@ -88,19 +91,82 @@ console.table(this.state.Datos);
 
 } 
     
+mostrarFormulario=()=>{
 
+if (this.state.Mostrar) {
+
+this.setState({
+
+
+Mostrar:false
+
+})
+
+} else {
+
+this.setState({
+
+
+Mostrar:true
+
+})
+
+
+}
+
+
+
+}
+
+
+AsignarDatos(etiqueta){
+
+const valor=etiqueta.target.value;
+this.setState({
+
+crear:valor
+
+
+
+})
+
+console.log(this.state.describe);
+
+
+}
+
+
+EnviarFormulario= async (e)=>{
+ e.preventDefault();
+
+await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearDepartamento",{Nombre:this.state.crear}).then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
+
+alert(response.data);
+
+  })
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+alert("problemas");
+    console.log(error);
+    //alert(error);
+  });
+
+
+
+}
 
 
 render(){
 
-
+if (this.state.Mostrar==true) {
   return (
  
-   
 <div className=" col-4">
 <div className="fondoBarra p-3 rounded">
 
-<h1 className="font-weight-bold text-center text-primary">Departamentos</h1>
+<div className="text-center"><h1 className="font-weight-bold text-primary d-inline">Departamentos</h1><button className="ml-2 btn btn-light font-weight-bold subebotonlista" onClick={this.mostrarFormulario}>+</button></div>
+
 {
 this.state.Datos.map(Elementos => {
   
@@ -129,6 +195,34 @@ return(
 
 
   );
+}
+
+else{
+
+return(
+
+
+<div className=" col-4">
+<div className="fondoBarra p-3 rounded">
+
+<div className="text-center mb-2"><h1 className="font-weight-bold text-primary d-inline">Departamentos</h1><button className="ml-2 btn  btn-light font-weight-bold subebotonlista" onClick={this.mostrarFormulario}>-</button></div>
+
+<form className="text-center" onSubmit={this.EnviarFormulario}>
+
+<input type="text" placeholder="Nombre" onChange={this.AsignarDatos}/>
+<br/>
+<br/>
+<input type="submit" className="btn bg-success" value="Crear" />
+
+
+</form>
+
+</div>
+</div>
+  );
+
+
+}
 
 }
 
