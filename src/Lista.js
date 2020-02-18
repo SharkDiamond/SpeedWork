@@ -14,8 +14,9 @@ this.state={
 
 Datos:[],
 elegido:"",
-Mostrar:true,
-crear:""
+Mostrar:1,
+crear:"",
+eleccion:"Clientes"
 
 
 }
@@ -91,23 +92,38 @@ console.table(this.state.Datos);
 
 } 
     
-mostrarFormulario=()=>{
+mostrarFormulario=(e)=>{
 
-if (this.state.Mostrar) {
+
+
+if (this.state.Mostrar==1) {
 
 this.setState({
 
 
-Mostrar:false
+Mostrar:e.target.id
 
 })
 
-} else {
+} else if(this.state.Mostrar==2){
 
 this.setState({
 
 
-Mostrar:true
+Mostrar:1
+
+})
+
+
+}
+
+
+else if(this.state.Mostrar==3){
+
+this.setState({
+
+
+Mostrar:1
 
 })
 
@@ -136,6 +152,20 @@ console.log(this.state.describe);
 }
 
 
+cambia=(etiqueta)=>{
+
+this.setState({
+
+
+eleccion:etiqueta.target.value
+
+})
+
+
+}
+
+
+
 EnviarFormulario= async (e)=>{
  e.preventDefault();
 
@@ -157,15 +187,39 @@ alert("problemas");
 }
 
 
+EnviarFormularioReporte= async (e)=>{
+ e.preventDefault();
+
+await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearReporte",{Nombre:this.state.crear,Departamento:this.state.eleccion}).then((response) => {
+    //RESPUESTA SI TODO SALE BIEN
+console.log(response.data);
+alert(response.data);
+
+  })
+  .catch((error) => {
+//RESPUESTA SI HAY ALGUN ERROR
+alert("problemas");
+    console.log(error);
+    //alert(error);
+  });
+
+
+
+}
+
+
+
 render(){
 
-if (this.state.Mostrar==true) {
+if (this.state.Mostrar==1) {
   return (
  
 <div className=" col-4">
 <div className="fondoBarra p-3 rounded">
 
-<div className="text-center"><h1 className="font-weight-bold text-primary d-inline">Departamentos</h1><button className="ml-2 btn btn-light font-weight-bold subebotonlista" onClick={this.mostrarFormulario}>+</button></div>
+<div className="text-center"><h1 className="font-weight-bold text-primary d-inline">Departamentos</h1>
+<button className="ml-2 btn btn-light font-weight-bold subebotonlista" id={2} onClick={this.mostrarFormulario} >D</button>
+<button className="ml-2 btn btn-light font-weight-bold subebotonlista" id={3} onClick={this.mostrarFormulario} >R</button></div>
 
 {
 this.state.Datos.map(Elementos => {
@@ -173,7 +227,7 @@ this.state.Datos.map(Elementos => {
 return(
 <div className="bg-white  rounded p-1 text-center mt-3 mb-2" key={Elementos[0].NombreDepartamento}>
 
-<h1 className="d-inline mr-4 " onMouseEnter={this.Envia} id={Elementos[0].idDepartamento}>{Elementos[0].NombreDepartamento}</h1>
+<h1 className="d-inline mr-4 " onClick={this.Envia} id={Elementos[0].idDepartamento}>{Elementos[0].NombreDepartamento}</h1>
 
 
 <h1 className="d-inline fondoBarra  colorVerde rounded" >{Elementos[0].Cantidad}</h1>
@@ -197,7 +251,7 @@ return(
   );
 }
 
-else{
+else if(this.state.Mostrar==2){
 
 return(
 
@@ -207,7 +261,7 @@ return(
 
 <div className="text-center mb-2"><h1 className="font-weight-bold text-primary d-inline">Departamentos</h1><button className="ml-2 btn  btn-light font-weight-bold subebotonlista" onClick={this.mostrarFormulario}>-</button></div>
 
-<form className="text-center" onSubmit={this.EnviarFormulario}>
+<form className="text-center" id="" onSubmit={this.EnviarFormulario}>
 
 <input type="text" placeholder="Nombre" onChange={this.AsignarDatos}/>
 <br/>
@@ -224,7 +278,65 @@ return(
 
 }
 
+
+else if(this.state.Mostrar==3){
+
+return(
+
+
+<div className=" col-4">
+<div className="fondoBarra p-3 rounded">
+
+<div className="text-center mb-2"><h1 className="font-weight-bold colorVerde d-inline">Nuevo Reporte</h1><button className="ml-2 btn  btn-light font-weight-bold subebotonlista" onClick={this.mostrarFormulario}>-</button></div>
+
+<form className="text-center" id="" onSubmit={this.EnviarFormularioReporte}>
+
+<input type="text" placeholder="Nombre" onChange={this.AsignarDatos}/>
+<br/>
+<br/>
+
+
+<select value={this.state.eleccion} onChange={this.cambia}>
+{
+this.state.Datos.map(Elementos => {
+  
+return(
+<option className="d-block"  id={Elementos[0].idDepartamento} value={Elementos[0].NombreDepartamento}>{Elementos[0].NombreDepartamento}</option>
+
+
+)
+
+  
+})
+
 }
+</select>
+
+<br/>
+<br/>
+
+
+<input type="submit" className="btn bg-success" value="Crear" />
+
+</form>
+
+</div>
+</div>
+  );
+
+
+}
+
+
+
+
+
+
+}
+
+
+
+
 
 
 }

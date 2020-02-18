@@ -181,6 +181,24 @@ $this->response("Departamento Creado Exitosamente");
 }
 
 
+public function CrearReporte_post(){
+
+$datos = json_decode(file_get_contents("php://input"), true); 
+
+$IDS = $this->db->query("select idDepartamento from Departamentos where NombreDepartamento='" . $datos["Departamento"] . "'");
+
+
+
+foreach ($IDS->result_array() as $row){
+
+$this->db->query("insert into Reportes values('','" . $datos["Nombre"] . "',true,SYSDATE()," . $row["idDepartamento"] . ",null)");
+
+}
+
+$this->response("Creado");
+
+
+}
 
 
 
