@@ -242,7 +242,7 @@ tercera:""
 this.PEDIR(etiqueta.target.id);
 
 
-console.log(this.state.cantidad);
+
 
 
 }
@@ -265,7 +265,7 @@ tercera:""
 this.PEDIR(etiqueta.target.id);
 
 
-console.log(this.state.cantidad);
+
 
 
 }
@@ -312,7 +312,7 @@ clienteElegido=(e)=>{
         
         
         
-        console.log(this.state.perfiles);
+        
         
         this.ver();
 

@@ -23,7 +23,7 @@ dr:[]
 
     
     async imprime(Nuevo){
-console.log(this.props.idFiltro);
+
   
 await axios.post("http://localhost:8080/restback/index.php/Clientes/RM",{
 number:Nuevo

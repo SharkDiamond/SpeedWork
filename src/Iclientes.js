@@ -50,7 +50,7 @@ datobusqueda:valor
 
 })
 
-console.log(this.state.datobusqueda);
+
 
 
 }

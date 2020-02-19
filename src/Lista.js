@@ -21,7 +21,7 @@ eleccion:"Clientes"
 
 }
 
- this.Envia=this.Envia.bind(this);
+this.Envia=this.Envia.bind(this);
 this.actua=this.actua.bind(this);
 this.AsignarDatos=this.AsignarDatos.bind(this);
 }
@@ -53,7 +53,7 @@ Datos:response.data
 
 
 })
-console.table(this.state.Datos);
+
 
   })
   .catch((error) => {
@@ -79,7 +79,7 @@ Datos:response.data
 
 
 })
-console.table(this.state.Datos);
+
 
   })
   .catch((error) => {
@@ -146,7 +146,7 @@ crear:valor
 
 })
 
-console.log(this.state.describe);
+
 
 
 }
@@ -192,7 +192,7 @@ EnviarFormularioReporte= async (e)=>{
 
 await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearReporte",{Nombre:this.state.crear,Departamento:this.state.eleccion}).then((response) => {
     //RESPUESTA SI TODO SALE BIEN
-console.log(response.data);
+
 alert(response.data);
 
   })
@@ -200,7 +200,7 @@ alert(response.data);
 //RESPUESTA SI HAY ALGUN ERROR
 alert("problemas");
     console.log(error);
-    //alert(error);
+
   });
 
 
