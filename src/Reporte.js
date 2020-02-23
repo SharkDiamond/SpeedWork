@@ -23,10 +23,10 @@ cerradooabierto:""
 }
 
 this.Peticion=this.Peticion.bind(this);
-//this.enviaComentario=this.enviaComentario.bind(this);
+
 this.AsignarDatos=this.AsignarDatos.bind(this);
 this.MostrarAbiertoOCerrado=this.MostrarAbiertoOCerrado.bind(this);
-//this.AbrirOCerrarReporte=this.AbrirOCerrarReporte.bind(this);
+
 }
 
 AsignarDatos(etiqueta){
@@ -40,7 +40,7 @@ describe:valor
 
 })
 
-console.log(this.state.describe);
+
 
 
 }
@@ -84,7 +84,7 @@ ac:false
 
 })
 this.MostrarAbiertoOCerrado();
-console.log(this.state.cerradooabierto);
+
 this.props.actualizaLista();
 
 }).catch((error)=>{
@@ -103,7 +103,7 @@ axios.post("http://localhost:8080/restback/index.php/Departamentos/AbirCerrarRep
 
 
 this.MostrarAbiertoOCerrado();
-console.log(this.state.cerradooabierto);
+
 this.setState({
 ac:true
 
@@ -140,7 +140,7 @@ Comentarios:respuesta.data
 })
 
 
-console.log(respuesta);
+
 
 
 }).catch((error)=>{
@@ -163,9 +163,6 @@ axios.post("http://localhost:8080/restback/index.php/Departamentos/TituloReporte
 //SI TODO SALE BIEN
 
 
-
-
-
 respuesta.data.map((elemento)=>{
 
 this.setState({
@@ -177,12 +174,12 @@ ac:elemento.Estado
 
 })
 
-console.log(elemento.Estado);
+
 });
 
 this.MostrarAbiertoOCerrado();
 
-console.log(respuesta.data.NombreReporte);
+
 
 
 }).catch((error)=>{
@@ -205,9 +202,9 @@ Comentarios:respuesta.data
 
 })
 
-console.table(this.state.Comentarios);
 
-console.log();
+
+
 
 
 }).catch((error)=>{
@@ -215,7 +212,7 @@ console.log();
 //SI OCURRE UN PROBLEMA
 
 //alert("problemas");
-console.log(error);
+
 });
 
 

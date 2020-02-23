@@ -55,7 +55,7 @@ reportes:response.data
   .catch((error) => {
 //RESPUESTA SI HAY ALGUN ERROR
 
-    console.log(error);
+   
     alert(error);
   });
 
@@ -88,21 +88,11 @@ reportes:response.data
   .catch((error) => {
 //RESPUESTA SI HAY ALGUN ERROR
 
-    console.log(error);
+    
     alert(error);
   });
 
-/*
-this.setState({
 
-
-ov:true,
-anima:"grande fondoBarra  rounded p-2  text-center container"
-
-
-
-})
-*/
 
 setTimeout(this.actualiza, 80);
 
