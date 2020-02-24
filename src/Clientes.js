@@ -6,7 +6,7 @@ import tienda from "./imagenes/tienda.png";
 import casa from "./imagenes/casa.png";
 import Miniperfil from "./Miniperfil.js";
 import axios from "axios";
-
+import './App.css';
 
 
 export default class Clientes extends Component {
@@ -28,7 +28,8 @@ veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none",
 cantidad:0,
 cancelados:0,
 resultadosbusqueda:[],
-perfiles:null
+perfiles:null,
+BOC:1
 
 
     }
@@ -398,6 +399,37 @@ fila.className="quesevea col-6 fondoBarra rounded";
 }
 
 
+CambiarAbuscarOCrear=()=>{
+
+
+if (this.state.BOC==1) {
+this.setState({
+
+BOC:2
+
+
+})
+
+    
+}
+
+
+if (this.state.BOC==2) {
+this.setState({
+
+BOC:1
+
+
+})
+
+
+}
+
+
+
+}
+
+
 
    
     render() {
@@ -409,13 +441,11 @@ return (
 
 
 
-<div className="row p-3 fondoBarra rounded">
+<div className="row p-3 fondoBarra rounded "  Style="height:300px">
 
 
 <div className="col-2 rounded p-3 ">
 <div className="text-center">
-
-
 
 <img src={vip} width="80px" heigh="80px" className={this.state.primera} alt="" id="VIP" onClick={this.cambiacliente}/>
      
@@ -432,7 +462,7 @@ return (
 
 
 
-<div className="col-6 fondoBarra text-center  rounded  p-3 border">
+<div className="col-6 fondoBarra text-center  rounded  p-3 border " Style="height:270px">
 
 
 <h1 className="text-white font-weight-bold mt-3" >Cantidad Total De Clientes</h1>
@@ -447,9 +477,15 @@ return (
 </div>
 
 
-<div className="col-4  ">
+<div className="col-4">
+
+<div>
 <br/>
-<Iclientes Titulo={this.state.tipoCliente} pasafuncion={this.ver2} enviarResultados={this.ObteniendoResultados}/>
+
+<button className="btn bg-white ml-2 rounded-circle mb-4" Style=" position:absolute; left:330px; top:-10px;" onClick={this.CambiarAbuscarOCrear}>+</button>
+
+<Iclientes crearClienteoBuscar={this.state.BOC} Titulo={this.state.tipoCliente} pasafuncion={this.ver2} enviarResultados={this.ObteniendoResultados}/>
+</div>
 
 </div>
 

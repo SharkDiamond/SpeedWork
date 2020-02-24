@@ -14,7 +14,9 @@ constructor(){
     this.state={
     eleccion:"ID",
     datobusqueda:"",
-cliente:1
+cliente:1,
+
+
 
     }
     
@@ -147,9 +149,11 @@ console.log(error);
    
     render() {
 
-return (
 
-            <div className="mb-4 container">
+if (this.props.crearClienteoBuscar==1) {
+ 
+return (
+ <div className="mb-4 container">
 
 
 <div className="row fondoBarra rounded">
@@ -178,7 +182,7 @@ return (
 
 
 
-<br/>
+<br/>}
 
 <input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn" onClick={this.props.pasafuncion} />
 
@@ -206,7 +210,57 @@ return (
             </div>
       
 
-      )  
+
+  )  
+
+
+
+
+
+
+}      
+    
+
+if (this.props.crearClienteoBuscar==2) {
+
+return(
+ <div className="fondoBarra col-11 p-2 rounded" >
+
+<form className="text-center">
+<h1 className="colorVerde font-weight-bold">Clientes</h1>
+<input type="text"  placeholder="Nombre"/>
+<br/>
+<br/>
+<input type="text"  placeholder="Apellido"/>
+<br/>
+<br/>
+<input type="text"  placeholder="Direccion"/>
+<br/>
+<br/>
+<input type="number"  placeholder="Telefono"/>
+<br/>
+<br/>
+<input type="text"  placeholder="Correo Electronico"/>
+<br/>
+<br/>
+<select className="mb-3">
+<option>Residencial</option>
+<option>Comercial</option>
+<option>VIP</option>
+</select>
+<br/>
+<input type="submit" value="Crear" />
+
+</form>
+</div>
+)
+
+
+
+
+}
+
+
     }
 
 
