@@ -7,7 +7,7 @@ import casa from "./imagenes/casa.png";
 import Miniperfil from "./Miniperfil.js";
 import axios from "axios";
 import './App.css';
-
+import ParteMediaClientes from "./ParteMediaClientes";
 
 export default class Clientes extends Component {
    
@@ -29,7 +29,7 @@ cantidad:0,
 cancelados:0,
 resultadosbusqueda:[],
 perfiles:null,
-BOC:1
+BOC:false
 
 
     }
@@ -402,10 +402,10 @@ fila.className="quesevea col-6 fondoBarra rounded";
 CambiarAbuscarOCrear=()=>{
 
 
-if (this.state.BOC==1) {
+if (this.state.BOC==true) {
 this.setState({
 
-BOC:2
+BOC:false
 
 
 })
@@ -414,10 +414,10 @@ BOC:2
 }
 
 
-if (this.state.BOC==2) {
+if (this.state.BOC==false) {
 this.setState({
 
-BOC:1
+BOC:true
 
 
 })
@@ -465,13 +465,11 @@ return (
 <div className="col-6 fondoBarra text-center  rounded  p-3 border " Style="height:270px">
 
 
-<h1 className="text-white font-weight-bold mt-3" >Cantidad Total De Clientes</h1>
-<h1 className="text-white">{this.state.cantidad}</h1>
 
-<h1 className="text-white font-weight-bold">Clientes Cancelados</h1>
+<button className="btn bg-white ml-2 rounded-circle mb-4" Style=" position:absolute; left:500px; top:3px;" onClick={this.CambiarAbuscarOCrear}>+</button>
 
-<h1 className="text-white ">{this.state.cancelados}</h1>
 
+<ParteMediaClientes crearOver={this.state.BOC} cantidad={this.state.cantidad} cancelados={this.state.cancelados} />
 
 
 </div>
@@ -482,9 +480,7 @@ return (
 <div>
 <br/>
 
-<button className="btn bg-white ml-2 rounded-circle mb-4" Style=" position:absolute; left:330px; top:-10px;" onClick={this.CambiarAbuscarOCrear}>+</button>
-
-<Iclientes crearClienteoBuscar={this.state.BOC} Titulo={this.state.tipoCliente} pasafuncion={this.ver2} enviarResultados={this.ObteniendoResultados}/>
+<Iclientes crearClienteoBuscar={1} Titulo={this.state.tipoCliente} pasafuncion={this.ver2} enviarResultados={this.ObteniendoResultados}/>
 </div>
 
 </div>
