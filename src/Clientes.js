@@ -410,7 +410,25 @@ BOC:false
 
 })
 
-    
+   if (this.state.tipoCliente=="Residencial") {
+this.PEDIR("Residencial");
+
+   }
+
+   if (this.state.tipoCliente=="Comercial") {
+
+this.PEDIR("Comercial");
+
+   }
+
+if (this.state.tipoCliente=="VIP") {
+
+this.PEDIR("VIP");
+
+}
+
+
+
 }
 
 

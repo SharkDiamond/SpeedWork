@@ -10,11 +10,88 @@ constructor(){
 super();
 
 this.state={
-
+Nombre:"",
+Apellido:"",
+Telefono:"",
+Direccion:"",
+Correo:"",
+tipoCliente:"Residencial"
 
 
 }
 
+
+}
+
+
+FiltroCliente=(e)=>{
+
+var valor=e.target.value;
+
+
+this.setState({
+
+
+tipoCliente:valor
+
+})
+
+console.log(this.state.tipoCliente);
+
+}
+
+
+Formularios=(e)=>{
+
+var valor=e.target.value;
+
+
+this.setState({
+
+
+[e.target.name]:e.target.value
+
+})
+
+
+console.log(this.state.Nombre);
+console.log(this.state.Apellido);
+console.log(this.state.Correo);
+console.log(this.state.Direccion);
+console.log(this.state.Telefono);
+}
+
+
+enviar= async (e) =>{
+
+e.preventDefault();
+
+await axios.post("http://localhost:8080/restback/index.php/Clientes/crearclientes",
+{Nombre:this.state.Nombre,
+Apellido:this.state.Apellido,
+Correo:this.state.Correo,
+Direccion:this.state.Direccion,
+Telefono:this.state.Telefono,
+Tipo:this.state.tipoCliente
+}).then((respuesta)=>{
+
+
+
+
+alert("todo salio bien");
+
+
+
+}  ).catch(()=>{
+
+
+alert("Problemas");
+
+
+}
+
+
+);
 
 }
 
@@ -24,24 +101,24 @@ if (this.props.crearOver==true) {
 
 return(
 <div>
-<form className="text-center">
+<form className="text-center" >
 <h1 className="colorVerde font-weight-bold">Clientes</h1>
 
 <div className="form-row">
 
 <div className="col">
-<input type="text"  placeholder="Nombre"/>
-<input type="text"  placeholder="Direccion Fisica" className="mt-2"/>
-<input type="text"  placeholder="Correo Electronico" className="mt-2"/>
+<input type="text"  placeholder="Nombre" name="Nombre" onChange={this.Formularios}/>
+<input type="text"  placeholder="Direccion Fisica" name="Direccion" className="mt-2" onChange={this.Formularios}/>
+<input type="text"  placeholder="Correo Electronico" name="Correo" className="mt-2" onChange={this.Formularios}/>
 </div>
 
 <div className="col">
-<input type="text"  placeholder="Apellido"/>
-<input type="text-number"  placeholder="Telefono" className="mt-2"/>
-<select className="mt-2">
-<option>Residencial</option>
-<option>Comercial</option>
-<option>VIP</option>
+<input type="text"  placeholder="Apellido" name="Apellido" onChange={this.Formularios}/>
+<input type="text-number"  placeholder="Telefono" name="Telefono" className="mt-2" onChange={this.Formularios}/>
+<select className="mt-2" name="tipoCliente">
+<option onClick={this.FiltroCliente}  value="Residencial">Residencial</option>
+<option onClick={this.FiltroCliente} value="Comercial">Comercial</option>
+<option onClick={this.FiltroCliente} value="VIP">VIP</option>
 </select>
 </div>
 
@@ -52,7 +129,7 @@ return(
 
 <div className="col">
 
-<input type="submit" value="Crear" />
+<input type="submit" value="Crear"  onClick={this.enviar}/>
 
 
 </div>
