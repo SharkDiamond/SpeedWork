@@ -264,7 +264,7 @@ return(
 
 <form className="text-center" id="" onSubmit={this.EnviarFormulario}>
 
-<input type="text" placeholder="Nombre" onChange={this.AsignarDatos}/>
+<input type="text" placeholder="Nombre" onChange={this.AsignarDatos} required/>
 <br/>
 <br/>
 <input type="submit" className="btn bg-success" value="Crear" />
@@ -292,7 +292,7 @@ return(
 
 <form className="text-center" id="" onSubmit={this.EnviarFormularioReporte}>
 
-<input type="text" placeholder="Nombre" onChange={this.AsignarDatos}/>
+<input type="text" placeholder="Nombre" onChange={this.AsignarDatos} required/>
 <br/>
 <br/>
 

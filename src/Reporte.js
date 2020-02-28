@@ -267,7 +267,7 @@ return <div className="bg-white p-3 m-3 rounded"><h4 className="d-block">{elemen
 
 <div className="fondoBarra p-3 rounded">
 <form onSubmit={this.enviaComentario} className="d-inline">
-<textarea name="message" rows="5" cols="90"  onChange={this.AsignarDatos} className="ml-3"></textarea>
+<textarea name="message" rows="5" cols="90"  onChange={this.AsignarDatos} className="ml-3" required></textarea>
 
 <input type="submit" className="btn bg-white ml-3 mt-2 " value="Enviar"  />
 

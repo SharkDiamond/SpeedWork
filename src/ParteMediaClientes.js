@@ -101,20 +101,20 @@ if (this.props.crearOver==true) {
 
 return(
 <div>
-<form className="text-center" >
+<form className="text-center" onSubmit={this.enviar}>
 <h1 className="colorVerde font-weight-bold">Clientes</h1>
 
 <div className="form-row">
 
 <div className="col">
-<input type="text"  placeholder="Nombre" name="Nombre" onChange={this.Formularios}/>
-<input type="text"  placeholder="Direccion Fisica" name="Direccion" className="mt-2" onChange={this.Formularios}/>
-<input type="text"  placeholder="Correo Electronico" name="Correo" className="mt-2" onChange={this.Formularios}/>
+<input type="text"  placeholder="Nombre" name="Nombre" onChange={this.Formularios} required />
+<input type="text"  placeholder="Direccion Fisica" name="Direccion" className="mt-2" onChange={this.Formularios} required />
+<input type="email"  placeholder="Correo Electronico" name="Correo" className="mt-2" onChange={this.Formularios} required />
 </div>
 
 <div className="col">
 <input type="text"  placeholder="Apellido" name="Apellido" onChange={this.Formularios}/>
-<input type="text-number"  placeholder="Telefono" name="Telefono" className="mt-2" onChange={this.Formularios}/>
+<input type="tel"  placeholder="Telefono" name="Telefono" className="mt-2" onChange={this.Formularios} required />
 <select className="mt-2" name="tipoCliente">
 <option onClick={this.FiltroCliente}  value="Residencial">Residencial</option>
 <option onClick={this.FiltroCliente} value="Comercial">Comercial</option>
@@ -129,7 +129,7 @@ return(
 
 <div className="col">
 
-<input type="submit" value="Crear"  onClick={this.enviar}/>
+<input type="submit" value="Crear"  />
 
 
 </div>

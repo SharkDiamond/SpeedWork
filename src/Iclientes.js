@@ -102,6 +102,7 @@ componentWillReceiveProps(nextProps){
 
 onSubmit= async (e)=>{
 
+this.props.pasafuncion();
 e.preventDefault();
 
 await axios.post("http://localhost:8080/restback/index.php/Clientes/Resultados",{
@@ -169,7 +170,7 @@ return (
 <form className="mb-1 mt-1 text-center" onSubmit={this.onSubmit}>
 
 
-<input type="text" placeholder={this.state.eleccion} id="datobusqueda" name="datobusqueda" onChange={this.AsignarDatos} value={this.state.datobusqueda}/> 
+<input type="text" placeholder={this.state.eleccion} id="datobusqueda" name="datobusqueda" onChange={this.AsignarDatos} value={this.state.datobusqueda} required/> 
 <br/>
 <br/>
 <select className="seleccion" onClick={this.cambia} id="filtrobusqueda" name="filtrobusqueda">
@@ -184,7 +185,7 @@ return (
 
 <br/>}
 
-<input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn" onClick={this.props.pasafuncion} />
+<input type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn"  />
 
 </form>
 
