@@ -4,7 +4,7 @@ import './App.css';
 import axios from "axios";
 
 export default class Reporte extends Component  {
-  
+
 constructor(){
 
 super();
@@ -130,7 +130,7 @@ console.log(error);
 enviaComentario= async (e)=>{
 
 e.preventDefault();
-await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearComentario",{comentario:this.state.describe,reporte:this.props.idbusqueda}).then((respuesta)=>{
+await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearComentario",{comentario:this.state.describe,reporte:this.props.idbusqueda,usuario:localStorage.getItem("Usuario")}).then((respuesta)=>{
 
 
 this.setState({
@@ -244,8 +244,8 @@ if (this.props.ver===true) {
 
 
   return (
- 
-   
+
+
 <div className="fondoBarra rounded p-3">
 
 <h1 className="mr-3" align="right" Style="color:white;">{this.state.FechaC}</h1>
@@ -295,8 +295,8 @@ if (this.props.ver===false) {
 
 
   return (
- 
-   
+
+
 <div className="d-none">
 
 

@@ -8,15 +8,17 @@ import Miniperfil from "./Miniperfil.js";
 import axios from "axios";
 import './App.css';
 import ParteMediaClientes from "./ParteMediaClientes";
+import Barra from "./Barra.js";
+
 
 export default class Clientes extends Component {
-   
-   
-   
+
+
+
 
 constructor(){
     super();
-    
+
     this.state={
 tipoCliente:"VIP",
 primera:"fondominibarra",
@@ -33,8 +35,8 @@ BOC:false
 
 
     }
-    
-    
+
+
 //CODIGO PARA PODER USAR THIS EN LOS METODOS
 
 this.PEDIR=this.PEDIR.bind(this);
@@ -43,7 +45,7 @@ this.ver=this.ver.bind(this);
 
 
     }
-    
+
 
 
 //METODO PARA PEDIR  LOS DATOS DE LAS CANTIDADES DE CLIENTES TANTO ACTIVOS COMO CANCELADOS
@@ -301,20 +303,20 @@ this.PEDIR(etiqueta.target.id);
 
 clienteElegido=(e)=>{
 
-   
+
 
 
     this.setState({
 
 
         perfiles:e.target.id
-        
+
         })
-        
-        
-        
-        
-        
+
+
+
+
+
         this.ver();
 
 
@@ -449,125 +451,176 @@ BOC:true
 
 
 
-   
+
     render() {
 
-return (
 
-            <div className="container  p-3 rounded">
-
+if (localStorage.getItem("Usuario")) {
 
 
+  return (
 
-<div className="row p-3 fondoBarra rounded "  Style="height:300px">
+              <div className="container  p-3 rounded">
 
-
-<div className="col-2 rounded p-3 ">
-<div className="text-center">
-
-<img src={vip} width="80px" heigh="80px" className={this.state.primera} alt="" id="VIP" onClick={this.cambiacliente}/>
-     
-
-<img src={tienda} width="80px" heigh="80px" className={this.state.segunda} alt="" id="Comercial" onClick={this.cambiacliente}/>
-
-     
-
-<img src={casa} width="80px" heigh="80px" className={this.state.tercera} alt="" id="Residencial" onClick={this.cambiacliente}/>
-
-   </div>
-</div>
+    <Barra/>
 
 
+        <br/>
 
+        <br/>
 
-<div className="col-6 fondoBarra text-center  rounded  p-3 border " Style="height:270px">
+        <br/>
+
+        <br/>
+
+        <br/>
+
+        <br/>
+
+        <br/>
 
 
 
-<button className="btn bg-white ml-2 rounded-circle mb-4" Style=" position:absolute; left:500px; top:3px;" onClick={this.CambiarAbuscarOCrear}>+</button>
+  <div className="row p-3 fondoBarra rounded "  Style="height:300px">
 
 
-<ParteMediaClientes crearOver={this.state.BOC} cantidad={this.state.cantidad} cancelados={this.state.cancelados} />
+  <div className="col-2 rounded p-3 ">
+  <div className="text-center">
+
+  <img src={vip} width="80px" heigh="80px" className={this.state.primera} alt="" id="VIP" onClick={this.cambiacliente}/>
 
 
-</div>
+  <img src={tienda} width="80px" heigh="80px" className={this.state.segunda} alt="" id="Comercial" onClick={this.cambiacliente}/>
 
 
-<div className="col-4">
 
-<div>
-<br/>
-
-<Iclientes crearClienteoBuscar={1} Titulo={this.state.tipoCliente} pasafuncion={this.ver2} enviarResultados={this.ObteniendoResultados}/>
-</div>
-
-</div>
-
+  <img src={casa} width="80px" heigh="80px" className={this.state.tercera} alt="" id="Residencial" onClick={this.cambiacliente}/>
 
      </div>
-      
+  </div>
 
 
 
-<div className="row  mt-4 rounded justify-content-center">
+
+  <div className="col-6 fondoBarra text-center  rounded  p-3 border " Style="height:270px">
 
 
 
-<div className="quitar" id="resultado">
-
-<br/>
-
-<h1 className="text-center display-4 text-white font-weight-bold">Resultados</h1>
-<br/>
-
-<ul className="">
-
-{
-
-this.state.resultadosbusqueda.map((elementos)=>{
-
-if (elementos==="No Hay Resultados") {
+  <button className="btn bg-white ml-2 rounded-circle mb-4" Style=" position:absolute; left:500px; top:3px;" onClick={this.CambiarAbuscarOCrear}>+</button>
 
 
-return <li className="text-danger h4 font-weight-bold">No hay resultado</li>
+  <ParteMediaClientes crearOver={this.state.BOC} cantidad={this.state.cantidad} cancelados={this.state.cancelados} />
+
+
+  </div>
+
+
+  <div className="col-4">
+
+  <div>
+  <br/>
+
+  <Iclientes crearClienteoBuscar={1} Titulo={this.state.tipoCliente} pasafuncion={this.ver2} enviarResultados={this.ObteniendoResultados}/>
+  </div>
+
+  </div>
+
+
+       </div>
+
+
+
+
+  <div className="row  mt-4 rounded justify-content-center">
+
+
+
+  <div className="quitar" id="resultado">
+
+  <br/>
+
+  <h1 className="text-center display-4 text-white font-weight-bold">Resultados</h1>
+  <br/>
+
+  <ul className="">
+
+  {
+
+  this.state.resultadosbusqueda.map((elementos)=>{
+
+  if (elementos==="No Hay Resultados") {
+
+
+  return <li className="text-danger h4 font-weight-bold">No hay resultado</li>
+
+  }
+
+   return  <li className=" colorVerde h4 font-weight-bold border-right border-success" onMouseEnter={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
+
+
+
+  })
+
+  }
+
+  </ul>
+
+
+  <br/>
+
+  </div>
+
+
+  <div className="quitar"  id="perfil">
+  <div className="d-none" id="componenteperfil">
+  <Miniperfil  idFiltro={this.state.perfiles}/>
+  </div>
+
+  </div>
+
+
+  </div>
+
+
+
+
+
+
+              </div>
+
+
+        )
+
+
+
+
+
 
 }
 
- return  <li className=" colorVerde h4 font-weight-bold border-right border-success" onMouseEnter={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
+
+if (localStorage.getItem("Usuario")==undefined) {
+
+return(
+
+<div>
+
+
+<h1 className="text-center font-weight-bold display-1">Pagina No Encontrada</h1>
+
+
+</div>
 
 
 
-})
+)
+
+
 
 }
 
-</ul>
 
 
-<br/>
-
-</div>
-
-
-<div className="quitar"  id="perfil">
-<div className="d-none" id="componenteperfil">
-<Miniperfil  idFiltro={this.state.perfiles}/>
-</div>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-            </div>
-      
-
-      )  
     }
 
 

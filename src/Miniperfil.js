@@ -4,13 +4,13 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 export default class Miniperfil extends Component {
-   
-   
-   
+
+
+
 
 constructor(){
     super();
-    
+
     this.state={
    numero:null,
    nombre:"",
@@ -18,13 +18,13 @@ Direccion:"",
 dr:[]
     }
     this.imprime=this.imprime.bind(this);
-    
+
     }
 
-    
+
     async imprime(Nuevo){
 
-  
+
 await axios.post("http://localhost:8080/restback/index.php/Clientes/RM",{
 number:Nuevo
 
@@ -39,7 +39,7 @@ dr:respuesta.data
 
 
 this.state.dr.forEach(element => {
- 
+
 
 this.setState({
 
@@ -64,8 +64,8 @@ setTimeout(20,this.imprime());
 
 
 });
-   
-    
+
+
 
 
 
@@ -91,7 +91,7 @@ this.imprime(nextProps.idFiltro);
 
 
 
-  
+
     render() {
 
 return (
@@ -107,12 +107,12 @@ return (
     <p class="card-text text-dark font-weight-bold">{this.state.Direccion}</p>
 
   </div>
- 
+
 </div>
             </div>
-      
 
-      )  
+
+      )
     }
 
 
