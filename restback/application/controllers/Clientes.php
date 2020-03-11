@@ -18,20 +18,20 @@ class Clientes extends REST_Controller {
    public function __construct() {
                parent::__construct();
               // $this->load->model('user_model');
-    
+
 
 //CARGO LA CONEXION
     $this->load->database();
 
 
 
-       }  
+       }
 
 
 private $Buscar;
 
  public function setBuscar($valor){
-	
+
 $this->Buscar=$valor;
 
 
@@ -39,7 +39,7 @@ $this->Buscar=$valor;
 
 
 public function getBuscar(){
-	
+
 	return $this->Buscar;
 }
 
@@ -135,7 +135,7 @@ $this->response($valores);
 
 public function RM_post(){
 
-  $datos = json_decode(file_get_contents("php://input"), true); 
+  $datos = json_decode(file_get_contents("php://input"), true);
 
   $consulta=$this->db->query("select * from Clientes where idClientes=" . $datos["number"]);
 
@@ -151,10 +151,10 @@ public function RM_post(){
 
 public function Resultados_post(){
 
-$datos = json_decode(file_get_contents("php://input"), true); 
+$datos = json_decode(file_get_contents("php://input"), true);
 
 
-$entrada = $datos['dato']; 
+$entrada = $datos['dato'];
 
 $campo=$datos["campo"];
 
@@ -162,11 +162,11 @@ $TipoDeCliente=$datos["Tipo"];
 
 switch ($campo) {
   case 'Nombre':
-  
+
 $consulta=$this->db->query("select * from Clientes where Nombre like" . "'" . $entrada . "%' and Tipo=" . $TipoDeCliente);
 
     break;
-  
+
 case 'ID':
  $consulta=$this->db->query("select * from Clientes where IdClientes=" . "'" . $entrada . "' and Tipo=" . $TipoDeCliente);
   break;
@@ -208,6 +208,94 @@ $this->response($r);
 
 
 }
+
+
+
+
+public function crearclientes_post(){
+
+  $datos = json_decode(file_get_contents("php://input"), true);
+
+
+switch ($datos["Tipo"]) {
+
+  case 'Residencial':
+
+ $consulta=$this->db->query("insert into Clientes values ('','" . $datos["Nombre"] . "','" . $datos["Apellido"] . "','" . $datos["Direccion"] . "','" . $datos["Telefono"] . "','" . $datos["Correo"] . "',3,SYSDATE(),true)");
+
+  $this->response("se creo");
+
+
+    break;
+
+ case 'Comercial':
+
+ $consulta=$this->db->query("insert into Clientes values ('','" . $datos["Nombre"] . "','" . $datos["Apellido"] . "','" . $datos["Direccion"] . "','" . $datos["Telefono"] . "','" . $datos["Correo"] . "',2,SYSDATE(),true)");
+
+  $this->response("se creo");
+
+    break;
+
+   case 'VIP':
+
+ $consulta=$this->db->query("insert into Clientes values ('','" . $datos["Nombre"] . "','" . $datos["Apellido"] . "','" . $datos["Direccion"] . "','" . $datos["Telefono"] . "','" . $datos["Correo"] . "',1,SYSDATE(),true)");
+
+  $this->response("se creo");
+
+
+
+    break;
+
+  default:
+    # code...
+    break;
+}
+
+
+
+
+
+//CIERRO LA CONEXION
+           $this->db->close();
+
+}
+
+
+
+public function ValidarUsuarios_post(){
+
+
+    $datos = json_decode(file_get_contents("php://input"), true);
+
+
+$consulta =$this->db->query("select * from Usuarios where NombreUsuario='" . $datos["Usuario"] . "' and Contraseña='" . $datos["Contraseña"] . "'");
+
+$numerodefilas=$consulta->num_rows();
+
+
+if ($numerodefilas!=0) {
+
+$this->response(true);
+
+
+}
+
+else {
+
+$this->response(false);
+
+}
+
+
+
+
+//CIERRO LA CONEXION
+           $this->db->close();
+
+
+}
+
+
 
 
 

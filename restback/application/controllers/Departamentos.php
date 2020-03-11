@@ -17,13 +17,13 @@ class Departamentos extends REST_Controller {
 
    public function __construct() {
                parent::__construct();
-      
+
 //CARGO LA BASE DE DATOS
     $this->load->database();
 
 
 
-       }  
+       }
 
 
 
@@ -38,7 +38,7 @@ $RESULTADOS;
 
 
 foreach ($IDS->result_array() as $row){
-   
+
 $Nombrecantidad=$this->db->query("select NombreDepartamento,  count(NombreReporte) as Cantidad,idDepartamento from Departamentos inner join Reportes on Departamentos.idDepartamento=Reportes.PertenenciaDepartamento where Estado=true and idDepartamento=" . $row["idDepartamento"]);
 
 $RESULTADOS[$cuenta]=$Nombrecantidad->result();
@@ -60,11 +60,11 @@ public function EnviarDatos_post(){
 
 
 
-$datos = json_decode(file_get_contents("php://input"), true); 
+$datos = json_decode(file_get_contents("php://input"), true);
 
 
 
-$NombreDepartamento = $datos['numero']; 
+$NombreDepartamento = $datos['numero'];
 
 $CONSULTA = $this->db->query("select * from Reportes where PertenenciaDepartamento=" . $NombreDepartamento . " and Estado=true");
 
@@ -79,7 +79,7 @@ public function TituloReporte_post(){
 
 
 
-$datos = json_decode(file_get_contents("php://input"), true); 
+$datos = json_decode(file_get_contents("php://input"), true);
 
 $CONSULTA = $this->db->query("select NombreReporte,FechaCreacion,Estado from Reportes where idReporte=" . $datos["IDentificador"]);
 
@@ -95,7 +95,7 @@ public function Comentarios_post(){
 
 
 
-$datos = json_decode(file_get_contents("php://input"), true); 
+$datos = json_decode(file_get_contents("php://input"), true);
 
 $CONSULTA = $this->db->query("SELECT DescripcionComentarios,FechaCreacion,Creador FROM Comentarios where NumeroReporte=" . $datos["IDentificador"]);
 
@@ -110,20 +110,23 @@ $this->db->close();
 
 
 public function CrearComentario_post(){
-	
 
-$datos = json_decode(file_get_contents("php://input"), true); 
+
+$datos = json_decode(file_get_contents("php://input"), true);
 
 $e="17-06-1999";
-	
+
 $data = array(
         'NumeroComentario'=>'',
         'DescripcionComentarios'=>'' . $datos["comentario"],
-        'Creador'=>'Gabriel1722',
+        'Creador'=>$datos["usuario"],
         'NumeroReporte'=>'' . $datos["reporte"]
 );
 
 $this->db->insert('Comentarios', $data);
+
+//$this->db->query("insert into Comentarios values ('','" . $datos["comentario"] . "','" . $datos["usuariocreador"] . "'," . $datos["reporte"] ")");
+
 
 $CONSULTA = $this->db->query("SELECT DescripcionComentarios,FechaCreacion,Creador FROM Comentarios where NumeroReporte=" . $datos["reporte"]);
 
@@ -138,7 +141,7 @@ $this->db->close();
 public function AbirCerrarReporte_post(){
 
 
-$datos = json_decode(file_get_contents("php://input"), true); 
+$datos = json_decode(file_get_contents("php://input"), true);
 
 
 $this->db->set('Estado',$datos["cambia"]);
@@ -153,7 +156,7 @@ public function CrearDepartamento_post(){
 
 
 
-$datos = json_decode(file_get_contents("php://input"), true); 
+$datos = json_decode(file_get_contents("php://input"), true);
 
 
 $Verificar=$this->db->query("SELECT * FROM Departamentos where NombreDepartamento='" . $datos["Nombre"] . "'");
@@ -183,7 +186,15 @@ $this->response("Departamento Creado Exitosamente");
 
 public function CrearReporte_post(){
 
-$datos = json_decode(file_get_contents("php://input"), true); 
+$datos = json_decode(file_get_contents("php://input"), true);
+
+if (empty($datos["Departamento"])) {
+
+ $this->response("No se escribio nada");
+
+}
+
+else {
 
 $IDS = $this->db->query("select idDepartamento from Departamentos where NombreDepartamento='" . $datos["Departamento"] . "'");
 
@@ -196,6 +207,14 @@ $this->db->query("insert into Reportes values('','" . $datos["Nombre"] . "',true
 }
 
 $this->response("Creado");
+
+
+
+
+}
+
+
+
 
 
 }

@@ -14,11 +14,11 @@ class Peticion extends REST_Controller {
    public function __construct() {
                parent::__construct();
               // $this->load->model('user_model');
-    
+
 
 //CARGO LA CONEXION
     $this->load->database();
-       }  
+       }
 
 
 
@@ -29,30 +29,30 @@ class Peticion extends REST_Controller {
   public function General_get(){
       //GENERO LA CONSULA PARA OBTENER TODOS LOS CLIENTES
 $consulta1=$this->db->query("select * from Clientes");
-  
+
   //GENERO LA CONSULTA PARA OBTENER TODOS LOS REPORTESS
 $consulta2=$this->db->query("select * from Reportes");
 
   //GENERO LA CONSULTA PARA OBTENER TODOS LOS TICKET QUE PERTENEZCAN AL DEPARTAMENTO DE VISITAS ES DECIR LAS VISITAS
-$consulta3=$this->db->query("select * from Reportes where PertenenciaDepartamento=1");
+$consulta3=$this->db->query("select * from Reportes where PertenenciaDepartamento=24");
 
 //GUARDO EN UN ARREGLO CUANTAS FILAS TRAJO LA COLUMNA
 $resultado = array('CLIENTES' => $consulta1->num_rows(),"REPORTES"=>$consulta2->num_rows(),"VISITAS"=>$consulta3->num_rows());
-           
+
 
 //RESPONDO LA SOLUCITUD
-           $this->response($resultado); 
+           $this->response($resultado);
 
 
 //CIERRO LA CONEXION
            $this->db->close();
        }
-   
+
 
 
 public function EnviaDatosMes($sentencia){
- 
-for ($i=1; $i<=12; $i++) { 
+
+for ($i=1; $i<=12; $i++) {
 
 
 $consulta=$this->db->query($sentencia . $i);
@@ -93,7 +93,11 @@ $this->EnviaDatosMes("select * from Reportes where MONTH(FechaCreacion)=");
 }
 
 
+public function VisitasEnMes_get(){
 
+$this->EnviaDatosMes("select * from Reportes where PertenenciaDepartamento=24 and MONTH(FechaCreacion)=");
+
+}
 
 public function ObtenerClientesVip_get(){
 
@@ -209,7 +213,7 @@ $this->response($data);
 
  if (isset($NR[0],$NR[1],$NR[2])) {
 
-  
+
 $data = array('Primero' => $NR[0],"Segundo"=>$NR[1],"Tercero"=>$NR[2]);
 
 
