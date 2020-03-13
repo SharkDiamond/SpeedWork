@@ -1,0 +1,22 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "BAck end de speedwork",
+  "main": "Clientes.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SharkDiamond/SpeedWork.git"
+  },
+  "author": "GAbriel Arispe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SharkDiamond/SpeedWork/issues"
+  },
+  "homepage": "https://github.com/SharkDiamond/SpeedWork#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
