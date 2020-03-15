@@ -2,21 +2,25 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "BAck end de speedwork",
-  "main": "Clientes.js",
+  "main": "Index.js",
   "scripts": {
-    "test": "npm start"
+    "start": "node Index.js",
+    "test": "npm start",
+    "dev": "nodemon Index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SharkDiamond/SpeedWork.git"
   },
-  "author": "GAbriel Arispe",
+  "author": "Gabriel Arispe",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SharkDiamond/SpeedWork/issues"
   },
   "homepage": "https://github.com/SharkDiamond/SpeedWork#readme",
   "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
     "mysql": "^2.18.1"
   }
 }

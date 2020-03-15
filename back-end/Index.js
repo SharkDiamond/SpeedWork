@@ -1,34 +1,57 @@
 const express = require('express');
-const VU=require('./ValidameUsuarios.js');
+const VU=require('./ValidacionUsuarios.js');
+const Clientes = require('./Clientes.js');
 const app=express();
+const path = require('path');
+
+app.set("Puerto",3000);
+app.set("Vistafrontal",__dirname + "/Vista/index.html");
+
+//MOSTRAR FRON-END APLICACION REACT
+app.get("/",(req,res) => {
+
+res.sendFile(app.get("Vistafrontal"));
+
+});
 
 //Validacion De Usuarios
 app.post("/Usuarios",(req,res) => {
 
-var PoD=VU.ValidameUsuario(req.body.User,req.body.Password);
+//VALIDANDO EL USUARIO
+VU.ValidameUsuario(req.body.Usuario,req.body.Contraseña,res);
 
-if (PoD) {
+});
 
-res.send(PoD);
+//CANTIDAD DE CLIENTES Y CANTIDAD DE CLIENTES CANCELADOS PARA CADA TIPO DE USUARIO
 
-res.end();
-}
+//VIP
+app.get("/ClientesV",(req,res) => {
 
-else if (PoD==false) {
+Clientes.informeClientes(res,1);
 
-res.send(PoD);
+});
 
-res.end();
-}
+//COMERCIAL
+app.get("/ClientesC",(req,res) => {
 
+Clientes.informeClientes(res,2);
 
+});
+
+//RESIDENCIAL
+app.get("/ClientesR",(req,res) => {
+
+Clientes.informeClientes(res,3);
 
 });
 
 
 
-app.listen(3000,() => {
 
-console.log("Servidor Iniciado en el puerto 3000");
+
+
+app.listen(app.get("Puerto"),() => {
+
+console.log("Servidor Iniciado en el puerto " + app.get("Puerto"));
 
 });

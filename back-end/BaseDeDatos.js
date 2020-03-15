@@ -5,18 +5,34 @@ var mysql= require('mysql');
 hacer las consultas*/
 
 
-function Conecta() {
+const Conexion=mysql.createConnection({
 
-  var conexion = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'admin',
-    password : ''
-  });
+host:"localhost",
+user:"root",
+password:"",
+database:"SpeedWork"
 
-conexion.connect();
 
-return conexion;
+});
+
+
+Conexion.connect((Error) => {
+
+if (Error) {
+
+console.log("Problemas Al Conectar con la base de datos");
 
 }
 
-exports.Conecta = Conecta;
+else{
+
+console.log("Base De Datos Conectada");
+
+
+}
+
+
+});
+
+
+exports.Conexion=Conexion;
