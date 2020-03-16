@@ -45,6 +45,13 @@ Clientes.informeClientes(res,3);
 
 });
 
+//PARA LA BUSQUEDA DE DATOS
+app.post("/BusquedaXYZ",(req,res) => {
+
+Clientes.BuscaCliente(req.body.dato,req.body.Tipo,req.body.campo,res);
+
+});
+
 
 
 
