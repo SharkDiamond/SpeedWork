@@ -45,14 +45,20 @@ Clientes.informeClientes(res,3);
 
 });
 
-//PARA LA BUSQUEDA DE DATOS
+//PARA LA BUSQUEDA DE CLIENTES
 app.post("/BusquedaXYZ",(req,res) => {
 
 Clientes.BuscaCliente(req.body.dato,req.body.Tipo,req.body.campo,res);
 
 });
 
+//PARA CREAR CLIENTES
+app.post("/CrearClienteXYZ",(req,res) => {
 
+Clientes.CrearCliente(res,req.body.Nombre,req.body.Apellido,req.body.Correo,req.body.Direccion,req.body.Telefono,req.body.Tipo);
+
+
+});
 
 
 
