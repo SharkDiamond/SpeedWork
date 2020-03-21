@@ -1,5 +1,4 @@
 const datos = require('./BaseDeDatos.js');
-
 const mysql = require('mysql');
 
 
