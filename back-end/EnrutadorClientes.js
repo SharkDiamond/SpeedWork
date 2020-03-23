@@ -2,8 +2,16 @@ const express = require('express');
 var Enrutador=express.Router();
 const Clientes = require('./Clientes.js');
 
-Enrutador.get("/Clientes:tipo",(req,res) => {
-  
+
+//middlerware
+function validaToken(req,res,next) {
+
+}
+
+
+
+Enrutador.get("/Clientes:tipo",validaToken,(req,res) => {
+
 switch (req.params.tipo) {
 
   case "VIP":
