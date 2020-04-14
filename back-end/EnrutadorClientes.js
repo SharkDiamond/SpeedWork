@@ -3,12 +3,6 @@ var Enrutador=express.Router();
 const Clientes = require('./Clientes.js');
 
 
-//middlerware
-function validaToken(req,res,next) {
-
-}
-
-
 
 Enrutador.get("/Clientes:tipo",validaToken,(req,res) => {
 

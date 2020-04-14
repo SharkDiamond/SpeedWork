@@ -1,13 +1,17 @@
+//MODULOS
 const express = require('express');
 const VU=require('./ValidacionUsuarios.js');
 const app=express();
 const path = require('path');
-var ClientesPrueba=require("./EnrutadorClientes.js");
 const jwt = require('jsonwebtoken');
+//ENRUTADORES
+var ClientesPrueba=require("./EnrutadorClientes.js");
+var Usuarios=require("./EnrutadorUsuario.js");.
+
+
+//VARIABLES
 app.set("Puerto",3000);
 app.set("Vistafrontal",__dirname + "/Vista/index.html");
-
-
 
 
 //APRENDER PARA LA SEGURIDAD JSON WEB TOKEN  Open auth2 Y HACER BIEN LAS PETICIONES DESDE EL CLIENTE "OLVIDATE DE AXIOS"
@@ -19,34 +23,67 @@ res.sendFile(app.get("Vistafrontal"));
 
 });
 
-//Validacion De Usuarios
-app.get("/Usuarios",(req,res) => {
-
-//PRUEBA
-  VU.ValidameUsuario("Gabriel1722","wwwaaa12",res);
-
-
-//VALIDANDO EL USUARIO
-//VU.ValidameUsuario(req.body.Usuario,req.body.Contraseña,res);
-
-});
+//ENRUTADOR ENCARGADO DE VALIDAR USUARIOS
+app.use("/",Usuarios);
 
 /*
 axios({ method: 'POST', url: 'you http api here', headers: {autorizacion: localStorage.token}, data: { user: 'name' } })
 
 */
 
+//FUNCION MIDELLWARE
 function validaToken(req,res,next) {
 
-if (req.headers.authorization) {
+//QUE LA PETICION VENGA CON LA CABECERA DE autorizacion
+
+const PARTIDO=req.headers.authorization.split(" ");
+
+//VERIFICANDO QUE EN LA SOLICITUD SE ENVIEN TANTO LA CABECERA DE AUTORIZACION COMO EL BEADER
+if (req.headers.authorization && PARTIDO[1]=="beader") {
 
 console.log("se esta enviando en la cabecera la autorizacion");
 
-req.headers.authorization.split(" ");
+//RESCATANDO EL TOKEN QUE VIENE DEL FRON-END
+const Tk=req.body.token;
+
+//VERIFICANDO SI EL TOKEN TODAVIA EXISTE
+  jwt.verify(TK,"PERROSÑ37",(error,decode) =>{
+
+if(error){
+console.log("hay un error en la verificacion del JWT" + error);
+}
+
+//SI EXISTE
+else if(!error){
+
+//VALIDAR SI EL TOKEN VIENE FIRMADO
+PARTETOKEN=Tk.split(".");
 
 
-} else {
+if (PARTETOKEN[2]=="undefined" || PARTETOKEN[2]==null) {
 
+
+return;
+
+}
+
+else {
+
+  next();
+}
+
+
+
+}
+
+
+  });
+
+
+
+}//CIERRE DEL IF
+
+else {
 
   console.log("no se esta enviando la autorizacion");
 
@@ -57,10 +94,9 @@ res.sendStatus("403");
 
 }
 
-
-
-
+//USANDO MIDELLWARE
 app.use(validaToken);
+
 
 
 //RUTAS DE LOS CLIENTES

@@ -5,8 +5,8 @@ const conexionDT=require('./BaseDeDatos.js');
 const jwt = require('jsonwebtoken');
 
 function ValidameUsuario(Nombre,Password,res) {
-
 const s=[Nombre,Password];
+
 
 
 const ConsultBD="select * from Usuarios where NombreUsuario= ? and Contraseña= ?";
@@ -25,7 +25,7 @@ Apellido:row[0].Apellido
 };
 
 //FALTA COLOCARLE EL TIEMPO DE EXPIRACION
-const token=jwt.sign({datos},"LOLVALIDACLAVE");
+const token=jwt.sign(datos,"PERROSÑ37",{ExpireIn:"1h"});
 
 res.json(token);
 res.end();
