@@ -42,148 +42,56 @@ const Campos={
 "Telefono"
 
 };
+ 
+  let datos;
   
 for(const propiedad in Campos){
 
 
 if(Campos[propiedad]===campo){
 
-const datos=[TipoDeCliente,Campos[propiedad]];
+datos=[TipoDeCliente,Campos[propiedad]];
 
   
+break;  
+
+}//LLAVE DEL CIERRE DEL IF
+
+}//LLAVE DE CIERRE DEL FOR
   
+ const consulta="";
+ 
+ if(datos[1]==="Nombre" ǀǀ datos[1]==="Telefono") consulta="select * from Clientes where Tipo=? and "+datos[1]+" LIKE'" + datos[1] + "%'";
 
-}
-
-}  
+ else consulta="select * from Clientes where Tipo=? and "+datos[1]+"=?";
   
+  //VERIFICANDO QUE LA CONSULTA NO TENGA ALGUN ATAQUE DE INYECCION
+  if (datos.Conexion.escape(busca)) {
   
-switch (campo) {
-
-  case "ID":
-console.log("id");
-
-const s=[TipoDeCliente,Cliente];
-
-
-const consulta="select * from Clientes where Tipo=? and idClientes=?";
-
-datos.Conexion.query(consulta,s,(error,row,fiel) => {
+datos.Conexion.query(consulta,TipoDeCliente,Cliente,(error,row,fiel) => {
 
 if (row.length!==0) {
 
 res.json(row);
 
 res.end();
+
 }
 
 else {
 
 res.send("No hay Resultados");
 res.end();
+
 }
-
-
+  
 });
-
-    break;
-
-  case "Nombre":
-
-console.log("nombre");
-const sb=[TipoDeCliente,Cliente];
-
-
-const busca="select * from Clientes where Tipo=? and Nombre  LIKE '" + sb[1] + "%'";
-
-
-if (datos.Conexion.escape(busca)) {
-
-  console.log("Consulta de busqueda por Nombre realizada");
-
-  datos.Conexion.query(busca,sb[0],(error,row,fiel) => {
-
-  if (row.length!==0) {
-
-  res.json(row);
-  res.end();
-  }
-
-  else {
-
-  res.send("No hay Resultados");
-  res.end();
-  }
-
-
-
-  });
-
-
-} else {
-
-  console.log("no paso estan intentando hacer una inyeccion");
-
-
-}
-
-
-
-      break;
-
-      case "Telefono":
-console.log("telefono");
-
-const sc=[TipoDeCliente,Cliente];
-
-const buscat="select * from Clientes where Tipo=? and Telefono  LIKE '" + sc[1] + "%'";
-
-
-
-if (datos.Conexion.escape(buscat)) {
-
-console.log("Consulta de busqueda por Telefono realizada ");
-
-datos.Conexion.query(buscat,sc[0],(error,row,fiel) => {
-
-
-  if (row.length!==0) {
-
-  res.json(row);
-  res.end();
-  }
-
-  else {
-
-  res.send("No hay Resultados");
-  res.end();
-  }
-
-});
-
-
-}
-
-else{
-
-console.log("no paso estan intentando hacer una inyeccion");
-
-
-}
-
-
-
-
-
-        break;
-
-  default:
-
-}
-
-
-
-}
+  
+  }//LLAVE DE CIERRE DEL IF QUE VERIFICA SI LA CONSULTA TIENE ALGUNA INYECCION SQL
+  
+else console.log("no paso estan intentando hacer una inyeccion");
+  
+}//LLAVE DE CIERRE DE LA FUNCION BUSCACLIENTE
 
 
 
