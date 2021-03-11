@@ -2,29 +2,34 @@ const datos = require('./BaseDeDatos.js');
 const mysql = require('mysql');
 
 
-function informeClientes(res,tipo){
+const informeClientes = (res,tipo) =>{
+
+const Consultas=["select * from Clientes where Tipo=? and EstadoCliente=true","select * from Clientes where EstadoCliente=false and Tipo=?"];
+
+let Clientes={
+
+Actuales:0,
+Cancelados:0
+  
+};
 
 
-datos.Conexion.query("select * from Clientes where Tipo=? and EstadoCliente=true",tipo,(error,row,filed) => {
+  for(let x=1;x>=2;x++){
 
-const Cantidad=row.length;
+   datos.Conexion.query(Consultas[x],tipo,(error,row,filed)=>{
+  
+    if(x==1) Clientes.Actuales=row.length;
+    
+    if(x==2) Clientes.Cancelados=row.length;   
+     
+    
+  });
 
+}  
+  
+  res.json(Clientes);
 
-datos.Conexion.query("select * from Clientes where EstadoCliente=false and Tipo=?",tipo,(error,row,field) => {
-
-
-const CantidadCancelados=row.length;
-const datos={CANTIDAD:Cantidad,CANCELADOS:CantidadCancelados};
-
-res.json(datos);
-
-res.end();
-
-});
-
-
-});
-
+  res.end();
 
 }
 
