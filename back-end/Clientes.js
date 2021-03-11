@@ -36,6 +36,28 @@ Cancelados:0
 function BuscaCliente(Cliente,TipoDeCliente,campo,res) {
 
 
+const Campos={  
+"ID":"idClientes=?",
+"Nombre",
+"Telefono"
+
+};
+  
+for(const propiedad in Campos){
+
+
+if(Campos[propiedad]===campo){
+
+const datos=[TipoDeCliente,Campos[propiedad]];
+
+  
+  
+
+}
+
+}  
+  
+  
 switch (campo) {
 
   case "ID":
