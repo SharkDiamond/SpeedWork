@@ -94,20 +94,20 @@ else console.log("no paso estan intentando hacer una inyeccion");
 }//LLAVE DE CIERRE DE LA FUNCION BUSCACLIENTE
 
 
-
 function CrearCliente(res,nombre,apellido,direccion,telefono,correo,tipo) {
 
-switch (Tipo) {
-  case 'Residencial':
+const Clientes=[
+{"VIP":1},
+{"Comercial":2},
+{"Residencial":3}];
 
+const IDCLIENTE=Clientes.filter((T) => {T==tipo;});  
+ 
 const data1=[nombre,apellido,direccion,telefono,correo];
-datos.Conexion.query("insert into Clientes values('',?,?,?,?,?,3,SYSDATE(),true)",data1,(error,row,field) => {
 
-if (error) {
+ datos.Conexion.query("insert into Clientes values('',?,?,?,?,?,3,SYSDATE(),true)",data1,(error,row,field) => {
 
-console.log("Hay problemas para ejecutar la consulta");
-
-}
+if (error) console.log("Hay problemas para ejecutar la consulta");
 
 else {
 
@@ -116,77 +116,10 @@ res.send("se creo");
 res.end();
 }
 
-});
-
-
-    break;
-
- case 'Comercial':
-
- const data2=[nombre,apellido,direccion,telefono,correo];
- datos.Conexion.query("insert into Clientes values('',?,?,?,?,?,2,SYSDATE(),true)",data2,(error,row,field) => {
-
- if (error) {
-
- console.log("Hay problemas para ejecutar la consulta");
-
- }
-
- else {
-
-res.send("se creo");
-
- res.end();
- }
-
- });
-
-
-
-
-break;
-
-case 'VIP':
-
-const data3=[nombre,apellido,direccion,telefono,correo];
-datos.Conexion.query("insert into Clientes values('',?,?,?,?,?,1,SYSDATE(),true)",data3,(error,row,field) => {
-
-if (error) {
-
-console.log("Hay problemas para ejecutar la consulta");
-
+});  
+  
 }
-
-else {
-
-res.send("se creo");
-
-res.end();
-}
-
-});
-
-
-
-break;
-
-
-  default:
-
-
-
-  break;
-}
-
-
-}
-
-
-
-
 
 exports.informeClientes = informeClientes;
-
 exports.BuscaCliente = BuscaCliente;
-
 exports.CrearCliente=CrearCliente;
