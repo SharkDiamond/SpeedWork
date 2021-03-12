@@ -33,7 +33,7 @@ Cancelados:0
 
 }
 
-function BuscaCliente(Cliente,TipoDeCliente,campo,res) {
+const BuscaCliente = (Cliente,TipoDeCliente,campo,res) => {
 
 
 const Campos={  
@@ -94,7 +94,7 @@ else console.log("no paso estan intentando hacer una inyeccion");
 }//LLAVE DE CIERRE DE LA FUNCION BUSCACLIENTE
 
 
-function CrearCliente(res,nombre,apellido,direccion,telefono,correo,tipo) {
+const CrearCliente = (res,nombre,apellido,direccion,telefono,correo,tipo) => {
 
 const Clientes=[
 {"VIP":1},
