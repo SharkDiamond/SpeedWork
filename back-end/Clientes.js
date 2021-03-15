@@ -13,25 +13,27 @@ Cancelados:0
   
 };
 
-
-  for(let x=1;x>=2;x++){
-
-   datos.Conexion.query(Consultas[x],tipo,(error,row,filed)=>{
+  Consultas.forEach((elemento,indice)=>{
   
-    if(x==1) Clientes.Actuales=row.length;
+    datos.Conexion.query(elemento,tipo,(error,row,filed)=>{
+  
+      if(indice==0) Clientes.Actuales=row.length;
     
-    if(x==2) Clientes.Cancelados=row.length;   
+      if(indice==1) Clientes.Cancelados=row.length;   
      
-    
   });
 
-}  
+    
+  }//LLAVE DE CIERRE DEL CALLBACK
+  
+  );
   
   res.json(Clientes);
 
   res.end();
 
 }
+
 
 const BuscaCliente = (Cliente,TipoDeCliente,campo,res) => {
 
@@ -96,25 +98,26 @@ else console.log("no paso estan intentando hacer una inyeccion");
 
 const CrearCliente = (res,nombre,apellido,direccion,telefono,correo,tipo) => {
 
-const Clientes=[
-{"VIP":1},
-{"Comercial":2},
-{"Residencial":3}];
+  const Clientes=[
+  {"VIP":1},
+  {"Comercial":2},
+  {"Residencial":3}];
 
-const IDCLIENTE=Clientes.filter((T) => {T==tipo;});  
+  const IDCLIENTE=Clientes.filter((T) => {T==tipo;});  
  
-const data1=[nombre,apellido,direccion,telefono,correo];
+  const data1=[nombre,apellido,direccion,telefono,correo];
 
  datos.Conexion.query("insert into Clientes values('',?,?,?,?,?,3,SYSDATE(),true)",data1,(error,row,field) => {
 
-if (error) console.log("Hay problemas para ejecutar la consulta");
+  if (error) console.log("Hay problemas para ejecutar la consulta");
 
-else {
+  else {
 
-res.send("se creo");
+    res.send("se creo");
 
-res.end();
-}
+    res.end();
+    
+    }
 
 });  
   
