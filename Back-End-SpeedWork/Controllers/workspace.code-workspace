@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\RestServer"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "..\\..\\SpeedWork\\restback\\application\\controllers"
+		}
+	],
+	"settings": {}
+}
