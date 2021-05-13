@@ -1,15 +1,15 @@
 const {Router}=require('express');
 
 const createClients=require('../Controllers/Create.Clients.Controller');
-const SearhClients=require('../Controllers/Search.Clients.Controller');
+const SearchClients=require('../Controllers/Search.Clients.Controller');
 
 
 const router=Router();
 
 
-router.post("/",createClients);
+router.post("/create",createClients);
 
-router.get("/",SearhClients);
+router.post("/search",SearchClients);
 
 
 

@@ -1,21 +1,34 @@
 const {response}=require("express");
-const SearhClient=require("../Data/Database");
+const {searchClientData}=require("../Data/Database");
 
 
-const SearhClients= (req,res=response)=>{
+const SearchClients= (req,res=response)=>{
 
-    const {Tipo,dato,campo}=req.query;
+    const {Tipo,dato,campo}=req.body;
 
-    SearhClient(Tipo,dato,campo).then((result) => {
+    let Hours = new Date();
+    console.log("Search:",req.body,Hours);
 
-        res.status(200).json({"datos":result});
+    searchClientData(Tipo,dato,campo).then((results) => {
 
-        res.end();
+        if (results.length!=0 && results.length>0) {
+            res.status(200).json({"Clients":results});
+            res.end();
+        }
 
-    });
+        else{
+            res.status(204);
+            res.end();
+        }
 
+    }).catch((error)=>{
+        console.log(error);
+        res.status(400).end();
+    }
+
+    );
 
 }
 
 
-module.exports=SearhClients;
+module.exports=SearchClients;

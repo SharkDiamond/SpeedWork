@@ -268,21 +268,21 @@ public function ValidarUsuarios_post(){
     $datos = json_decode(file_get_contents("php://input"), true);
 
 
-$consulta =$this->db->query("select * from Usuarios where NombreUsuario='" . $datos["Usuario"] . "' and Contraseña='" . $datos["Contraseña"] . "'");
+    $consulta =$this->db->query("select * from Usuarios where NombreUsuario='" . $datos["Usuario"] . "' and Contraseña='" . $datos["Contraseña"] . "'");
 
-$numerodefilas=$consulta->num_rows();
+    $numerodefilas=$consulta->num_rows();
 
 
-if ($numerodefilas!=0) {
+    if ($numerodefilas!=0) {
 
-$this->response(true);
+      $this->response(true);
 
 
 }
 
-else {
+    else {
 
-$this->response(false);
+      $this->response(false);
 
 }
 
@@ -290,7 +290,7 @@ $this->response(false);
 
 
 //CIERRO LA CONEXION
-           $this->db->close();
+      $this->db->close();
 
 
 }

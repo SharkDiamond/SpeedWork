@@ -30,16 +30,20 @@ class Server{
 
     routes(){
 
+        this.app.use("/Users",require("../Routes/Validation"));
+
         this.app.use("/General",require("../Routes/General"));
         
         this.app.use("/CreateClients",require("../Routes/Clients"));
 
-        this.app.use("/SearhClients",require("../Routes/Clients"));
+        this.app.use("/SearchClients",require("../Routes/Clients"));
+
+
 
     } 
 
     Escuchar(){
-
+        
        this.app.listen(8081);
 
     }

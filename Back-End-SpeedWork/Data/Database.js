@@ -1,63 +1,97 @@
+//IMPORTS
 const mysql=require("mysql");
 const { search } = require("../Routes/General");
 
-//DATA OF SERVICE OF THE DATABASE
-const connection = mysql.createConnection({
-
-host:"localhost",
-user:"root",
-password:"",
-database:"SpeedWork"
-
-
-});
-
-
-//CONECTED TO THE DATABASE
-connection.connect(function(err) {
-    
-    if (err) console.log("Not Connection");
-
-console.log("connected to the database");
+//CREATE THE CONNEXION WITH DATABASE
+const connections = mysql.createPool({
+    connectionLimit:10,
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"SpeedWork",
+    port:3306
 
 });
 
+//FOR BACK AN CONNEXION WITH DATABASE
+const createConeccionUpdate=()=>{
 
-//FOR SEARCH OF CLIENTS
-searchClientData=(Tipo,dato,campo)=>{
-   
-   return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject)=>{
 
-    const typeClient=["","VIP","Comercial","Residencial"];
+        connections.getConnection((error,connection)=>{
 
-    const IdType =typeClient.indexOf(Tipo);
+            if (error) reject("Not Connection");
 
-    console.log(dato,IdType);
+            else resolve(connection);
 
-    let query=``;
-    
-    
-        if (campo!="idClientes") {
-        
-            query=`SELECT * from clientes where Tipo=${IdType} and ${campo} like ${"'"+dato+"%'"}  and  EstadoCliente=true`;
-    
-        }
-    
-        else{
+        });
 
-            query=`SELECT * from clientes where Tipo=${IdType} and ${campo}=${"'"+dato+"'"} and  EstadoCliente=true`;
-    
-        } 
-    
-        connection.query(query,(error, results, fields)=> {
-        
-            if (error) throw error;
-
-            resolve(results);
-      
     });
 
+};
 
+//FOR SEARCH THE TYPE OF CLIENTS ACCORDING TO ID
+const SearchTypeClient =(Type)=>{
+
+        const typeClient=["","VIP","Comercial","Residencial"];
+    
+        const IdType =typeClient.indexOf(Type);
+    
+        return IdType;
+    
+     }
+
+//FOR SEARCH OF CLIENTS
+ const searchClientData= (Type,data,campo) => {
+
+   return new Promise(async (resolve,reject)=>{
+
+        let query=``;
+    
+        let s1="'"+data+"'";
+        let s2="'"+campo+"'";
+
+        try {
+
+            let connection = await createConeccionUpdate();
+
+                if (connection.escape(data)===s1 && connection.escape(campo)===s2 && parseInt(connection.escape(Type),10)===Type) {
+
+                    if (campo!=="ID") query="SELECT * from clientes where "+ campo + " LIKE '"+data+"%'" + "and Tipo="+Type;
+
+                    else {
+
+                        campo = "idClientes";
+
+                        query="SELECT * from clientes where "+ campo +"="+ data + " and Tipo="+Type;
+                    }
+
+                    connection.query(query,[campo,data],(error,results)=> {
+        
+                        resolve(results);
+                        //CLOSE CONNECTION
+                        connection.release();
+
+                    });
+
+                }
+
+
+                else{
+
+                    reject("The data of enter have sql injection");
+
+                    console.log("The data of enter have sql injection");
+
+                }
+
+        }
+
+        catch (error) {
+
+           reject("Problems with the consult of the find of the clients" + error);
+
+        }
 
 
    }); 
@@ -65,18 +99,72 @@ searchClientData=(Tipo,dato,campo)=>{
 
 }
 
+//FOR CREATE CLIENTS
+const CreateClient = (Nombre,Apellido,Direccion,Telefono,Correo,Tipo)=>{
+
+    return new Promise(async (resolve,reject)=>{
+
+        try {
+
+            let connection = await createConeccionUpdate();
+
+            let query=`INSERT INTO Clientes VALUES ("",?,?,?,?,?,?,SYSDATE(),true)`;
+
+            connection.query(query,[Nombre,Apellido,Direccion,Telefono,Correo,SearchTypeClient(Tipo)],(error, results)=> {
+            
+                if (error) reject("PROBLEM TO THE INSERT IN THE DATABASE");
+                
+                else resolve(true);
+                
+                connection.release();
+    
+            });
+
+        } catch (error) {
+
+            console.log("Problems the create client" + Nombre, Apellido);
+
+            reject("PROBLEM TO THE INSERT IN THE DATABASE CLIENTS" + error);
+
+        }
+
+       }); 
 
 
+}
 
+//FOR VALIDATE USERS
+const validUsers =(NombreUsuario,Contraseña)=>{
+
+    return new Promise(async (resolve, reject) => {
+
+        try {
+
+            let coneccion = await createConeccionUpdate();
+
+            let query="SELECT * FROM usuarios where NombreUsuario=?  and  Contraseña=?";
+
+            coneccion.query(query,[NombreUsuario,Contraseña],(error, result)=>{
+
+                if (result.length>0) resolve(true);
+
+                else resolve(false);
+
+                coneccion.release();
+
+            });
+
+        }
+
+        catch (error) {
+            reject("there was a problem when searching for the user" + error);
+        }
+
+
+    });
+
+
+}
 
 //EXPORT THE FUNCTIONS
-module.exports=searchClientData;
-
-
-
-
-
-
-
-
-
+module.exports={searchClientData,CreateClient,validUsers};

@@ -1,14 +1,15 @@
 const {response}=require("express");
-
+const {CreateClient}=require("../Data/Database");
 
 const createClients = (req,res=response)=>{
 
-const {Nombre,Apellido,Direccion,Telefono,Correo}=req.body;
+    const {Nombre,Apellido,Direccion,Telefono,Correo,Tipo}= req.body;
 
-
-
-res.status(201).json({create:true});
-
+    CreateClient(Nombre,Apellido,Direccion,Telefono,Correo,Tipo).then((test)=>{
+        if (test) res.status(201).end();
+    }).catch((message)=>{
+ res.end();console.log(message);
+});
 
 }
 

@@ -14,7 +14,7 @@ constructor(){
     this.state={
     eleccion:"ID",
     datobusqueda:"",
-cliente:1,
+    cliente:1,
 
 
 
@@ -51,8 +51,6 @@ datobusqueda:valor
 
 
 })
-
-
 
 
 }
@@ -105,20 +103,18 @@ onSubmit= async (e)=>{
 this.props.pasafuncion();
 e.preventDefault();
 
-await axios.post("http://localhost:8080/restback/index.php/Clientes/Resultados",{
+axios.post("http://localhost:8081/SearchClients/search",{
 Tipo:this.state.cliente,
 dato:this.state.datobusqueda,
 campo:this.state.eleccion
-
 }).then((respuesta)=>{
 
 //SI TODO SALE BIEN
+    console.log(respuesta.data.Clients);
 
-if (respuesta.data) {
+if (respuesta.data.Clients) {
 
-
-this.props.enviarResultados(respuesta.data);
-
+this.props.enviarResultados(respuesta.data.Clients);
 
 } 
 
@@ -126,11 +122,7 @@ else {
 
 var nhr=["No Hay Resultados"];
 
-
 this.props.enviarResultados(nhr);
-
-
-
 
 }
 

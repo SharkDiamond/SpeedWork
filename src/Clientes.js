@@ -16,22 +16,22 @@ export default class Clientes extends Component {
 
 
 
-constructor(){
-    super();
+    constructor(){
+        super();
 
-    this.state={
-tipoCliente:"VIP",
-primera:"fondominibarra",
-segunda:"",
-tercera:"",
-primerafila:false,
-segundafila:false,
-veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none",
-cantidad:0,
-cancelados:0,
-resultadosbusqueda:[],
-perfiles:null,
-BOC:false
+        this.state={
+            tipoCliente:"VIP",
+            primera:"fondominibarra",
+            segunda:"",
+            tercera:"",
+            primerafila:false,
+            segundafila:false,
+            veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none",
+            cantidad:0,
+            cancelados:0,
+            resultadosbusqueda:[],
+            perfiles:null,
+            BOC:false
 
 
     }
@@ -50,120 +50,97 @@ this.ver=this.ver.bind(this);
 
 //METODO PARA PEDIR  LOS DATOS DE LAS CANTIDADES DE CLIENTES TANTO ACTIVOS COMO CANCELADOS
 
-PEDIR(tipo){
+    PEDIR(tipo){
 
-switch(tipo){
+        switch(tipo){
 
-case "VIP":
+            case "VIP":
 
-axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesVip?format=json').then((respuesta)=>{
+                axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesVip?format=json').then((respuesta)=>{
 
 
 
-this.setState({
+                this.setState({
 
-cantidad:respuesta.data.CANTIDAD,
-cancelados:respuesta.data.CANCELADOS
+                    cantidad:respuesta.data.CANTIDAD,
+                    cancelados:respuesta.data.CANCELADOS
 
+                    })
 
 
 
-})
+                }).catch((error)=>{
 
+                    alert("ERROR");
 
 
-}).catch((error)=>{
+                    }
 
+                    );
 
+            break;
 
-alert("ERROR");
+            case "Comercial":
 
 
-}
+                axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesComerciales?format=json').then((respuesta)=>{
 
+                    this.setState({
 
+                        cantidad:respuesta.data.CANTIDAD,
+                        cancelados:respuesta.data.CANCELADOS
 
 
-);
+                    })
 
-break;
 
-case "Comercial":
 
+                }).catch((error)=>{
 
-axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesComerciales?format=json').then((respuesta)=>{
+                    alert("ERROR");
 
 
+                }
 
-this.setState({
 
-cantidad:respuesta.data.CANTIDAD,
-cancelados:respuesta.data.CANCELADOS
+                );
 
+            break;
 
 
+            case "Residencial":
 
-})
+                axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesResidenciales?format=json').then((respuesta)=>{
 
 
 
-}).catch((error)=>{
+                    this.setState({
 
+                        cantidad:respuesta.data.CANTIDAD,
+                        cancelados:respuesta.data.CANCELADOS
 
+                    })
 
-alert("ERROR");
 
 
-}
 
+                }).catch((error)=>{
 
+                        alert("ERROR");
 
 
-);
+                    }
 
-break;
 
+                    );
 
-case "Residencial":
 
-axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesResidenciales?format=json').then((respuesta)=>{
 
+            break;
 
-
-this.setState({
-
-cantidad:respuesta.data.CANTIDAD,
-cancelados:respuesta.data.CANCELADOS
-
-
-
-
-})
-
-
-
-
-}).catch((error)=>{
-
-
-
-alert("ERROR");
-
-
-}
-
-
-
-
-);
-
-
-
-break;
-
-default:
-alert("Ningun Caso");
-
+            default:
+                
+            alert("Ningun Caso");
 
 }
 
@@ -174,121 +151,100 @@ alert("Ningun Caso");
 
 //METODO  QUE SE EJECUTA LUEGO DE QUE SE RENDERICE EL COMPONENTE FATA EL ASYNC Y EL AWAIT
 
-componentDidMount(){
+    componentDidMount(){
 
 
-axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesVip?format=json').then((respuesta)=>{
+        axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesVip?format=json').then((respuesta)=>{
 
+            this.setState({
 
+                cantidad:respuesta.data.CANTIDAD,
+                cancelados:respuesta.data.CANCELADOS
 
-this.setState({
-
-cantidad:respuesta.data.CANTIDAD,
-cancelados:respuesta.data.CANCELADOS
-
-
-
-
-})
+            })
 
 
 
 
-}).catch((error)=>{
+        }).catch((error)=>{
 
 
 
-alert("ERROR");
+            alert("ERROR");
 
 
-}
+        }
 
-
-
-
-);
+        );
 
 
 
 }
 
 
-ObteniendoResultados(result){
+    ObteniendoResultados(result){
 
+        this.setState({
 
+            resultadosbusqueda:result
 
-this.setState({
-
-
-resultadosbusqueda:result
-
-
-});
+        });
 
 
 }
 
 
-cambiacliente=(etiqueta)=>{
+    cambiacliente=(etiqueta)=>{
 
-if (etiqueta.target.id==="VIP") {
+        if (etiqueta.target.id==="VIP") {
 
-this.setState({
+            this.setState({
 
-tipoCliente:etiqueta.target.id,
-primera:"fondominibarra",
-segunda:"",
-tercera:""
+                tipoCliente:etiqueta.target.id,
+                primera:"fondominibarra",
+                segunda:"",
+                tercera:""
 
-});
+        });
 
-this.PEDIR(etiqueta.target.id);
+            this.PEDIR(etiqueta.target.id);
+
+}
+
+        else if (etiqueta.target.id==="Comercial") {
 
 
+            this.setState({
 
+                tipoCliente:etiqueta.target.id,
+                primera:"",
+                segunda:"fondominibarra",
+                tercera:""
+
+            })
+
+
+            this.PEDIR(etiqueta.target.id);
 
 
 }
 
+        else if (etiqueta.target.id==="Residencial") {
 
 
-else if (etiqueta.target.id==="Comercial") {
+            this.setState({
 
+                tipoCliente:etiqueta.target.id,
+                primera:"",
+                segunda:"",
+                tercera:"fondominibarra"
 
-this.setState({
-
-tipoCliente:etiqueta.target.id,
-primera:"",
-segunda:"fondominibarra",
-tercera:""
-
-})
-
-
-this.PEDIR(etiqueta.target.id);
+            })
 
 
 
 
-
-}
-
-else if (etiqueta.target.id==="Residencial") {
-
-
-this.setState({
-
-tipoCliente:etiqueta.target.id,
-primera:"",
-segunda:"",
-tercera:"fondominibarra"
-
-})
-
-
-
-
-this.PEDIR(etiqueta.target.id);
+        this.PEDIR(etiqueta.target.id);
 
 
 }
@@ -301,97 +257,70 @@ this.PEDIR(etiqueta.target.id);
 
 //METODO QUE SE EJECUTA CUANDO SE HACE CLICK SOBRE UN ELEMENTO DE LA LISTA
 
-clienteElegido=(e)=>{
+    clienteElegido=(e)=>{
 
+        this.setState({
 
-
-
-    this.setState({
-
-
-        perfiles:e.target.id
+            perfiles:e.target.id
 
         })
 
-
-
-
-
         this.ver();
-
-
 
 }
 
 
-
-
-ver(e){
+    ver(e){
 
 //quesevea col-4  pt-3 cajaminip rounded fondoBarra
 
-var segundacolumna=document.getElementById("perfil");
+        var segundacolumna=document.getElementById("perfil");
 
-var componente=document.getElementById("componenteperfil");
-
-
-if (this.state.segundafila===false) {
-
-this.setState({
+        var componente=document.getElementById("componenteperfil");
 
 
-segundafila:true,
-veri:"quitar"
+        if (this.state.segundafila===false) {
 
-})
+            this.setState({
 
+                segundafila:true,
+                veri:"quitar"
 
-segundacolumna.className="quesevea col-4  pt-3 cajaminip rounded fondoBarra";
-
-
-setTimeout(()=>{
+            })
 
 
-componente.className="";
+        segundacolumna.className="quesevea col-4  pt-3 cajaminip rounded fondoBarra";
 
 
-},300);
+        setTimeout(()=>{
+
+            componente.className="";
+
+        },300);
 
 
 
-}
+        }
+
+
+    }
 
 
 
+    ver2=()=>{
+
+        var fila=document.getElementById("resultado");
+
+        if (this.state.primerafila===false) {
+
+            this.setState({
+
+                primerafila:true
+
+            })
 
 
-
-
-}
-
-
-
-ver2=()=>{
-
-var fila=document.getElementById("resultado");
-
-
-
-if (this.state.primerafila===false) {
-
-this.setState({
-
-
-primerafila:true
-
-
-})
-
-
-fila.className="quesevea col-6 fondoBarra rounded";
-
-
-
+            fila.className="quesevea col-6 fondoBarra rounded";
 
 }
 
@@ -401,85 +330,83 @@ fila.className="quesevea col-6 fondoBarra rounded";
 }
 
 
-CambiarAbuscarOCrear=()=>{
+    CambiarAbuscarOCrear=()=>{
 
 
-if (this.state.BOC==true) {
-this.setState({
+        if (this.state.BOC==true) {
+            
+            this.setState({
 
-BOC:false
+                BOC:false
 
+            })
 
-})
+            if (this.state.tipoCliente=="Residencial") {
+                
+                this.PEDIR("Residencial");
 
-   if (this.state.tipoCliente=="Residencial") {
-this.PEDIR("Residencial");
+            }
 
-   }
+            if (this.state.tipoCliente=="Comercial") {
 
-   if (this.state.tipoCliente=="Comercial") {
+                this.PEDIR("Comercial");
 
-this.PEDIR("Comercial");
+            }
 
-   }
+            if (this.state.tipoCliente=="VIP") {
 
-if (this.state.tipoCliente=="VIP") {
+                this.PEDIR("VIP");
 
-this.PEDIR("VIP");
-
-}
-
-
-
-}
-
-
-if (this.state.BOC==false) {
-this.setState({
-
-BOC:true
-
-
-})
-
-
-}
+            }
 
 
 
-}
+        }
 
 
+        if (this.state.BOC==false) {
+
+            this.setState({
+
+                BOC:true
+
+
+            })
+
+
+        }
+
+
+
+    }
 
 
     render() {
 
 
-if (localStorage.getItem("Usuario")) {
+        if (localStorage.getItem("Usuario")) {
 
 
-  return (
+            return (
 
               <div className="container  p-3 rounded">
 
-    <Barra/>
+                <Barra/>
 
 
-        <br/>
+                <br/>
 
-        <br/>
+                <br/>
 
-        <br/>
+                <br/>
 
-        <br/>
+                <br/>
 
-        <br/>
+                <br/>
 
-        <br/>
+                <br/>
 
-        <br/>
-
-
+                <br/>
 
   <div className="row p-3 fondoBarra rounded "  Style="height:300px">
 
