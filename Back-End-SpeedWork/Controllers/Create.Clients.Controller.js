@@ -6,7 +6,11 @@ const createClients = (req,res=response)=>{
     const {Nombre,Apellido,Direccion,Telefono,Correo,Tipo}= req.body;
 
     CreateClient(Nombre,Apellido,Direccion,Telefono,Correo,Tipo).then((test)=>{
-        if (test) res.status(201).end();
+        if (test){
+            res.status(201).end();
+            let dato=new Date();
+            console.log(req.body," " + dato);
+        }
     }).catch((message)=>{
  res.end();console.log(message);
 });
