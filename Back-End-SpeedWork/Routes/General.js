@@ -1,12 +1,12 @@
 const {Router}=require('express');
 const DatosGeneral=require('../Controllers/General.Controller');
-
+const amountClients=require('../Controllers/amount.Clients.Controller');
 const router=Router();
 
 
-//GET DATA
-router.get('/',DatosGeneral);
 
+router.post('/',DatosGeneral);
+router.post('/amount',amountClients);
 
 module.exports=router;
 

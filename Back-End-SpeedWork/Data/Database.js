@@ -1,10 +1,10 @@
 //IMPORTS
 const mysql=require("mysql");
-const { search } = require("../Routes/General");
+//const { search } = require("../Routes/General");
 
 //CREATE THE CONNEXION WITH DATABASE
 const connections = mysql.createPool({
-    connectionLimit:10,
+    connectionLimit:15,
     host:"localhost",
     user:"root",
     password:"",
@@ -134,7 +134,7 @@ const CreateClient = (Nombre,Apellido,Direccion,Telefono,Correo,Tipo)=>{
 }
 
 //FOR VALIDATE USERS
-const validUsers =(NombreUsuario,Contraseña)=>{
+const validUsers = (NombreUsuario,Contraseña)=>{
 
     return new Promise(async (resolve, reject) => {
 
@@ -151,7 +151,6 @@ const validUsers =(NombreUsuario,Contraseña)=>{
                 else resolve(false);
 
                 coneccion.release();
-
             });
 
         }
@@ -166,5 +165,44 @@ const validUsers =(NombreUsuario,Contraseña)=>{
 
 }
 
+
+const DataClientType = (Type) =>{
+
+    return new Promise(async (resolve,reject)=>{
+
+        try {
+            let connexion=await createConeccionUpdate();
+
+            let query="SELECT COUNT(*) as Amount FROM clientes WHERE EstadoCliente=true AND Tipo=? UNION SELECT COUNT(*) from clientes WHERE EstadoCliente=false AND Tipo=?";
+
+            connexion.query(query,[Type,Type],(error, results, fields)=>{
+
+                const cantidad={
+                    totalClients:results[0].Amount,
+                    CanceledClients:results[1].Amount
+
+                };
+
+                if (error) reject("Hubo un problema al ejecutar la consulta:"+error);
+
+                else resolve(cantidad);
+
+                connexion.release();
+
+            });
+        }
+
+        catch (error){
+
+            reject("Hubo un problema:"+error);
+
+        }
+
+
+    });
+
+
+}
+
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType};

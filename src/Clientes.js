@@ -56,14 +56,12 @@ this.ver=this.ver.bind(this);
 
             case "VIP":
 
-                axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesVip?format=json').then((respuesta)=>{
-
-
+                axios.post('http://localhost:8081/amountClients/amount',{Type:1}).then((respuesta)=>{
 
                 this.setState({
 
-                    cantidad:respuesta.data.CANTIDAD,
-                    cancelados:respuesta.data.CANCELADOS
+                    cantidad:respuesta.data.amountClients,
+                    cancelados:respuesta.data.cancelClients
 
                     })
 
@@ -83,12 +81,12 @@ this.ver=this.ver.bind(this);
             case "Comercial":
 
 
-                axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesComerciales?format=json').then((respuesta)=>{
+                axios.post('http://localhost:8081/amountClients/amount',{Type:2}).then((respuesta)=>{
 
                     this.setState({
 
-                        cantidad:respuesta.data.CANTIDAD,
-                        cancelados:respuesta.data.CANCELADOS
+                        cantidad:respuesta.data.amountClients,
+                        cancelados:respuesta.data.cancelClients
 
 
                     })
@@ -110,14 +108,14 @@ this.ver=this.ver.bind(this);
 
             case "Residencial":
 
-                axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesResidenciales?format=json').then((respuesta)=>{
+                axios.post('http://localhost:8081/amountClients/amount',{Type:3}).then((respuesta)=>{
 
 
 
                     this.setState({
 
-                        cantidad:respuesta.data.CANTIDAD,
-                        cancelados:respuesta.data.CANCELADOS
+                        cantidad:respuesta.data.amountClients,
+                        cancelados:respuesta.data.cancelClients
 
                     })
 
@@ -154,14 +152,14 @@ this.ver=this.ver.bind(this);
     componentDidMount(){
 
 
-        axios.get('http://localhost:8080/restback/index.php/Peticion/ObtenerClientesVip?format=json').then((respuesta)=>{
+        axios.post('http://localhost:8081/amountClients/amount',{Type:1}).then((respuesta)=>{
 
             this.setState({
 
-                cantidad:respuesta.data.CANTIDAD,
-                cancelados:respuesta.data.CANCELADOS
+                cantidad:respuesta.data.amountClients,
+                cancelados:respuesta.data.cancelClients
 
-            })
+            });
 
 
 

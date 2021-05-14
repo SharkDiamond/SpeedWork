@@ -33,7 +33,9 @@ class Server{
         this.app.use("/Users",require("../Routes/Validation"));
 
         this.app.use("/General",require("../Routes/General"));
-        
+
+        this.app.use("/amountClients",require("../Routes/General"));
+
         this.app.use("/CreateClients",require("../Routes/Clients"));
 
         this.app.use("/SearchClients",require("../Routes/Clients"));
