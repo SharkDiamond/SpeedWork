@@ -213,7 +213,7 @@ return (
 
 }      
     
-
+//RENDER DE CREAR CLIENTES
 if (this.props.crearClienteoBuscar==2) {
 
 return(

@@ -165,7 +165,7 @@ const validUsers = (NombreUsuario,Contraseña)=>{
 
 }
 
-
+//FOR AMOUNT CLIENTS OPEN AND CANCELED
 const DataClientType = (Type) =>{
 
     return new Promise(async (resolve,reject)=>{

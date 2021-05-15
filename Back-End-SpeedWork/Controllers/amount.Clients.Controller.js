@@ -9,7 +9,8 @@ const amountClients = (req,res)=>{
     console.log(Type);
 
     DataClientType(Type).then((Amount)=>{
-        console.log("ejecutas");
+
+
 
         res.status(202).json({"amountClients":Amount.totalClients,"cancelClients":Amount.CanceledClients}).end();
 

@@ -22,52 +22,39 @@ dr:[]
     }
 
 
-    async imprime(Nuevo){
+     imprime(Nuevo){
 
-
-await axios.post("http://localhost:8080/restback/index.php/Clientes/RM",{
-number:Nuevo
-
-}).then((respuesta)=>{
+    console.log("SE EJECUTA IMPRIME EN MINIPERFIL",this.props.informationCliente);
 
 //SI TODO SALE BIEN
 this.setState({
 
-dr:respuesta.data
+dr:this.props.informationCliente
 
 })
 
 
 this.state.dr.forEach(element => {
 
+if (Nuevo==element.idClientes){
 
-this.setState({
+    this.setState({
 
-nombre:element.Nombre,
-Direccion:element.Direccion,
-numero:element.Telefono
+        nombre:element.Nombre,
+        Direccion:element.Direccion,
+        numero:element.Telefono
 
-})
-
-});
-
-setTimeout(20,this.imprime());
+    });
 
 
-}).catch((error)=>{
 
-//SI OCURRE UN PROBLEMA
 
-//alert("problemas con miniperfil imprime");
-//console.log(error);
-
+}
 
 
 });
 
-
-
-
+//setTimeout(20,this.imprime());
 
 
 }
@@ -79,17 +66,9 @@ setTimeout(20,this.imprime());
 //RECIBIENDO LA NUEVA PROPIEDAD
 componentWillReceiveProps(nextProps){
 
-
-
 this.imprime(nextProps.idFiltro);
 
-
 }
-
-
-
-
-
 
 
     render() {

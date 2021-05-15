@@ -480,7 +480,7 @@ this.ver=this.ver.bind(this);
 
   }
 
-   return  <li className=" colorVerde h4 font-weight-bold border-right border-success" onMouseEnter={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
+   return  <li className=" colorVerde h4 font-weight-bold border-right border-success" onClick={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
 
 
 
@@ -498,7 +498,7 @@ this.ver=this.ver.bind(this);
 
   <div className="quitar"  id="perfil">
   <div className="d-none" id="componenteperfil">
-  <Miniperfil  idFiltro={this.state.perfiles}/>
+  <Miniperfil  idFiltro={this.state.perfiles} informationCliente={this.state.resultadosbusqueda}/>
   </div>
 
   </div>
