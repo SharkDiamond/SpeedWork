@@ -4,7 +4,7 @@ const mysql=require("mysql");
 
 //CREATE THE CONNEXION WITH DATABASE
 const connections = mysql.createPool({
-    connectionLimit:15,
+    connectionLimit:20,
     host:"localhost",
     user:"root",
     password:"",

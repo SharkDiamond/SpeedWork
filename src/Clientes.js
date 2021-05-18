@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Iclientes from "./Iclientes.js";
 import vip from "./imagenes/vip.png";
 import tienda from "./imagenes/tienda.png";
@@ -9,21 +8,30 @@ import axios from "axios";
 import './App.css';
 import ParteMediaClientes from "./ParteMediaClientes";
 import Barra from "./Barra.js";
+import {Link,useParams} from "react-router-dom";
 
 
 export default class Clientes extends Component {
 
-
-
-
     constructor(){
+
         super();
 
+        let typeClient=window.location.href.length-1;
+
+        let ClientsType={
+            '1':"VIP",
+            '2':"Comercial",
+            '3':"Residencial"
+
+        }
+
         this.state={
-            tipoCliente:"VIP",
-            primera:"fondominibarra",
-            segunda:"",
-            tercera:"",
+            //"fondominibarra"
+            tipoCliente:window.location.href[typeClient]!=='a' ? ClientsType[window.location.href[typeClient]] : 'VIP',
+            primera:window.location.href[typeClient]=='a' || '1' ? "fondominibarra" : '',
+            segunda:window.location.href[typeClient]=='2'  ? "fondominibarra" : '',
+            tercera:window.location.href[typeClient]=="3"  ? "fondominibarra" : '',
             primerafila:false,
             segundafila:false,
             veri:"col-4  pt-3 cajaminip rounded fondoBarra d-none",
@@ -33,20 +41,17 @@ export default class Clientes extends Component {
             perfiles:null,
             BOC:false
 
-
     }
 
 
 //CODIGO PARA PODER USAR THIS EN LOS METODOS
 
-this.PEDIR=this.PEDIR.bind(this);
-this.ObteniendoResultados=this.ObteniendoResultados.bind(this);
-this.ver=this.ver.bind(this);
+        this.PEDIR=this.PEDIR.bind(this);
+        this.ObteniendoResultados=this.ObteniendoResultados.bind(this);
+        this.ver=this.ver.bind(this);
 
 
     }
-
-
 
 //METODO PARA PEDIR  LOS DATOS DE LAS CANTIDADES DE CLIENTES TANTO ACTIVOS COMO CANCELADOS
 
@@ -158,7 +163,6 @@ this.ver=this.ver.bind(this);
 
                 cantidad:respuesta.data.amountClients,
                 cancelados:respuesta.data.cancelClients
-
             });
 
 
@@ -177,7 +181,7 @@ this.ver=this.ver.bind(this);
 
 
 
-}
+    }
 
 
     ObteniendoResultados(result){
@@ -186,10 +190,89 @@ this.ver=this.ver.bind(this);
 
             resultadosbusqueda:result
 
+
         });
 
+        if ( window.location.href[31]=="-"){
 
-}
+
+
+            let y;
+            //ONE DIGIT NUMBER
+            if (window.location.href[33]=="#") {
+
+                y=parseInt(window.location.href.slice(32,33));
+
+                this.setState({
+
+                    resultadosbusqueda:result,
+                    perfiles:y
+
+                });
+
+                this.ver();
+
+            }
+
+            //TWO DIGIT NUMBER
+            else  if (window.location.href[34]=="#") {
+
+               y=parseInt(window.location.href.slice(32,34));
+
+                this.setState({
+
+                    resultadosbusqueda:result,
+                    perfiles:y
+
+                });
+
+
+                this.ver();
+
+
+            }
+
+            //THREE DIGIT NUMBER
+            else  if (window.location.href[35]=="#") {
+
+                y=parseInt(window.location.href.slice(32,35));
+
+                this.setState({
+
+                    resultadosbusqueda:result,
+                    perfiles:y
+
+                });
+
+
+                this.ver();
+
+
+            }
+
+            //FOUR DIGIT NUMBER
+            else  if (window.location.href[36]=="#") {
+
+                y=parseInt(window.location.href.slice(32,36));
+
+                this.setState({
+
+                    resultadosbusqueda:result,
+                    perfiles:y
+
+                });
+
+
+                this.ver();
+
+
+            }
+
+        }
+
+
+
+    }
 
 
     cambiacliente=(etiqueta)=>{
@@ -257,18 +340,27 @@ this.ver=this.ver.bind(this);
 
     clienteElegido=(e)=>{
 
+
+
+
         this.setState({
 
             perfiles:e.target.id
 
         })
 
+
+
+
+
         this.ver();
+
+
 
 }
 
 
-    ver(e){
+    ver(){
 
 //quesevea col-4  pt-3 cajaminip rounded fondoBarra
 
@@ -289,8 +381,7 @@ this.ver=this.ver.bind(this);
 
         segundacolumna.className="quesevea col-4  pt-3 cajaminip rounded fondoBarra";
 
-
-        setTimeout(()=>{
+            setTimeout(()=>{
 
             componente.className="";
 
@@ -299,7 +390,6 @@ this.ver=this.ver.bind(this);
 
 
         }
-
 
     }
 
@@ -377,6 +467,9 @@ this.ver=this.ver.bind(this);
 
 
     }
+
+
+
 
 
     render() {
@@ -467,7 +560,7 @@ this.ver=this.ver.bind(this);
   <h1 className="text-center display-4 text-white font-weight-bold">Resultados</h1>
   <br/>
 
-  <ul className="">
+<ul className="">
 
   {
 
@@ -475,14 +568,11 @@ this.ver=this.ver.bind(this);
 
   if (elementos==="No Hay Resultados") {
 
-
   return <li className="text-danger h4 font-weight-bold">No hay resultado</li>
 
   }
 
-   return  <li className=" colorVerde h4 font-weight-bold border-right border-success" onClick={this.clienteElegido} id={elementos.idClientes}>{elementos.Nombre}</li>
-
-
+   return  <Link to={"-"+this.state.perfiles+window.location.hash} className="quitarHi"><li className=" colorVerde h4 font-weight-bold border-right border-success " onClick={this.clienteElegido} id={elementos.idClientes} >{elementos.Nombre}</li></Link>
 
   })
 

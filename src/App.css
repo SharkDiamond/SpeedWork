@@ -11,6 +11,14 @@
   
 }
 
+
+.quitarHi{
+
+
+    text-decoration:none;
+    color: #2e8ece;
+}
+
 .anchura{
 
 position:relative;
@@ -50,7 +58,7 @@ transition: 600ms;
 
 
 .colorVerde{
-
+text-decoration: none;
   color:  #12dd9a;
 
 }
