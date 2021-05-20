@@ -1,7 +1,7 @@
 //IMPORTS
 const mysql=require("mysql");
 //const { search } = require("../Routes/General");
-
+const encriptar=require("bcryptjs");
 //CREATE THE CONNEXION WITH DATABASE
 const connections = mysql.createPool({
     connectionLimit:20,
@@ -142,11 +142,12 @@ const validUsers = (NombreUsuario,Contraseña)=>{
 
             let coneccion = await createConeccionUpdate();
 
-            let query="SELECT * FROM usuarios where NombreUsuario=?  and  Contraseña=?";
+            let query="SELECT Contraseña FROM usuarios where NombreUsuario=?";
 
-            coneccion.query(query,[NombreUsuario,Contraseña],(error, result)=>{
+            coneccion.query(query,[NombreUsuario],(error, result)=>{
 
-                if (result.length>0) resolve(true);
+
+                if (encriptar.compareSync(Contraseña,result[0].Contraseña)) resolve(true);
 
                 else resolve(false);
 
@@ -204,5 +205,47 @@ const DataClientType = (Type) =>{
 
 }
 
+
+const UpdatePassword = () =>{
+
+    return new Promise(async (resolve, reject) => {
+
+        try {
+
+            let coneccion = await createConeccionUpdate();
+
+            var salt = encriptar.genSaltSync(10);
+
+            var hash = encriptar.hashSync("paseelectronica", salt);
+
+            let query="UPDATE usuarios SET Contraseña='"+hash + "' WHERE NombreUsuario='Joseito'";
+
+            coneccion.query(query,(error, result)=>{
+
+                resolve(true);
+
+                coneccion.release();
+            });
+
+        }
+
+        catch (error) {
+            reject("there was a problem when searching for the user" + error);
+        }
+
+
+    });
+
+
+
+
+
+
+
+
+}
+
+
+
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword};
