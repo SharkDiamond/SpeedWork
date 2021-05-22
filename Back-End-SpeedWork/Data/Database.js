@@ -134,7 +134,7 @@ const CreateClient = (Nombre,Apellido,Direccion,Telefono,Correo,Tipo)=>{
 }
 
 //FOR VALIDATE USERS
-const validUsers = (NombreUsuario,Contraseña)=>{
+const validUsers = (NombreUsuario,Contraseña2)=>{
 
     return new Promise(async (resolve, reject) => {
 
@@ -142,12 +142,14 @@ const validUsers = (NombreUsuario,Contraseña)=>{
 
             let coneccion = await createConeccionUpdate();
 
+            //giving back Password
             let query="SELECT Contraseña FROM usuarios where NombreUsuario=?";
 
             coneccion.query(query,[NombreUsuario],(error, result)=>{
 
+                if (error) console.log(error);
 
-                if (encriptar.compareSync(Contraseña,result[0].Contraseña)) resolve(true);
+                if (result.length>0 && encriptar.compareSync(Contraseña2,result[0].Contraseña)) resolve(true);
 
                 else resolve(false);
 
@@ -245,7 +247,39 @@ const UpdatePassword = () =>{
 
 }
 
+const existUser= (User)=>{
+
+    return new Promise(async (resolve, reject)=>{
+    
+        try {
+
+            let connection=await createConeccionUpdate();
+
+            let query="SELECT Sexo from usuarios where NombreUsuario='"+User+"'";
+
+            connection.query(query,User,(error,fields)=>{
+
+                if (error) reject("hubo un problema",error);
+
+               const manageResult = fields.length>0 && fields.length==1 ? resolve(true) : resolve(false);
+
+
+            });
+
+        }
+        
+        catch (error) {
+            reject(error);
+        }
+
+    });
+
+
+
+}
+
+
 
 
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser};
