@@ -16,8 +16,9 @@ router.post("/create",[
     check("Tipo","El tipo de cliente ingresado no es correcto").isIn(["Residencial","Comercial","VIP"]),validateRequest],createClients);
 
 router.post("/search",[
+    check("dato","No se puede enviar el dato de busqueda con un valor vacio").not().isEmpty(),
     check("Tipo","El tipo de dato ingresado no es valido.").isIn([1,2,3]),
-    check("campo","El campo  ingresado no es valido.").isIn(["Nombre","Telefono","ID"]),
-    check("dato","No se puede enviar el dato de busqueda con un valor vacio").not().isEmpty(),validateRequest],SearchClients);
+    check("campo","El campo  ingresado no es valido.").isIn(["Nombre","Telefono","ID"])
+    ,validateRequest],SearchClients);
 
 module.exports=router;

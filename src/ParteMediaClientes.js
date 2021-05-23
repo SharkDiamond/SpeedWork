@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import './App.css';
-
+import {toast} from "react-toastify";
 
 export default class ParteMediaClientes extends Component {
    
@@ -73,25 +73,13 @@ Direccion:this.state.Direccion,
 Telefono:this.state.Telefono,
 Correo:this.state.Correo,
 Tipo:this.state.tipoCliente
-}).then((respuesta)=>{
-
-alert("todo salio bien");
-
-}).catch(()=>{
-
-
-alert("Problemas");
-
-
-}
-
-
-);
+}).then((respuesta)=>toast.success("Cliente Creado!")).catch(error=>toast.info(error.response.data.Errors[0]));
 
 }
 
 
 render(){
+
 if (this.props.crearOver==true) {
 
 return(

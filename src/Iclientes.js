@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { Link} from "react-router-dom";
+import {toast} from "react-toastify";
+
 
 export default class Iclientes extends Component {
 
     constructor(){
-
+    toast.configure();
         super();
 
         const  [nodefinido,dato,campo,clientType]=window.location.hash.split("#",4);
@@ -59,7 +61,7 @@ export default class Iclientes extends Component {
     }
 
 
-    onSubmit=  (e)=>{
+    onSubmit=(e)=>{
 
         this.props.pasafuncion();
 
@@ -71,15 +73,13 @@ export default class Iclientes extends Component {
             campo:this.state.eleccion
         }).then((respuesta)=>{
 
-//SI TODO SALE BIEN
-            console.log(respuesta.data.Clients);
-
+            //SI TODO SALE BIEN
 
             if (respuesta.data.Clients) {
 
-
-
                 this.props.enviarResultados(respuesta.data.Clients);
+
+                toast.success(respuesta.data.Clients.length+" Resultados Encontrados");
 
             }
 
@@ -87,18 +87,14 @@ export default class Iclientes extends Component {
 
                 var nhr=["No Hay Resultados"];
 
+                toast.error("No Hay Resultados");
+
                 this.props.enviarResultados(nhr);
 
             }
 
 
-        }).catch((error)=>{
-
-//SI OCURRE UN PROBLEMA
-
-            alert("problemas");
-            console.log(error);
-        });
+        }).catch(error  => toast.info(error.response.data.Errors[0]));
 
     }
 
@@ -180,7 +176,7 @@ export default class Iclientes extends Component {
    
     render() {
 
-
+        //RENDERIZADO DE BUSQUEDA
         if (this.props.crearClienteoBuscar==1) {
  
             return (
@@ -252,7 +248,7 @@ export default class Iclientes extends Component {
 
 }      
     
-//RENDER DE CREAR CLIENTES
+        //RENDERIZADO DE CLIENTES
         if (this.props.crearClienteoBuscar==2) {
 
 return(
@@ -266,7 +262,7 @@ return(
 <input type="text"  placeholder="Apellido"/>
 <br/>
 <br/>
-<input type="text"  placeholder="Direccion"/>
+<input type="text"  placeholder="SDASD"/>
 <br/>
 <br/>
 <input type="number"  placeholder="Telefono"/>
