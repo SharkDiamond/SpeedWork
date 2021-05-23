@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
-
-
+import './App.css';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
 export default class Clientes extends Component {
 
 
@@ -15,6 +16,7 @@ export default class Clientes extends Component {
     Usuario:"",
     Contraseña:"",
     pasaste:false
+
 
 }
 
@@ -40,9 +42,9 @@ export default class Clientes extends Component {
 
   if(respuesta.data.happen===true) {
 
-    localStorage.setItem("Usuario",this.state.Usuario);
+    toast.success("¡Bienvenido "+this.state.Usuario + "!");
 
-    alert("Bienvenido");
+    localStorage.setItem("Usuario",this.state.Usuario);
 
     this.setState({
 
@@ -53,17 +55,14 @@ export default class Clientes extends Component {
 
 }
 
-  else {
+  else toast.error("Contraseña Incorrecta!");
 
-  alert("USUARIO O CONTRASEÑA INCONRRECTO");
+  }).catch( (error) => {
 
-  }
+    const [E1,E2]=error.response.data.Errors;
 
+      toast.error(E1,E2);
 
-
-  }).catch( (Error) => {
-
-      console.log(Error);
 
 });
 
@@ -74,11 +73,17 @@ export default class Clientes extends Component {
 
   render(){
 
+
+  toast.configure();
+
+
     if (this.state.pasaste==false) {
 
       return (
 
         <div class="d-flex align-items-center justify-content-center container" Style="height: 100vh;">
+
+
 
           <div class="row   rounded justify-content-center fondoBarra" Style="padding:60px;">
 
@@ -97,9 +102,12 @@ export default class Clientes extends Component {
 
               <br />
 
-              <input type="submit"  name="" id="" class="m-3 btn bg-white" value="Acceder" />
+              <input type="submit"  name="" id="" class="m-3 btn bg-white" value="Acceder"  />
+
+
 
               </form>
+
 
 
 

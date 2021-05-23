@@ -263,6 +263,7 @@ const existUser= (User)=>{
 
                const manageResult = fields.length>0 && fields.length==1 ? resolve(true) : resolve(false);
 
+                connection.release();
 
             });
 
@@ -273,8 +274,6 @@ const existUser= (User)=>{
         }
 
     });
-
-
 
 }
 
