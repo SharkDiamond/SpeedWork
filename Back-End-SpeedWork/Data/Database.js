@@ -277,8 +277,46 @@ const existUser= (User)=>{
 
 }
 
+//FOR CREATE DEPARTAMENTS
+const CreateDepartaments=(NameDepartament)=>{
+
+    return new Promise(async (resolve,reject)=>{
+
+
+        try{
+
+            const conexion= await createConeccionUpdate();
+
+            let query="INSERT INTO departamentos VALUES ('',?)";
+
+            conexion.query(query,[NameDepartament],(error,results,fields)=>{
+
+                if (error) reject("No autorizado"+ error);
+
+                if (results.affectedRows>0) resolve("Departamento Creado!");
+
+                conexion.release();
+
+            });
+
+
+        }
+
+        catch (e) {
+            reject(`No hay conexion con la base de datos`);
+        }
+
+
+
+    });
+
+
+
+
+}
+
 
 
 
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments};

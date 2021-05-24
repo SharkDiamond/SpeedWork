@@ -40,7 +40,7 @@ class Server{
 
         this.app.use("/SearchClients",require("../Routes/Clients"));
 
-
+        this.app.use("/Departments",require("../Routes/Clients"));
 
     } 
 
