@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import './App.css';
 import {toast} from "react-toastify";
-
+import {Ip} from "./Ip";
 export default class ParteMediaClientes extends Component {
    
 
@@ -66,7 +66,7 @@ enviar= (e) =>{
 
 e.preventDefault();
 
-axios.post("http://localhost:8081/CreateClients/create",
+axios.post("http://"+Ip+":8081/CreateClients/create",
 {Nombre:this.state.Nombre,
 Apellido:this.state.Apellido,
 Direccion:this.state.Direccion,

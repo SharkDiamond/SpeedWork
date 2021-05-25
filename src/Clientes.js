@@ -9,6 +9,7 @@ import './App.css';
 import ParteMediaClientes from "./ParteMediaClientes";
 import Barra from "./Barra.js";
 import {Link,useParams} from "react-router-dom";
+import {Ip} from "./Ip";
 
 
 export default class Clientes extends Component {
@@ -61,7 +62,7 @@ export default class Clientes extends Component {
 
             case "VIP":
 
-                axios.post('http://localhost:8081/amountClients/amount',{Type:1}).then((respuesta)=>{
+                axios.post("http://"+Ip+":8081/amountClients/amount",{Type:1}).then((respuesta)=>{
 
                 this.setState({
 
@@ -86,7 +87,7 @@ export default class Clientes extends Component {
             case "Comercial":
 
 
-                axios.post('http://localhost:8081/amountClients/amount',{Type:2}).then((respuesta)=>{
+                axios.post("http://"+Ip+":8081/amountClients/amount",{Type:2}).then((respuesta)=>{
 
                     this.setState({
 
@@ -113,7 +114,7 @@ export default class Clientes extends Component {
 
             case "Residencial":
 
-                axios.post('http://localhost:8081/amountClients/amount',{Type:3}).then((respuesta)=>{
+                axios.post("http://"+Ip+":8081/amountClients/amount",{Type:3}).then((respuesta)=>{
 
 
 
@@ -156,8 +157,7 @@ export default class Clientes extends Component {
 
     componentDidMount(){
 
-
-        axios.post('http://localhost:8081/amountClients/amount',{Type:1}).then((respuesta)=>{
+        axios.post("http://"+Ip+":8081/amountClients/amount",{Type:1}).then((respuesta)=>{
 
             this.setState({
 
@@ -165,20 +165,13 @@ export default class Clientes extends Component {
                 cancelados:respuesta.data.cancelClients
             });
 
-
-
-
         }).catch((error)=>{
 
-
-
             alert("ERROR");
-
 
         }
 
         );
-
 
 
     }
@@ -192,17 +185,19 @@ export default class Clientes extends Component {
 
 
         });
+        console.log(window.location.href[35]);
 
-        if ( window.location.href[31]=="-"){
 
+        if ( window.location.href[35]=="-"){
+            //#35
 
 
             let y;
-            //ONE DIGIT NUMBER
-            if (window.location.href[33]=="#") {
+            //ONE DIGIT NUMBER   #37
+            if (window.location.href[37]=="#") {
 
-                y=parseInt(window.location.href.slice(32,33));
-
+                y=parseInt(window.location.href.slice(36,37));
+                  //  36
                 this.setState({
 
                     resultadosbusqueda:result,
@@ -215,9 +210,9 @@ export default class Clientes extends Component {
             }
 
             //TWO DIGIT NUMBER
-            else  if (window.location.href[34]=="#") {
+            else  if (window.location.href[38]=="#") {
 
-               y=parseInt(window.location.href.slice(32,34));
+               y=parseInt(window.location.href.slice(36,38));
 
                 this.setState({
 
@@ -233,9 +228,9 @@ export default class Clientes extends Component {
             }
 
             //THREE DIGIT NUMBER
-            else  if (window.location.href[35]=="#") {
+            else  if (window.location.href[39]=="#") {
 
-                y=parseInt(window.location.href.slice(32,35));
+                y=parseInt(window.location.href.slice(36,39));
 
                 this.setState({
 
@@ -251,9 +246,9 @@ export default class Clientes extends Component {
             }
 
             //FOUR DIGIT NUMBER
-            else  if (window.location.href[36]=="#") {
+            else  if (window.location.href[40]=="#") {
 
-                y=parseInt(window.location.href.slice(32,36));
+                y=parseInt(window.location.href.slice(36,40));
 
                 this.setState({
 
@@ -340,22 +335,13 @@ export default class Clientes extends Component {
 
     clienteElegido=(e)=>{
 
-
-
-
         this.setState({
 
             perfiles:e.target.id
 
         })
 
-
-
-
-
         this.ver();
-
-
 
 }
 

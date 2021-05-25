@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { Link} from "react-router-dom";
 import {toast} from "react-toastify";
-
+import {Ip} from "./Ip";
 
 export default class Iclientes extends Component {
 
@@ -12,19 +12,22 @@ export default class Iclientes extends Component {
 
         const  [nodefinido,dato,campo,clientType]=window.location.hash.split("#",4);
 
+        console.log(nodefinido,dato,campo,clientType);
+
         //COLOCAR UN CONDICIONAL POR SI VIENEN VACIOS
 
-
         console.log(window.location.href);
-       // http://localhost:3000/Clientes/data
 
         //STATE SEGUN LA URL
-        if (window.location.href!=="http://localhost:3000/Clientes/data"){
+        if (window.location.href!=="http://"+Ip+":3000/Clientes/data"){
+
+
+
+            console.log(window.location.href);
 
             let r1=""+campo;
             let r2=""+dato;
             let r3=parseInt(clientType);
-
 
             this.state={
 
@@ -34,9 +37,6 @@ export default class Iclientes extends Component {
                 uri:"./Clientes/data"
 
             }
-
-
-
 
         }
 
@@ -67,7 +67,7 @@ export default class Iclientes extends Component {
 
         e.preventDefault();
 
-        axios.post("http://localhost:8081/SearchClients/search",{
+        axios.post("http://"+Ip+":8081/SearchClients/search",{
             Tipo:this.state.cliente,
             dato:this.state.datobusqueda,
             campo:this.state.eleccion
@@ -102,7 +102,13 @@ export default class Iclientes extends Component {
 
     componentDidMount() {
 
-        if (window.location.href!=="http://localhost:3000/Clientes/data") document.getElementById("SD").click();
+
+        //PARA PRESIONAR EL BOTON DE BUSCAR SI ES DISTINTO DE LINK NORMAL
+        if (window.location.href!=="http://"+Ip+":3000/Clientes/data") {document.getElementById("SD").click();
+
+
+
+        }
 
     }
 
@@ -219,32 +225,14 @@ export default class Iclientes extends Component {
 
     <h1 className="text-white letra1 h1 text-center">{this.props.Cantidad}</h1>
 
-
-
-
-
-
     </div>
 
 
-
-
-
-
-
     </div>
-
 
                 </div>
 
-
-
   )  
-
-
-
-
-
 
 }      
     

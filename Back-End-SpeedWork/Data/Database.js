@@ -293,7 +293,7 @@ const CreateDepartaments=(NameDepartament)=>{
 
                 if (error) reject("No autorizado"+ error);
 
-                if (results.affectedRows>0) resolve("Departamento Creado!");
+                if (results.affectedRows>0) resolve("Creado!");
 
                 conexion.release();
 
@@ -315,8 +315,36 @@ const CreateDepartaments=(NameDepartament)=>{
 
 }
 
+const validDepartament= (Departament)=>{
 
+    return new Promise(async (resolve, reject)=>{
+
+        try {
+
+            let connection=await createConeccionUpdate();
+
+            let query="SELECT NombreDepartamento from departamentos where NombreDepartamento='"+Departament+"'";
+
+            connection.query(query,Departament,(error,fields)=>{
+
+                if (error) reject("hubo un problema",error);
+
+                const manageResult = fields.length>0 && fields.length==1 ? resolve(true) : resolve(false);
+
+                connection.release();
+
+            });
+
+        }
+
+        catch (error) {
+            reject(error);
+        }
+
+    });
+
+}
 
 
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament};

@@ -1,4 +1,4 @@
-const {existUser}=require("../Data/Database");
+const {existUser,validDepartament}=require("../Data/Database");
 
 
 const validateUserExist= async (User)=> {
@@ -23,4 +23,18 @@ const validateUserExist= async (User)=> {
 }
 
 
-module.exports={validateUserExist};
+
+const valideDepartamentExist=async (Departament)=>{
+
+    let found=null;
+
+    try { found = await validDepartament(Departament); }
+
+    catch (error) { console.log("Hubo un problema al verificar el Departamento",error); }
+
+    if (found) throw new Error("Ya existe un departamento con ese nombre.");
+
+}
+
+
+module.exports={validateUserExist,valideDepartamentExist};

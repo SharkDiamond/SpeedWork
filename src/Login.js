@@ -3,7 +3,10 @@ import axios from "axios";
 import {Redirect} from "react-router-dom";
 import './App.css';
 import { ToastContainer, toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
+import {Ip} from "./Ip";
+
+
 export default class Clientes extends Component {
 
 
@@ -37,10 +40,10 @@ export default class Clientes extends Component {
 
   e.preventDefault();
 
-    axios.post("http://localhost:8081/Users",{User:this.state.Usuario,Password:this.state.Contraseña}).then( (respuesta) => {
+    axios.post("http://"+Ip+":8081/Users",{User:this.state.Usuario,Password:this.state.Contraseña}).then( (respuesta) => {
 
 
-  if(respuesta.data.happen===true) {
+  if(respuesta.data.happen==true) {
 
     toast.success("¡Bienvenido "+this.state.Usuario + "!");
 
@@ -59,7 +62,10 @@ export default class Clientes extends Component {
 
   }).catch( (error) => {
 
+
     const [E1,E2]=error.response.data.Errors;
+
+    console.log(error.response.data.Errors);
 
       toast.error(E1,E2);
 

@@ -1,22 +1,26 @@
-
 import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
 import Reporte from "./Reporte";
+import {Ip} from "./Ip";
+import {toast} from "react-toastify";
+
+
 export default class Lista extends Component  {
   
 constructor(){
+
+    toast.configure();
+
 
 super();
 
 this.state={
 
-
 Datos:[],
 elegido:"",
 Mostrar:1,
 crear:"",
-
 eleccion:"Clientes"
 
 
@@ -139,6 +143,8 @@ Mostrar:1
 AsignarDatos(etiqueta){
 
 const valor=etiqueta.target.value;
+
+
 this.setState({
 
 crear:valor
@@ -167,19 +173,21 @@ eleccion:etiqueta.target.value
 
 
 
-EnviarFormulario= async (e)=>{
+EnviarFormulario=  (e)=>{
  e.preventDefault();
 
-await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearDepartamento",{Nombre:this.state.crear}).then((response) => {
-    //RESPUESTA SI TODO SALE BIEN
+    axios.post("http://"+Ip+":8081/Departments/"+this.state.crear).then((response) => {
 
-alert(response.data);
+    //RESPUESTA SI TODO SALE BIEN
+    toast.success("Departamento "+ this.state.crear +" "+ response.data.Respuesta);
 
   })
   .catch((error) => {
 //RESPUESTA SI HAY ALGUN ERROR
-alert("problemas");
-    console.log(error);
+      console.log();
+
+      toast.error(error.response.data.Errors[0]);
+
     //alert(error);
   });
 
