@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import MD from "./MD.js";
 import axios from "axios";
-
+import Grafica from "./Grafica";
 export default class InformeG extends Component {
 
 
@@ -179,9 +179,10 @@ Clientes:response.data.a
 
       return(
 
-        <div className="container fondoBarra  rounded text-center p-4">
+        <div className="container-fluid fondoBarra  rounded text-center p-2">
 
-        <MD muestra={this.state.mostrar} enviaFuncion={this.Vuelve} EnviaDatos={this.state.Meses}/>
+      <Grafica/>
+
 
         </div>
 

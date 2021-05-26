@@ -1,7 +1,7 @@
 
 
 
-var Ip="10.255.220.33";
+var Ip="172.26.9.133";
 
 
 module.exports={Ip};

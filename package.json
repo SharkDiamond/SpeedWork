@@ -5,8 +5,10 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "chart.js": "^3.3.0",
     "react": "^16.11.0",
     "react-burger-menu": "^2.6.13",
+    "react-chartjs-2": "^3.0.3",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
