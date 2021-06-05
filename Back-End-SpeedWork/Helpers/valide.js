@@ -1,5 +1,4 @@
-const {existUser,validDepartament}=require("../Data/Database");
-
+const {existUser,validDepartament,valideDepartamentExistId,validReportExist}=require("../Data/Database");
 
 const validateUserExist= async (User)=> {
 
@@ -22,8 +21,6 @@ const validateUserExist= async (User)=> {
 
 }
 
-
-
 const valideDepartamentExist=async (Departament)=>{
 
     let found=null;
@@ -36,5 +33,31 @@ const valideDepartamentExist=async (Departament)=>{
 
 }
 
+const DepartamentExistId=async (idDepartment)=>{
 
-module.exports={validateUserExist,valideDepartamentExist};
+    let found=null;
+
+    try { found = await valideDepartamentExistId(idDepartment); }
+
+    catch (error) { console.log("Hubo un problema al verificar el Departamento",error); }
+
+
+    if (!found) throw new Error("El departamento no existe.");
+
+}
+
+
+const validReport=async (idReporte)=>{
+
+    let found=null;
+
+    try {found=await validReportExist(idReporte);} 
+    
+    catch (error) { console.log("Hubo un problema al verificar el reporte:"+error); }   
+
+    if (!found) throw new Error("El Reporte no existe.");
+
+}
+
+
+module.exports={validateUserExist,DepartamentExistId,validReport};

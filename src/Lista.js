@@ -4,7 +4,7 @@ import axios from "axios";
 import Reporte from "./Reporte";
 import {Ip} from "./Ip";
 import {toast} from "react-toastify";
-
+import {Link} from "react-router-dom";
 
 export default class Lista extends Component  {
   
@@ -195,22 +195,19 @@ EnviarFormulario=  (e)=>{
 
 
 EnviarFormularioReporte= async (e)=>{
- e.preventDefault();
 
-await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearReporte",{Nombre:this.state.crear,Departamento:this.state.eleccion}).then((response) => {
+    e.preventDefault();
+
+await axios.post("http://"+Ip+":8081/Reports/"+this.state.crear+"/"+this.state.eleccion).then((response) => {
+
     //RESPUESTA SI TODO SALE BIEN
-
-alert(response.data);
+    toast.success(this.state.crear +" "+ response.data.Respuesta);
 
   })
   .catch((error) => {
 //RESPUESTA SI HAY ALGUN ERROR
-alert("problemas");
-    console.log(error);
-
+      toast.error(error.response.data.Errors[0]);
   });
-
-
 
 }
 
@@ -234,7 +231,7 @@ this.state.Datos.map(Elementos => {
 return(
 <div className="bg-white  rounded p-1 text-center mt-3 mb-2" key={Elementos[0].NombreDepartamento}>
 
-<h1 className="d-inline mr-4 " onClick={this.Envia} id={Elementos[0].idDepartamento}>{Elementos[0].NombreDepartamento}</h1>
+<Link to={"#"+Elementos[0].idDepartamento}><h1 className="d-inline mr-4 " onClick={this.Envia} id={Elementos[0].idDepartamento}>{Elementos[0].NombreDepartamento}</h1></Link>
 
 
 <h1 className="d-inline fondoBarra  colorVerde rounded" >{Elementos[0].Cantidad}</h1>

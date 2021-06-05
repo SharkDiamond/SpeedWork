@@ -2,6 +2,7 @@
 const mysql=require("mysql");
 //const { search } = require("../Routes/General");
 const encriptar=require("bcryptjs");
+const { query } = require("express-validator");
 //CREATE THE CONNEXION WITH DATABASE
 const connections = mysql.createPool({
     connectionLimit:20,
@@ -207,7 +208,6 @@ const DataClientType = (Type) =>{
 
 }
 
-
 const UpdatePassword = () =>{
 
     return new Promise(async (resolve, reject) => {
@@ -265,12 +265,12 @@ const existUser= (User)=>{
 
                 connection.release();
 
-            });
+        });
 
         }
         
         catch (error) {
-            reject(error);
+            reject("Hubo un problema",error);
         }
 
     });
@@ -315,6 +315,7 @@ const CreateDepartaments=(NameDepartament)=>{
 
 }
 
+//FOR VALIDE IF  A DEPARTAMENT EXIST
 const validDepartament= (Departament)=>{
 
     return new Promise(async (resolve, reject)=>{
@@ -345,6 +346,145 @@ const validDepartament= (Departament)=>{
 
 }
 
+const valideDepartamentExistId =(Departament)=>{
+
+    return new Promise(async (resolve, reject)=>{
+
+
+        try {
+
+            let connection=await createConeccionUpdate();
+
+            let IdNumber=parseInt(Departament);
+
+            let query="SELECT NombreDepartamento from departamentos where idDepartamento=?";
+
+            connection.query(query,IdNumber,(error,results,fields)=>{
+
+                if (error) reject("hubo un problema",error);
+
+                const manageResult = results.length>0 && results.length==1 ? resolve(true) : resolve(false);
+
+                connection.release();
+
+            });
+
+        }
+
+        catch (error) {
+            reject("Hubo un problema con la conexion o la consulta",error);
+        }
+
+    });
+
+}
+
+
+//FOR CREATE REPORT
+const createReport=(Report,idDepartamento)=>{
+
+    console.log(Report,idDepartamento);
+
+    return new Promise(async (resolve,reject)=>{
+
+        try {
+
+            let conexion=await createConeccionUpdate();
+
+            const query="insert into Reportes values('',?,true,SYSDATE(),?,null)";
+
+            conexion.query(query,[Report,idDepartamento],(error,results,fields)=>{
+
+                if (error) reject("Hubo un problema al ejecutar la consulta",error);
+
+              if (results.affectedRows>0) resolve("Reporte Creado!");
+
+                conexion.release();
+
+            });
+
+        }
+
+        catch (error){
+
+            reject("Hubo un problema al crear el reporte",error);
+
+        }
+
+    });
+
+}
+
+
+const validReportExist=(idReporte)=>{
+
+        return new Promise(async(resolve,reject)=>{
+
+            try {
+                
+                let conexion=await createConeccionUpdate();
+
+                const query="select NombreReporte from reporte where idReporte=?";
+
+                conexion.query(query,idReporte,((error,result)=>{
+
+                    if (error) console.log("Hubo un problema al ejecutar la consulta");
+
+                    let manageResult=result.length>0 && result.length==1 ? resolve(true) : resolve(false);
+
+                    conexion.release();
+
+
+                }));
+
+            } catch (error) {
+                
+                reject("Hubo un problema con la conexion:"+error);
+
+            }
+
+        }); 
+
+}
+
+
+
+const createCommentary=(comentario,reporte,usuario)=>{
+
+    return new Promise(async(resolve,reject)=>{
+
+        try {
+            
+        let conexion=await createConeccionUpdate();
+
+        let query="insert into comentarios values('','?',SYSDATE,'?',?";
+
+        conexion.query(query,[comentario,reporte,usuario],((error,result,fields)=>{
+
+            if (error) console.log("Hubo un problema al ejecutar la consulta");
+
+            if (result.affectedRows>0) resolve("Comentario Creado");
+        
+            conexion.release();
+
+        }));
+
+        } 
+        
+
+        catch (error){
+            
+            reject("Hubo un problema al crear el comentario:"+error);
+
+        } 
+
+
+    });
+
+
+}
+
+
 
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist};

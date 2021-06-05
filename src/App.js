@@ -19,7 +19,7 @@ function App() {
 <Route path="/" exact component={Login}/>
 <Route  path="/Principal" exact component={Principal}/>
 <Route  path="/Clientes/:data" exact component={Clientes}/>
-<Route  path="/Departamentos" exact component={Departamentos}/>
+<Route  path="/Departamentos/:nombre" exact component={Departamentos}/>
 <Route path="/Agenda" exact component={Departamentos}/>
 <Route path="/Reportes" exact component={Departamentos}/>
 

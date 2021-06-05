@@ -216,7 +216,7 @@ export default class Iclientes extends Component {
 
 
 
-    <br/>}
+    <br/>
 
         <span onClick={this.onSubmit}><Link to={"#"+this.state.datobusqueda+"#"+this.state.eleccion+"#"+this.state.cliente}><input id="SD" type="submit" placeholder="Buscar" value="Buscar" className="mt-3 bg-success btn"/></Link ></span>
 

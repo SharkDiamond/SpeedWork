@@ -224,6 +224,7 @@ componentDidUpdate(prevProps, prevState){
 
 if (this.props.idbusqueda!==prevProps.idbusqueda) {
 
+  
 	this.Peticion(this.props.idbusqueda);
 }
 
@@ -233,6 +234,14 @@ if (this.props.idbusqueda!==prevProps.idbusqueda) {
 
 }
 
+
+componentWillMount(){
+
+
+  this.Peticion(this.props.idbusqueda);
+
+
+}
 
 
 render(){

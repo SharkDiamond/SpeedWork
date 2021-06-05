@@ -29,7 +29,7 @@ export default class Barra extends Component {
 
       </li>
       <li class="nav-item">
-       <Link  className="nav-link font-weight-bold letra" to="/Departamentos"><img  src={conexion} width="62px" height="62px" className="mr-2" alt="" />Departamentos</Link>
+       <Link  className="nav-link font-weight-bold letra" to="/Departamentos/data"><img  src={conexion} width="62px" height="62px" className="mr-2" alt="" />Departamentos</Link>
       </li>
 
     </ul>
