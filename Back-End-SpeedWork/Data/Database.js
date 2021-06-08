@@ -113,7 +113,7 @@ const CreateClient = (Nombre,Apellido,Direccion,Telefono,Correo,Tipo)=>{
 
             connection.query(query,[Nombre,Apellido,Direccion,Telefono,Correo,SearchTypeClient(Tipo)],(error, results)=> {
             
-                if (error) reject("PROBLEM TO THE INSERT IN THE DATABASE");
+                if (error) reject("PROBLEM TO THE INSERT IN THE DATABASE CreateClient");
                 
                 else resolve(true);
                 
@@ -148,7 +148,7 @@ const validUsers = (NombreUsuario,Contraseña2)=>{
 
             coneccion.query(query,[NombreUsuario],(error, result)=>{
 
-                if (error) console.log(error);
+                if (error) console.log("Hubo un problema al ejecutar la consulta validUsers"+error);
 
                 if (result.length>0 && encriptar.compareSync(Contraseña2,result[0].Contraseña)) resolve(true);
 
@@ -259,7 +259,7 @@ const existUser= (User)=>{
 
             connection.query(query,User,(error,fields)=>{
 
-                if (error) reject("hubo un problema",error);
+                if (error) reject("hubo un problema al ejecutar la consulta existUser",error);
 
                const manageResult = fields.length>0 && fields.length==1 ? resolve(true) : resolve(false);
 
@@ -328,7 +328,7 @@ const validDepartament= (Departament)=>{
 
             connection.query(query,Departament,(error,fields)=>{
 
-                if (error) reject("hubo un problema",error);
+                if (error) reject("hubo un problema al ejecutar la consulta validDepartament",error);
 
                 const manageResult = fields.length>0 && fields.length==1 ? resolve(true) : resolve(false);
 
@@ -361,9 +361,18 @@ const valideDepartamentExistId =(Departament)=>{
 
             connection.query(query,IdNumber,(error,results,fields)=>{
 
-                if (error) reject("hubo un problema",error);
+                if (error) reject("hubo un problema al ejecutar la consulta valideDepartamentExistId",error);
 
-                const manageResult = results.length>0 && results.length==1 ? resolve(true) : resolve(false);
+
+                try {
+                    const manageResult = results.length>0 && results.length==1 ? resolve(true) : resolve(false);
+                } catch (error) {
+                    
+                    reject("hubo un problema");
+
+                }
+
+                
 
                 connection.release();
 
@@ -395,7 +404,7 @@ const createReport=(Report,idDepartamento)=>{
 
             conexion.query(query,[Report,idDepartamento],(error,results,fields)=>{
 
-                if (error) reject("Hubo un problema al ejecutar la consulta",error);
+                if (error) reject("Hubo un problema al ejecutar la consulta create report",error);
 
               if (results.affectedRows>0) resolve("Reporte Creado!");
 
@@ -424,15 +433,25 @@ const validReportExist=(idReporte)=>{
                 
                 let conexion=await createConeccionUpdate();
 
-                const query="select NombreReporte from reporte where idReporte=?";
 
+                const query="select NombreReporte from reportes where idReporte=?";
+                
                 conexion.query(query,idReporte,((error,result)=>{
 
-                    if (error) console.log("Hubo un problema al ejecutar la consulta");
+                    if (error) console.log("Hubo un problema al ejecutar la consulta en validReport");
+                    
 
-                    let manageResult=result.length>0 && result.length==1 ? resolve(true) : resolve(false);
+                    try {
+
+                        let manageResult=result.length>0 && result.length==1 ? resolve(true) : resolve(false);
 
                     conexion.release();
+                        
+                    } catch (error) {
+                        console.log(error,"problema con el result en validreportexist");
+                    }
+
+                    
 
 
                 }));
@@ -449,7 +468,49 @@ const validReportExist=(idReporte)=>{
 
 
 
+const returnComents=(reporte)=>{
+
+    
+    return new Promise(async(resolve,reject)=>{
+
+        try {
+            
+        let conexion=await createConeccionUpdate();
+
+        let query="select * from comentarios where NumeroReporte=?";
+
+       
+        conexion.query(query,reporte,((error,results,fields)=>{
+
+            if (error) console.log("Hubo un problema al ejecutar la consulta returnComents");
+            
+            console.log(results);
+
+             resolve(results);
+        
+            conexion.release();
+
+        }));
+
+        } 
+        
+
+        catch (error){
+            
+            reject("Hubo un problema al buscar los comentarios:"+error);
+
+        } 
+
+
+    });
+
+
+}
+
+
 const createCommentary=(comentario,reporte,usuario)=>{
+
+    console.log("llego a crear comentario");
 
     return new Promise(async(resolve,reject)=>{
 
@@ -457,13 +518,15 @@ const createCommentary=(comentario,reporte,usuario)=>{
             
         let conexion=await createConeccionUpdate();
 
-        let query="insert into comentarios values('','?',SYSDATE,'?',?";
+        let query="insert into comentarios values ('',?,SYSDATE(),?,?)";
 
-        conexion.query(query,[comentario,reporte,usuario],((error,result,fields)=>{
+        conexion.query(query,[comentario,usuario,reporte],((error,results,fields)=>{
 
-            if (error) console.log("Hubo un problema al ejecutar la consulta");
+            if (error) console.log("Hubo un problema al ejecutar la consulta Commentary");
+            
+            console.log(results);
 
-            if (result.affectedRows>0) resolve("Comentario Creado");
+            if (results.affectedRows>0) resolve("Comentario Creado!");
         
             conexion.release();
 
@@ -487,4 +550,4 @@ const createCommentary=(comentario,reporte,usuario)=>{
 
 
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents};

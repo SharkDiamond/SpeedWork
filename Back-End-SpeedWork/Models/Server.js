@@ -45,6 +45,9 @@ class Server{
         this.app.use("/Reports",require("../Routes/Departaments"));
 
         this.app.use("/Commentarys",require("../Routes/Departaments"));
+    
+        
+    
     } 
 
     Escuchar(){

@@ -5,7 +5,7 @@ import Lista from "./Lista";
 import Reporte from "./Reporte";
 import Barra from "./Barra";
 import {Link} from "react-router-dom";
-
+import {toast} from "react-toastify";
 
 export default class Departametos extends Component {
 
@@ -13,6 +13,7 @@ export default class Departametos extends Component {
 
 constructor(){
 
+toast.configure();
 
 super();
 
@@ -23,8 +24,6 @@ if (window.location.href!=="http://localhost:3000/Departamentos/data") {
 
 const Ids=this.buscarNumeros(paramentros);
 
-console.log("Segundo parametro",Ids[1]);
-console.log(Ids);
 
   this.state={
 
@@ -197,9 +196,6 @@ actualiza=(DepartamentoNombre)=>{
 console.log("ID",DepartamentoNombre);
 
 
-
-
-
 axios.post("http://localhost:8080/restback/index.php/Departamentos/EnviarDatos",{numero:DepartamentoNombre}).then((respuesta)=>{
 
 //SI TODO SALE BIEN
@@ -221,7 +217,7 @@ VerReporte:false
 
 //SI OCURRE UN PROBLEMA
 
-alert("problemas");
+
 console.log(error);
 });
 

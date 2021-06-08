@@ -2,6 +2,9 @@ const {existUser,validDepartament,valideDepartamentExistId,validReportExist}=req
 
 const validateUserExist= async (User)=> {
 
+    console.log("Imprime en valid user",User);
+
+
     let found =null;
 
     if (User.length<7 || User.length>11){
@@ -49,15 +52,22 @@ const DepartamentExistId=async (idDepartment)=>{
 
 const validReport=async (idReporte)=>{
 
-    let found=null;
+let reporte=parseInt(idReporte);
 
-    try {found=await validReportExist(idReporte);} 
+    console.log("Imprime en valid report",reporte);
+
+    let found=null;
+   
+    try {found=await validReportExist(reporte);} 
     
     catch (error) { console.log("Hubo un problema al verificar el reporte:"+error); }   
+
+
+    console.log(found,"Imprime en funcion validreport");
 
     if (!found) throw new Error("El Reporte no existe.");
 
 }
 
 
-module.exports={validateUserExist,DepartamentExistId,validReport};
+module.exports={validateUserExist,DepartamentExistId,validReport,valideDepartamentExist};

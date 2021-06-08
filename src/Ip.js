@@ -1,7 +1,7 @@
 
 
 
-var Ip="172.26.9.133";
+var Ip="localhost";
 
 
 module.exports={Ip};

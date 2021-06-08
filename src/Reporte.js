@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
-
+import {toast} from "react-toastify";
 export default class Reporte extends Component  {
 
 constructor(){
-
+  toast.configure();
 super();
 
 this.state={
@@ -19,13 +19,15 @@ ac:null,
 cerradooabierto:""
 
 
-
 }
 
 this.Peticion=this.Peticion.bind(this);
 
 this.AsignarDatos=this.AsignarDatos.bind(this);
 this.MostrarAbiertoOCerrado=this.MostrarAbiertoOCerrado.bind(this);
+this.PeticionComentarios=this.PeticionComentarios.bind(this);
+
+
 
 }
 
@@ -127,36 +129,36 @@ console.log(error);
 
 
 
-enviaComentario= async (e)=>{
+enviaComentario= (e)=>{
 
 e.preventDefault();
-await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearComentario",{comentario:this.state.describe,reporte:this.props.idbusqueda,usuario:localStorage.getItem("Usuario")}).then((respuesta)=>{
 
 
-this.setState({
-
-Comentarios:respuesta.data
-
-})
+axios.post("http://localhost:8081/Commentarys",{comentario:this.state.describe,reporte:this.props.idbusqueda,usuario:localStorage.getItem("Usuario")}).then((respuesta)=>{
 
 
+this.PeticionComentarios(this.props.idbusqueda);
 
+
+toast.success(respuesta.data);
 
 
 }).catch((error)=>{
 
 //SI OCURRE UN PROBLEMA
 
-//alert("problemas");
-console.log(error);
+
+console.log("error en envia comentario",error);
 });
+
+
+
+
 
 }
 
 
-Peticion(Dato){
-
-
+Peticion(Dato){         
 
 axios.post("http://localhost:8080/restback/index.php/Departamentos/TituloReporte",{IDentificador:Dato}).then((respuesta)=>{
 
@@ -172,14 +174,14 @@ FechaC:elemento.FechaCreacion,
 ac:elemento.Estado
 
 
-})
+});
 
 
 });
 
+
+
 this.MostrarAbiertoOCerrado();
-
-
 
 
 }).catch((error)=>{
@@ -191,34 +193,37 @@ console.log(error);
 });
 
 
-axios.post("http://localhost:8080/restback/index.php/Departamentos/Comentarios",{IDentificador:Dato}).then((respuesta)=>{
-
-//SI TODO SALE BIEN
-
-
-this.setState({
-
-Comentarios:respuesta.data
-
-})
-
-
-
-
-
-
-}).catch((error)=>{
-
-//SI OCURRE UN PROBLEMA
-
-//alert("problemas");
-
-});
-
-
+this.PeticionComentarios(Dato);
 
 
 }
+
+PeticionComentarios=(Dato)=>{
+  
+axios.get("http://localhost:8081/Commentarys/"+Dato).then((respuesta)=>{
+
+  //SI TODO SALE BIEN
+  console.log("Test",respuesta);
+  
+  this.setState({
+  
+  Comentarios:respuesta.data
+  
+  });
+  
+  
+  
+  }).catch((error)=>{
+  
+  //SI OCURRE UN PROBLEMA
+  
+  alert(Dato,"problemas comentarios");
+  
+  });
+  
+}
+
+
 
 componentDidUpdate(prevProps, prevState){
 
@@ -226,6 +231,9 @@ if (this.props.idbusqueda!==prevProps.idbusqueda) {
 
   
 	this.Peticion(this.props.idbusqueda);
+
+
+
 }
 
 
@@ -240,8 +248,12 @@ componentWillMount(){
 
   this.Peticion(this.props.idbusqueda);
 
+ 
+
+
 
 }
+
 
 
 render(){

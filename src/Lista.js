@@ -91,7 +91,7 @@ Datos:response.data
 //RESPUESTA SI HAY ALGUN ERROR
 
     console.log(error);
-    //alert(error);
+   
   });
 
 
@@ -173,10 +173,11 @@ eleccion:etiqueta.target.value
 
 
 
-EnviarFormulario=  (e)=>{
- e.preventDefault();
+EnviarFormulario=(e)=>{
+ 
+  e.preventDefault();
 
-    axios.post("http://"+Ip+":8081/Departments/"+this.state.crear).then((response) => {
+  axios.post("http://"+Ip+":8081/Departments/"+this.state.crear).then((response) => {
 
     //RESPUESTA SI TODO SALE BIEN
     toast.success("Departamento "+ this.state.crear +" "+ response.data.Respuesta);
@@ -184,8 +185,7 @@ EnviarFormulario=  (e)=>{
   })
   .catch((error) => {
 //RESPUESTA SI HAY ALGUN ERROR
-      console.log();
-
+     
       toast.error(error.response.data.Errors[0]);
 
     //alert(error);
@@ -194,11 +194,13 @@ EnviarFormulario=  (e)=>{
 }
 
 
-EnviarFormularioReporte= async (e)=>{
+EnviarFormularioReporte=(e)=>{
 
     e.preventDefault();
 
-await axios.post("http://"+Ip+":8081/Reports/"+this.state.crear+"/"+this.state.eleccion).then((response) => {
+  alert(this.state.eleccion);
+
+ axios.post("http://"+Ip+":8081/Reports/"+this.state.crear+"/"+this.state.eleccion).then((response) => {
 
     //RESPUESTA SI TODO SALE BIEN
     toast.success(this.state.crear +" "+ response.data.Respuesta);
