@@ -207,9 +207,7 @@ Datos:respuesta.data,
 ClaseTabla:"table fondoBarra",
 VerReporte:false
 
-
-
-})
+});
 
 
 

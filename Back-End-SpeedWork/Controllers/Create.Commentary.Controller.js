@@ -20,9 +20,10 @@ const commentarys=(req,res)=>{
    const {reporte}=req.params;
    
    let ids=parseInt(reporte);
-
+   
    returnComents(ids).then((responde)=>{
-
+     
+      console.log(responde);
 
       res.status(200).json(responde).end();
 

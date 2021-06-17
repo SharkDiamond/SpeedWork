@@ -7,23 +7,35 @@ import {Ip} from "./Ip";
 export default class Iclientes extends Component {
 
     constructor(){
-    toast.configure();
+    
+        toast.configure();
+        
         super();
 
-        const  [nodefinido,dato,campo,clientType]=window.location.hash.split("#",4);
+        let nodo1=window.location.href.split("/");
 
-        console.log(nodefinido,dato,campo,clientType);
+        let nodo2=nodo1[4];
 
-        //COLOCAR UN CONDICIONAL POR SI VIENEN VACIOS
+        let nodo3=false;
+      
+        for (let index = 0; index < nodo2.length; index++) {
+            
+            if (nodo2[index]=="#") {
+                
+                nodo3=true;
 
-        console.log(window.location.href);
-
-        //STATE SEGUN LA URL
-        if (window.location.href!=="http://"+Ip+":3000/Clientes/data"){
+                break;
 
 
+            }
 
-            console.log(window.location.href);
+        }
+
+        if (nodo3) {
+            
+            const  [nodefinido,dato,campo,clientType]=nodo2.split("#",4);
+            
+            console.log(dato,campo,clientType);
 
             let r1=""+campo;
             let r2=""+dato;
@@ -40,8 +52,8 @@ export default class Iclientes extends Component {
 
         }
 
-        else{
-
+        else if (nodo3==false) {
+            
             this.state={
 
                 eleccion:"Nombre",
@@ -50,11 +62,10 @@ export default class Iclientes extends Component {
                 uri:"./Clientes/data"
 
             }
-
         }
 
 
-
+       
 
         this.AsignarDatos=this.AsignarDatos.bind(this);
 
@@ -102,13 +113,37 @@ export default class Iclientes extends Component {
 
     componentDidMount() {
 
-
+//BUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
         //PARA PRESIONAR EL BOTON DE BUSCAR SI ES DISTINTO DE LINK NORMAL
-        if (window.location.href!=="http://"+Ip+":3000/Clientes/data") {document.getElementById("SD").click();
 
+
+        let nodo1=window.location.href.split("/");
+
+        let nodo2=nodo1[4];
+
+        let nodo3=false;
+      
+        for (let index = 0; index < nodo2.length; index++) {
+            
+            if (nodo2[index]=="#") {
+                
+                nodo3=true;
+
+                break;
+
+
+            }
+
+        }
+
+        if (nodo3) {
+
+            document.getElementById("SD").click();
 
 
         }
+
+     
 
     }
 

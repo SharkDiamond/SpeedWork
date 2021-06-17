@@ -74,11 +74,13 @@ cerradooabierto:"Abrir"
 
 AbrirOCerrarReporte=()=>{
 
+
+  let contador=0;
 if(this.state.ac==true) {
 
 axios.post("http://localhost:8080/restback/index.php/Departamentos/AbirCerrarReporte",{cambia:false,reporte:this.props.idbusqueda}).then((respuesta)=>{
 
-
+  console.log("test2");
 
 
 this.setState({
@@ -93,7 +95,6 @@ this.props.actualizaLista();
 
 //SI OCURRE UN PROBLEMA
 
-//alert("problemas");
 console.log(error);
 });
 

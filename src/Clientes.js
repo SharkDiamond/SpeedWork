@@ -12,6 +12,7 @@ import {Link,useParams} from "react-router-dom";
 import {Ip} from "./Ip";
 
 
+
 export default class Clientes extends Component {
 
     constructor(){
@@ -26,7 +27,7 @@ export default class Clientes extends Component {
             '3':"Residencial"
 
         }
-
+        
         this.state={
             //"fondominibarra"
             tipoCliente:window.location.href[typeClient]!=='a' ? ClientsType[window.location.href[typeClient]] : 'VIP',
@@ -43,6 +44,9 @@ export default class Clientes extends Component {
             BOC:false
 
     }
+
+
+    
 
 
 //CODIGO PARA PODER USAR THIS EN LOS METODOS
@@ -179,24 +183,44 @@ export default class Clientes extends Component {
 
     ObteniendoResultados(result){
 
+
+        let encuentra=window.location.href;
+        
+        let indice=0;
+
+for (let index = 0; index < encuentra.length; index++) {
+   
+   if (encuentra[index]=="-") {
+       
+    indice=index;
+
+    break;
+
+   }
+    
+}
+
+
         this.setState({
 
             resultadosbusqueda:result
 
 
         });
-        console.log(window.location.href[35]);
 
-
-        if ( window.location.href[35]=="-"){
+        if ( window.location.href[indice]=="-"){
+            
             //#35
-
 
             let y;
             //ONE DIGIT NUMBER   #37
-            if (window.location.href[37]=="#") {
+            if (window.location.href[indice+2]=="#") {
 
-                y=parseInt(window.location.href.slice(36,37));
+                let p1=indice+1;
+                let p2=indice+2;
+
+
+                y=parseInt(window.location.href.slice(p1,p2));
                   //  36
                 this.setState({
 
@@ -210,9 +234,12 @@ export default class Clientes extends Component {
             }
 
             //TWO DIGIT NUMBER
-            else  if (window.location.href[38]=="#") {
+            else  if (window.location.href[indice+3]=="#") {
 
-               y=parseInt(window.location.href.slice(36,38));
+                let p1=indice+1;
+                let p2=indice+3;
+
+               y=parseInt(window.location.href.slice(p1,p2));
 
                 this.setState({
 
@@ -228,9 +255,12 @@ export default class Clientes extends Component {
             }
 
             //THREE DIGIT NUMBER
-            else  if (window.location.href[39]=="#") {
+            else  if (window.location.href[indice+4]=="#") {
 
-                y=parseInt(window.location.href.slice(36,39));
+                let p1=indice+1;
+                let p2=indice+4;
+
+                y=parseInt(window.location.href.slice(p1,p2));
 
                 this.setState({
 
@@ -246,9 +276,12 @@ export default class Clientes extends Component {
             }
 
             //FOUR DIGIT NUMBER
-            else  if (window.location.href[40]=="#") {
+            else  if (window.location.href[indice+5]=="#") {
 
-                y=parseInt(window.location.href.slice(36,40));
+                let p1=indice+1;
+                let p2=indice+5;
+
+                y=parseInt(window.location.href.slice(p1,p2));
 
                 this.setState({
 
@@ -265,7 +298,7 @@ export default class Clientes extends Component {
 
         }
 
-
+else{}
 
     }
 

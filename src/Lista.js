@@ -12,16 +12,15 @@ constructor(){
 
     toast.configure();
 
+  super();
 
-super();
+  this.state={
 
-this.state={
-
-Datos:[],
-elegido:"",
-Mostrar:1,
-crear:"",
-eleccion:"Clientes"
+    Datos:[],
+    elegido:"",
+    Mostrar:1,
+    crear:"",
+    eleccion:"Clientes"
 
 
 }
@@ -29,35 +28,34 @@ eleccion:"Clientes"
 this.Envia=this.Envia.bind(this);
 this.actua=this.actua.bind(this);
 this.AsignarDatos=this.AsignarDatos.bind(this);
+
 }
-
-
 
 
 Envia(e){
 
-
-
 this.props.actualizatabla(e.target.id);
-
-
-
 
 }
 
+
+
+
  actua(){
-axios.get("http://localhost:8080/restback/index.php/Departamentos/DepartamentosListado?format=json")
-  .then((response) => {
+
+  //FALTA PASAR AL NUEVO BACK-END
+axios.get("http://localhost:8080/restback/index.php/Departamentos/DepartamentosListado?format=json").then((response) => {
     //RESPUESTA SI TODO SALE BIEN
+    
+console.log("test");
 
 
 this.setState({
 
-
 Datos:response.data
 
 
-})
+});
 
 
   })
@@ -72,6 +70,8 @@ Datos:response.data
 }
 
   componentDidMount(){
+
+    //FALTA PASAR AL NUEVO BACK-END
 axios.get("http://localhost:8080/restback/index.php/Departamentos/DepartamentosListado?format=json")
   .then((response) => {
     //RESPUESTA SI TODO SALE BIEN
@@ -161,12 +161,13 @@ crear:valor
 
 cambia=(etiqueta)=>{
 
+
 this.setState({
 
 
 eleccion:etiqueta.target.value
 
-})
+});
 
 
 }
@@ -197,10 +198,10 @@ EnviarFormulario=(e)=>{
 EnviarFormularioReporte=(e)=>{
 
     e.preventDefault();
-
-  alert(this.state.eleccion);
-
- axios.post("http://"+Ip+":8081/Reports/"+this.state.crear+"/"+this.state.eleccion).then((response) => {
+  
+ let prueba=this.state.Datos.find(elemento=>elemento[0].NombreDepartamento===this.state.eleccion);
+  
+ axios.post("http://"+Ip+":8081/Reports/"+prueba[0].idDepartamento+"/"+this.state.crear).then((response) => {
 
     //RESPUESTA SI TODO SALE BIEN
     toast.success(this.state.crear +" "+ response.data.Respuesta);
@@ -295,7 +296,7 @@ return(
 
 <div className="text-center mb-2"><h1 className="font-weight-bold colorVerde d-inline">Nuevo Reporte</h1><button className="ml-2 btn  btn-light font-weight-bold subebotonlista" onClick={this.mostrarFormulario}>-</button></div>
 
-<form className="text-center" id="" onSubmit={this.EnviarFormularioReporte}>
+<form className="text-center"  onSubmit={this.EnviarFormularioReporte}>
 
 <input type="text" placeholder="Nombre" onChange={this.AsignarDatos} required/>
 <br/>
@@ -304,15 +305,16 @@ return(
 
 <select value={this.state.eleccion} onChange={this.cambia}>
 {
-this.state.Datos.map(Elementos => {
   
+this.state.Datos.map(Elementos => {
+ 
 return(
 <option className="d-block"  id={Elementos[0].idDepartamento} value={Elementos[0].NombreDepartamento}>{Elementos[0].NombreDepartamento}</option>
 
 
 )
 
-  
+   
 })
 
 }
