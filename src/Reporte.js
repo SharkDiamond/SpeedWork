@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
 import {toast} from "react-toastify";
+import {Ip} from "./Ip";
+
+
+
 export default class Reporte extends Component  {
 
 constructor(){
@@ -110,7 +114,8 @@ this.MostrarAbiertoOCerrado();
 this.setState({
 ac:true
 
-})
+});
+
 this.MostrarAbiertoOCerrado();
 this.props.actualizaLista();
 
@@ -165,7 +170,6 @@ axios.post("http://localhost:8080/restback/index.php/Departamentos/TituloReporte
 
 //SI TODO SALE BIEN
 
-
 respuesta.data.map((elemento)=>{
 
 this.setState({
@@ -201,10 +205,10 @@ this.PeticionComentarios(Dato);
 
 PeticionComentarios=(Dato)=>{
   
-axios.get("http://localhost:8081/Commentarys/"+Dato).then((respuesta)=>{
+axios.get("http://"+Ip+":8081/Departments/Comentarios/"+Dato).then((respuesta)=>{
 
   //SI TODO SALE BIEN
-  console.log("Test",respuesta);
+  
   
   this.setState({
   
@@ -212,7 +216,7 @@ axios.get("http://localhost:8081/Commentarys/"+Dato).then((respuesta)=>{
   
   });
   
-  
+  console.log(this.state.Comentarios);
   
   }).catch((error)=>{
   
@@ -246,12 +250,12 @@ if (this.props.idbusqueda!==prevProps.idbusqueda) {
 
 componentWillMount(){
 
-
+if (this.props.idbusqueda!=null) {
   this.Peticion(this.props.idbusqueda);
+}
+  
 
  
-
-
 
 }
 

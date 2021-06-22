@@ -28,7 +28,6 @@ check("usuario").custom(validateUserExist)
 
 router.get("/Comentarios/:reporte",[check("reporte").custom(validReport),validateRequest],commentarys);
 
-router.post("/amountReports/:idDepartment",[check("idDepartment").custom(DepartamentExistId),validateRequest],amountReports);
 
 router.get("/list",Lista);
 

@@ -37,28 +37,27 @@ const DepartamentExistId=async (idDepartment)=>{
 
     let found=null;
 
-    try { found = await valideDepartamentExistId(idDepartment); }
+    console.log(idDepartment);
+  
+    try { found = await valideDepartamentExistId(parseInt(idDepartment)); }
 
     catch (error) { console.log("Hubo un problema al verificar el Departamento",error); }
 
-
+    console.log("DepartamentExistId--lol",found);
+    
     if (!found) throw new Error("El departamento no existe.");
-
+  
 }
-
+// 
 const validReport=async (idReporte)=>{
 
 let reporte=parseInt(idReporte);
-
 
     let found=null;
    
     try {found=await validReportExist(reporte);} 
     
     catch (error) { console.log("Hubo un problema al verificar el reporte:"+error); }   
-
-
-    console.log(found,"Imprime en funcion validreport");
 
     if (!found) throw new Error("El Reporte no existe.");
 

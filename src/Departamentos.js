@@ -6,6 +6,7 @@ import Reporte from "./Reporte";
 import Barra from "./Barra";
 import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
+import {Ip} from "./Ip";
 
 export default class Departametos extends Component {
 
@@ -15,14 +16,15 @@ constructor(){
 
 toast.configure();
 
-super();
+  super();
 
-if (window.location.href!=="http://localhost:3000/Departamentos/data") {
+  let searchHash=window.location.hash;
+
+if (searchHash.length>0) {
   
   let paramentros=window.location.hash;
-  
 
-const Ids=this.buscarNumeros(paramentros);
+  const Ids=this.buscarNumeros(paramentros);
 
 
   this.state={
@@ -31,19 +33,16 @@ const Ids=this.buscarNumeros(paramentros);
     t:1,
     ClaseTabla:"table fondoBarra",
     VerReporte:false,
-    DepartamentoID:null,
-    REPORTEID:null,
+    REPORTEID:null
     
     
     }
 
 
 
-  
-
-
   if (Ids[1]==10000000000){
     
+   
 
     this.state={
 
@@ -51,8 +50,7 @@ const Ids=this.buscarNumeros(paramentros);
       t:1,
       ClaseTabla:"table fondoBarra",
       VerReporte:false,
-      DepartamentoID:null,
-      REPORTEID:null,
+      REPORTEID:null
       
       
       }
@@ -74,8 +72,7 @@ const Ids=this.buscarNumeros(paramentros);
       t:1,
       ClaseTabla:"d-none",
       VerReporte:true,
-      DepartamentoID:null,
-      REPORTEID:Ids[1],
+      REPORTEID:Ids[1]
       
       
       }
@@ -88,15 +85,14 @@ const Ids=this.buscarNumeros(paramentros);
 
 else{
 
-
+ 
   this.state={
 
     Datos:[],
     t:1,
     ClaseTabla:"table fondoBarra",
     VerReporte:false,
-    DepartamentoID:null,
-    REPORTEID:null,
+    REPORTEID:null
     
     
     }
@@ -136,7 +132,6 @@ MostrarReporte2=(e)=>{
   
   }
   
-
 
 
 buscarNumeros=(cadena)=>{
@@ -191,19 +186,15 @@ return ids;
 
 }
 
-actualiza=(DepartamentoNombre)=>{
+actualiza=(idDPT)=>{ 
 
-console.log("ID",DepartamentoNombre);
-
-
-axios.post("http://localhost:8080/restback/index.php/Departamentos/EnviarDatos",{numero:DepartamentoNombre}).then((respuesta)=>{
+axios.post("http://"+Ip+":8081/DepCANTD/Amount",{idDepartments:idDPT}).then((respuesta)=>{
 
 //SI TODO SALE BIEN
-
-
+  
 this.setState({
 
-Datos:respuesta.data,
+Datos:respuesta.data.resultado,
 ClaseTabla:"table fondoBarra",
 VerReporte:false
 
@@ -214,9 +205,9 @@ VerReporte:false
 }).catch((error)=>{
 
 //SI OCURRE UN PROBLEMA
-
-
 console.log(error);
+
+
 });
 
 
@@ -269,7 +260,7 @@ if (localStorage.getItem("Usuario")) {
   this.state.Datos.map((Elemento)=>{
 
   return(
-
+  
       <tr key={Elemento.Id}>
         <th scope="row" Style="color:orange;">{Elemento.idReporte}<Link to={"#"+Elemento.PertenenciaDepartamento+"#"+Elemento.idReporte}><button className="btn btn-outline-success ml-1" id={Elemento.idReporte} onClick={this.MostrarReporte}>Ver</button></Link></th>
 
@@ -293,13 +284,13 @@ if (localStorage.getItem("Usuario")) {
   </div>
 
 
-
+  
 
   <Lista actualizatabla={this.actualiza}/>
 
 
 
-
+  
 
 
 

@@ -47,7 +47,8 @@ class Server{
         this.app.use("/Commentarys",require("../Routes/Departaments"));
     
         this.app.use("/DepartamentList",require("../Routes/Departaments"));
-    
+        
+        this.app.use("/DepCANTD",require("../Routes/Departaments2"));
     } 
 
     Escuchar(){

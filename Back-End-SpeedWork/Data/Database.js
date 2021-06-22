@@ -21,7 +21,7 @@ const createConeccionUpdate=()=>{
 
         connections.getConnection((error,connection)=>{
 
-            if (error) reject("Not Connection");
+            if (error) return reject("Not Connection Whith Database");
 
             else resolve(connection);
 
@@ -361,7 +361,7 @@ const valideDepartamentExistId =(Departament)=>{
 
             connection.query(query,IdNumber,(error,results,fields)=>{
 
-                if (error) reject("hubo un problema al ejecutar la consulta valideDepartamentExistId",error);
+                if (error) return reject("hubo un problema al ejecutar la consulta valideDepartamentExistId");
 
 
                 try {
@@ -467,7 +467,6 @@ const validReportExist=(idReporte)=>{
 }
 
 
-
 const returnComents=(reporte)=>{
 
     
@@ -547,29 +546,36 @@ const createCommentary=(comentario,reporte,usuario)=>{
 }
 
 
-const returnReports=async(idReport)=>{
+const returnReports=(idReport)=>{
+
+
+    return new Promise(async(resolve,reject)=>{
 
     try {
         
+
         let conexion=await createConeccionUpdate();
 
         let query="select * from reportes where PertenenciaDepartamento=?"
 
         conexion.query(query,idReport,(error,result)=>{
 
-            if (error) console.log("Hubo un problema al ejecutar la consulta returnReports");
+            if (error) return reject("Hubo un problema al ejecutar la consulta de Reports");
 
             resolve(result);
 
+            conexion.release();
         });
 
     } catch (error) {
 
-        reject("Hubo un problema con la conexion a la base de datos");
+        reject(error);
 
         
     }
 
+
+    });
 
 
 }
@@ -588,16 +594,28 @@ const DepartamentNumber=()=>{
     
             conexion.query(query,(error,result,fields)=>{
                 
-                
+                if (error){
+
+                    console.log(error);  
+                    
+                    reject(error);
+                    
+                    return;
+
+                };
 
                 resolve(result);
-    
+
+                conexion.release();
+
             });
     
     
     
         } catch (error) {
-            
+            reject(error);
+            console.log(error);
+           
         }
 
 
@@ -618,36 +636,51 @@ const DepartamentNumber=()=>{
 
 DepartamentAndAmountReports=()=>{
 
-        return new Promise((resolve,reject)=>{
+        return new Promise(async(resolve,reject)=>{
             
             let CANTIDAD=[];
             let NOMBRES=[];
+            let IDDEPARTAMENTO=[];
 
-            Promise.all([createConeccionUpdate(),DepartamentNumber()]).then(resultados =>{
+            try {
+                
+                let data=await DepartamentNumber();
 
-                const [conexion,data]=resultados;
-
-                data.forEach((element,index) => {
-               
+                data.forEach(async(element,index) => {
+                   
+                    let conexion= await createConeccionUpdate();
+    
                     let query="select count(*) as cantidad from reportes where PertenenciaDepartamento=?";
                 
                     conexion.query(query,element.idDepartamento,(error,result)=>{
                        
-                        if (error) reject("Hubo un problema 505");
-
+                        if (error) return reject("Hubo un problema al ejecutar la consulta en la funcion DepartamentAndAmountReports");
+    
                         CANTIDAD.push(result[0].cantidad);
     
                         NOMBRES.push(element.NombreDepartamento);
+                        
+                        IDDEPARTAMENTO.push(element.idDepartamento);
     
-                        if (index==data.length-1) resolve([NOMBRES,CANTIDAD]);
+                        
+                        
+                        if (index==data.length-1) resolve([NOMBRES,CANTIDAD,IDDEPARTAMENTO]);
+                        //hay que volver a crear la bnghihyuconexion
+                        conexion.release();
     
                     });
                    
                     
                 });
+    
+    
 
 
-            });
+            } catch (error) {
+                
+                reject(error);
+            }
+
 
         });
 
@@ -655,22 +688,39 @@ DepartamentAndAmountReports=()=>{
 
 }
 
-/*
-DepartamentAndAmountReports().then((o)=>{
-   
-    let DANDC=[];   
-    let CANTIDAD=o[1];
+const returnReport=(idReport)=>{
 
-    o[0].forEach((Nombres,index)=>{
+        return new Promise(async(resolve,reject)=>{
 
-       DANDC.push({nombre:Nombres,cantidad:CANTIDAD[index]});
+            try {
 
-    });
+                let conexion=await createConeccionUpdate();
 
-    console.log(DANDC);
+                let query="select NombreReporte,FechaCreacion,Estado from reportes where idReporte=?";
 
-});
-*/
+                conexion.query(query,idReport,(error,result,fields)=>{
+
+                    if (error) return reject("Hubo un problema al ejecutar la consulta de returnReport");
+
+                    resolve(result[0]);
+
+                    conexion.release();
+
+                });
+
+
+            } catch (error) {
+                
+                reject(error);
+
+            }
+
+
+
+        });
+
+
+}
 
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents,returnReports,DepartamentAndAmountReports};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents,returnReports,DepartamentAndAmountReports,returnReport};

@@ -15,7 +15,7 @@ constructor(){
   super();
 
   this.state={
-
+   
     Datos:[],
     elegido:"",
     Mostrar:1,
@@ -28,7 +28,7 @@ constructor(){
 this.Envia=this.Envia.bind(this);
 this.actua=this.actua.bind(this);
 this.AsignarDatos=this.AsignarDatos.bind(this);
-
+this.pruebas=this.pruebas.bind(this);
 }
 
 
@@ -43,13 +43,12 @@ this.props.actualizatabla(e.target.id);
 
  actua(){
 
+  //BUG LOOP INFINITO SE REPITE MUCHAS
+
   //FALTA PASAR AL NUEVO BACK-END
-axios.get("http://localhost:8080/restback/index.php/Departamentos/DepartamentosListado?format=json").then((response) => {
+axios.get("http://localhost:8081/Commentarys/list").then((response) => {
     //RESPUESTA SI TODO SALE BIEN
     
-console.log("test");
-
-
 this.setState({
 
 Datos:response.data
@@ -58,24 +57,23 @@ Datos:response.data
 });
 
 
+
   })
   .catch((error) => {
 //RESPUESTA SI HAY ALGUN ERROR
 
     console.log(error);
-    //alert(error);
+    
   });
 
-
+  
 }
 
-  componentDidMount(){
-
+componentDidMount(){
+  console.log("se ejecuta");
     //FALTA PASAR AL NUEVO BACK-END
-axios.get("http://localhost:8080/restback/index.php/Departamentos/DepartamentosListado?format=json")
-  .then((response) => {
+axios.get("http://localhost:8081/Commentarys/list").then((response) => {
     //RESPUESTA SI TODO SALE BIEN
-
 
 this.setState({
 
@@ -83,7 +81,10 @@ this.setState({
 Datos:response.data
 
 
-})
+});
+
+
+
 
 
   })
@@ -95,8 +96,13 @@ Datos:response.data
   });
 
 
+  console.log("estado", this.state.Datos);
+
+
 } 
     
+
+
 mostrarFormulario=(e)=>{
 
 
@@ -118,6 +124,9 @@ this.setState({
 Mostrar:1
 
 })
+
+this.actua();
+
 
 
 }
@@ -199,9 +208,9 @@ EnviarFormularioReporte=(e)=>{
 
     e.preventDefault();
   
- let prueba=this.state.Datos.find(elemento=>elemento[0].NombreDepartamento===this.state.eleccion);
+ let prueba=this.state.Datos.find(elemento=>elemento.NombreDepartamento===this.state.eleccion);
   
- axios.post("http://"+Ip+":8081/Reports/"+prueba[0].idDepartamento+"/"+this.state.crear).then((response) => {
+ axios.post("http://"+Ip+":8081/Reports/"+prueba.idDepartamento+"/"+this.state.crear).then((response) => {
 
     //RESPUESTA SI TODO SALE BIEN
     toast.success(this.state.crear +" "+ response.data.Respuesta);
@@ -214,7 +223,7 @@ EnviarFormularioReporte=(e)=>{
 
 }
 
-
+pruebas(){}
 
 render(){
 
@@ -228,16 +237,19 @@ if (this.state.Mostrar==1) {
 <button className="ml-2 btn btn-light font-weight-bold subebotonlista" id={2} onClick={this.mostrarFormulario} >D</button>
 <button className="ml-2 btn btn-light font-weight-bold subebotonlista" id={3} onClick={this.mostrarFormulario} >R</button></div>
 
+
 {
+
+
 this.state.Datos.map(Elementos => {
   
 return(
-<div className="bg-white  rounded p-1 text-center mt-3 mb-2" key={Elementos[0].NombreDepartamento}>
+<div className="bg-white  rounded p-1 text-center mt-3 mb-2" key={Elementos.NombreDepartamento}>
 
-<Link to={"#"+Elementos[0].idDepartamento}><h1 className="d-inline mr-4 " onClick={this.Envia} id={Elementos[0].idDepartamento}>{Elementos[0].NombreDepartamento}</h1></Link>
+<Link to={"#"+Elementos.idDepartamento}><h1 className="d-inline mr-4 " onClick={this.Envia} id={Elementos.idDepartamento}>{Elementos.NombreDepartamento}</h1></Link>
 
 
-<h1 className="d-inline fondoBarra  colorVerde rounded" >{Elementos[0].Cantidad}</h1>
+<h1 className="d-inline fondoBarra  colorVerde rounded cantidad" >{}</h1>
 
 
 </div>
@@ -246,9 +258,10 @@ return(
   
 })
 
+
 }
 
-<Reporte ver={false} actualizaLista={this.actua()}/>
+<Reporte ver={false} actualizaLista={this.pruebas()}/>
 
 
 </div>
@@ -301,15 +314,13 @@ return(
 <input type="text" placeholder="Nombre" onChange={this.AsignarDatos} required/>
 <br/>
 <br/>
-
-
 <select value={this.state.eleccion} onChange={this.cambia}>
 {
   
 this.state.Datos.map(Elementos => {
  
 return(
-<option className="d-block"  id={Elementos[0].idDepartamento} value={Elementos[0].NombreDepartamento}>{Elementos[0].NombreDepartamento}</option>
+<option className="d-block"  id={Elementos.idDepartamento} value={Elementos.NombreDepartamento}>{Elementos.NombreDepartamento}</option>
 
 
 )

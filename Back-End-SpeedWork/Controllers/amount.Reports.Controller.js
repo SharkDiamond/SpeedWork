@@ -1,11 +1,16 @@
-const {returnReports}=require("../Data/Database");
+const {returnReports,returnReport}=require("../Data/Database");
 const {errorCatchGeneral}=require("../Helpers/ReduntCode");
 
 const amountReports=(req,res)=>{
 
-    const {idDepartment}=req.params;
+    const {idDepartments}=req.body;
 
-    returnReports(parseInt(idDepartment)).then((result)=>{
+    console.log("amountReports",idDepartments);
+
+   
+    returnReports(parseInt(idDepartments)).then((result)=>{
+
+        console.log(result);
 
         res.status(200).json({resultado:result}).end();
 
@@ -14,4 +19,27 @@ const amountReports=(req,res)=>{
 
 }
 
-module.exports={amountReports};
+//FALTA HACERLE LA RUTA.......
+const Report=async(req,res)=>{
+
+    try {
+        
+        let {Id}=req.body;
+
+        let valor=await returnReport(Id);
+
+        res.status(200).json(valor).end();
+
+    } catch (error) {
+        
+        errorCatchGeneral(error);
+
+
+    }
+
+
+
+}
+
+
+module.exports={amountReports,Report};
