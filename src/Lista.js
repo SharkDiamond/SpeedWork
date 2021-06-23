@@ -46,7 +46,7 @@ this.props.actualizatabla(e.target.id);
   //BUG LOOP INFINITO SE REPITE MUCHAS
 
   //FALTA PASAR AL NUEVO BACK-END
-axios.get("http://localhost:8081/Commentarys/list").then((response) => {
+axios.get("http://"+Ip+":8081/Commentarys/list").then((response) => {
     //RESPUESTA SI TODO SALE BIEN
     
 this.setState({
@@ -71,8 +71,8 @@ Datos:response.data
 
 componentDidMount(){
   console.log("se ejecuta");
-    //FALTA PASAR AL NUEVO BACK-END
-axios.get("http://localhost:8081/Commentarys/list").then((response) => {
+    
+axios.get("http://"+Ip+":8081/Commentarys/list").then((response) => {
     //RESPUESTA SI TODO SALE BIEN
 
 this.setState({

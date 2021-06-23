@@ -722,5 +722,36 @@ const returnReport=(idReport)=>{
 
 }
 
+const OOCReport=(cambia,reporte)=>{
+
+    return new Promise(async(resolve,reject)=>{
+
+       try {
+
+        let conexion=await createConeccionUpdate();
+
+        let query="UPDATE reportes SET Estado=? WHERE idReporte=?";
+
+        conexion.query(query,[cambia,reporte],(error,result,fields)=>{
+
+           if (error) return reject("Hubo un problema al ejecutar la consulta en OOCReport");
+
+            resolve(result.affectedRows==1 && result.affectedRows>0 ? true : false);
+
+            conexion.release();
+
+        });
+
+
+       } catch (error) {
+          
+            reject(error);
+
+       } 
+
+    });
+
+}
+
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents,returnReports,DepartamentAndAmountReports,returnReport};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents,returnReports,DepartamentAndAmountReports,returnReport,OOCReport};

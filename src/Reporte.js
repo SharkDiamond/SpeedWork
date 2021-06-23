@@ -78,19 +78,16 @@ cerradooabierto:"Abrir"
 
 AbrirOCerrarReporte=()=>{
 
-
-  let contador=0;
 if(this.state.ac==true) {
 
-axios.post("http://localhost:8080/restback/index.php/Departamentos/AbirCerrarReporte",{cambia:false,reporte:this.props.idbusqueda}).then((respuesta)=>{
-
-  console.log("test2");
-
+axios.post("http://"+Ip+":8081/DepCANTD/OpenOrCloseReport",{cambia:false,reporte:this.props.idbusqueda}).then((respuesta)=>{
 
 this.setState({
 ac:false
 
-})
+});
+
+
 this.MostrarAbiertoOCerrado();
 
 this.props.actualizaLista();
@@ -106,7 +103,7 @@ console.log(error);
 } else {
 
 
-axios.post("http://localhost:8080/restback/index.php/Departamentos/AbirCerrarReporte",{cambia:true,reporte:this.props.idbusqueda}).then((respuesta)=>{
+axios.post("http://"+Ip+":8081/DepCANTD/OpenOrCloseReport",{cambia:true,reporte:this.props.idbusqueda}).then((respuesta)=>{
 
 
 this.MostrarAbiertoOCerrado();
@@ -133,14 +130,12 @@ console.log(error);
 
 }
 
-
-
 enviaComentario= (e)=>{
 
 e.preventDefault();
 
 
-axios.post("http://localhost:8081/Commentarys",{comentario:this.state.describe,reporte:this.props.idbusqueda,usuario:localStorage.getItem("Usuario")}).then((respuesta)=>{
+axios.post("http://"+Ip+":8081/Commentarys",{comentario:this.state.describe,reporte:this.props.idbusqueda,usuario:localStorage.getItem("Usuario")}).then((respuesta)=>{
 
 
 this.PeticionComentarios(this.props.idbusqueda);
@@ -166,23 +161,21 @@ console.log("error en envia comentario",error);
 
 Peticion(Dato){         
 
-axios.post("http://localhost:8080/restback/index.php/Departamentos/TituloReporte",{IDentificador:Dato}).then((respuesta)=>{
+axios.post("http://"+Ip+":8081/DepCANTD/Report",{idReporte:Dato}).then((respuesta)=>{
 
 //SI TODO SALE BIEN
 
-respuesta.data.map((elemento)=>{
-
 this.setState({
 
-Nombre:elemento.NombreReporte,
-FechaC:elemento.FechaCreacion,
-ac:elemento.Estado
+Nombre:respuesta.data.NombreReporte,
+FechaC:respuesta.data.FechaCreacion,
+ac:respuesta.data.Estado
 
 
 });
 
 
-});
+
 
 
 

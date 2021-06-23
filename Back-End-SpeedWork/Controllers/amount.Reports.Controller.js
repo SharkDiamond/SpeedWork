@@ -1,4 +1,4 @@
-const {returnReports,returnReport}=require("../Data/Database");
+const {returnReports,returnReport,OOCReport}=require("../Data/Database");
 const {errorCatchGeneral}=require("../Helpers/ReduntCode");
 
 const amountReports=(req,res)=>{
@@ -24,9 +24,9 @@ const Report=async(req,res)=>{
 
     try {
         
-        let {Id}=req.body;
+        let {idReporte}=req.body;
 
-        let valor=await returnReport(Id);
+        let valor=await returnReport(idReporte);
 
         res.status(200).json(valor).end();
 
@@ -42,4 +42,29 @@ const Report=async(req,res)=>{
 }
 
 
-module.exports={amountReports,Report};
+const OpenOrClose=async(req,res)=>{
+
+    try {
+        
+        let {cambia,reporte}=req.body;
+
+        let valor=await OOCReport(cambia,reporte);
+
+        if (valor) res.status(200).json(valor).end();  
+      
+        else res.status(404).end();  
+
+    } catch (error) {
+        
+        errorCatchGeneral(error);
+
+
+    }
+
+
+
+}
+
+
+
+module.exports={amountReports,Report,OpenOrClose};

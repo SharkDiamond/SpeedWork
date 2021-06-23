@@ -52,7 +52,7 @@ const DepartamentExistId=async (idDepartment)=>{
 const validReport=async (idReporte)=>{
 
 let reporte=parseInt(idReporte);
-
+    console.log("validReport",idReporte);
     let found=null;
    
     try {found=await validReportExist(reporte);} 

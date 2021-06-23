@@ -7,8 +7,7 @@ const {validateRequest}=require("../Middlewares/Validation");
 const {valideDepartamentExist,DepartamentExistId,validReport,validateUserExist}=require("../Helpers/valide");
 const {Commentary,commentarys}=require("../Controllers/Create.Commentary.Controller");
 const {Lista}=require("../Controllers/ListDepartament.Controller");
-const {amountReports}=require("../Controllers/amount.Reports.Controller");
-
+const {amountReports,Report}=require("../Controllers/amount.Reports.Controller");
 
 const router=Router();
 
@@ -30,6 +29,7 @@ router.get("/Comentarios/:reporte",[check("reporte").custom(validReport),validat
 
 
 router.get("/list",Lista);
+
 
 module.exports=router;
 
