@@ -165,10 +165,14 @@ axios.post("http://"+Ip+":8081/DepCANTD/Report",{idReporte:Dato}).then((respuest
 
 //SI TODO SALE BIEN
 
+let newString=respuesta.data.FechaCreacion.replace("T"," ");
+
+let newString2=newString.replace("Z"," ");
+
 this.setState({
 
 Nombre:respuesta.data.NombreReporte,
-FechaC:respuesta.data.FechaCreacion,
+FechaC:newString2,
 ac:respuesta.data.Estado
 
 
@@ -276,8 +280,12 @@ if (this.props.ver===true) {
 
 this.state.Comentarios.map((elemento)=>{
 
+  let newString=elemento.FechaCreacion.replace("T"," ");
 
-return <div className="bg-white p-3 m-3 rounded"><h4 className="d-block">{elemento.DescripcionComentarios}</h4><p className="font-weight-bold d-inline">{elemento.Creador}  </p><p className="d-inline">{elemento.FechaCreacion}</p></div>
+  let newString2=newString.replace("Z"," ");
+  
+
+return <div className="bg-white p-3 m-3 rounded"><h4 className="d-block">{elemento.DescripcionComentarios}</h4><p className="font-weight-bold d-inline">{elemento.Creador}  </p><p className="d-inline">{newString2}</p></div>
 
 })
 

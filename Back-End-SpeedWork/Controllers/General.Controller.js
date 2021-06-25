@@ -1,14 +1,44 @@
-const {response}=require("express");
+//const {response}=require("express");
+const {returnReporstDay,returnPanelData}=require("../Data/Database");
 
-const DatosGeneral=(req,res=response)=>{
-    
 
-    res.json({
-        msg:"get"
+const ReportsDay=async(req,res)=>{
+   
+    try {
+        
+        let result=await returnReporstDay();
 
-    });
-    
+        res.status(200).json(result).end();
+
+    } catch (error) {
+
+        res.status(400).json(error);
+
+    }
+
 
 }
 
-module.exports=DatosGeneral;
+
+const GeneralPanel=async(req,res)=>{
+
+    try {
+
+       let DATA=await returnPanelData();
+
+       res.status(200).json(DATA).end();
+
+        
+    } catch (error) {
+
+        res.status(404).end();
+        
+    }
+
+
+
+
+}
+
+
+module.exports={ReportsDay,GeneralPanel};

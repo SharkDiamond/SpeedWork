@@ -37,9 +37,13 @@ Ver:""
     
        
     componentDidMount(){
-axios.get("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json")
+
+
+axios.get("http://localhost:8081/General/Reportes")
   .then((response) => {
     //RESPUESTA SI TODO SALE BIEN
+    console.log(response.data);
+
 
 
 this.setState({
@@ -67,11 +71,12 @@ reportes:response.data
 
 
 if (this.state.ov===false) {
-
-axios.get("http://localhost:8080/restback/index.php/Peticion/ultimosReportes?format=json")
+  
+axios.get("http://localhost:8081/General/Reportes")
   .then((response) => {
     //RESPUESTA SI TODO SALE BIEN
 
+console.log(response.data);
 
 this.setState({
 
@@ -124,9 +129,9 @@ Ver:"d-none"
             <p className="h1 cambialista colorVerde font-weight-bold">Reportes Del Dia</p>
             
            <ul className="text-white font-weight-bold">
-<li>{this.state.reportes.Primero}</li>
-<li>{this.state.reportes.Segundo}</li>
-<li>{this.state.reportes.Tercero}</li>
+<li>{this.state.reportes[0].NombreReporte}</li>
+<li>{this.state.reportes[1].NombreReporte}</li>
+<li>{this.state.reportes[2].NombreReporte}</li>
            </ul>   
             </div>
               

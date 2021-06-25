@@ -1,11 +1,13 @@
 const {Router}=require('express');
-const DatosGeneral=require('../Controllers/General.Controller');
+const {ReportsDay,GeneralPanel}=require('../Controllers/General.Controller');
 const amountClients=require('../Controllers/amount.Clients.Controller');
 const router=Router();
 
 
+router.get('/Reportes',ReportsDay);
 
-router.post('/',DatosGeneral);
+router.get("/GeneralData",GeneralPanel);
+
 router.post('/amount',amountClients);
 
 module.exports=router;

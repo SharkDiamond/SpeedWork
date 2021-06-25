@@ -753,5 +753,97 @@ const OOCReport=(cambia,reporte)=>{
 
 }
 
+
+const returnReporstDay=()=>{
+
+    return new Promise(async(resolve,reject)=>{
+        
+    try {
+
+        let conexion=await createConeccionUpdate();
+
+        let query="SELECT NombreReporte FROM `reportes` ORDER BY `FechaCreacion` DESC LIMIT 3"
+
+        conexion.query(query,(error,result)=>{
+
+            if (error) return reject(error);
+            
+            resolve(result);
+
+            conexion.release();
+
+        });
+
+
+    } catch (error) {
+       
+        reject(error);
+
+    }
+
+
+
+
+    });
+
+
+
+
+
+}
+
+const returnPanelData=()=>{
+
+    return new Promise(async(resolve,reject)=>{
+
+        try {
+            
+            let conexion=await createConeccionUpdate();
+
+            let query="select count(*) as DATA from clientes UNION select count(*)  from reportes UNION select count(*) from reportes where PertenenciaDepartamento=24";
+                //
+            conexion.query(query,(error,result)=>{
+                
+                if (error) return reject(error);
+                    
+                    
+                  let [CLIENTES,REPORTES,VISITAS]=result;
+                    
+                let Respuesta={
+                   "CLIENTES":CLIENTES.DATA,
+                    "REPORTES":REPORTES.DATA,
+                    "VISITAS":VISITAS.DATA
+
+
+                }
+
+                resolve(Respuesta);
+
+                delete Respuesta;
+
+                conexion.release();
+
+            });
+
+
+        } catch (error) {
+            
+            reject(error);
+
+
+        }
+
+
+    });
+
+
+
+
+
+
+
+}
+
+
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents,returnReports,DepartamentAndAmountReports,returnReport,OOCReport};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents,returnReports,DepartamentAndAmountReports,returnReport,OOCReport,returnReporstDay,returnPanelData};

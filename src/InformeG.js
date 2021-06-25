@@ -26,7 +26,7 @@ export default class InformeG extends Component {
   //Funcion Que hace la peticion y asigna los valores cuando se entra en el informe para ver los datos
   entra=()=>{
 
-   axios.get('http://localhost:8080/restback/index.php/Peticion/General?format=json').then((response) => {
+   axios.get('http://localhost:8081/General/GeneralData').then((response) => {
     
    //RESPUESTA SI TODO SALE BIEN
 
