@@ -19,7 +19,7 @@ export default class InformeG extends Component {
     Meses:null
 
 }
-
+this.Volver=this.Volver.bind(this);
     }
 
 
@@ -78,7 +78,7 @@ export default class InformeG extends Component {
     const mes=["","ClientesEnMes","ReportesEnMes","VisitasEnMes"];
 
 
-    axios.get("http://localhost:8080/restback/index.php/Peticion/" + mes[retornaid] + "?format=json").then((response) => {
+    axios.post("http://localhost:8081/General/MonthData",{"type":mes[retornaid]}).then((response) => {
     
     //RESPUESTA SI TODO SALE BIEN
 
@@ -150,6 +150,21 @@ Clientes:response.data.a
 
 }
 
+Volver=()=>{
+
+  this.setState({
+
+    mostrar:0,
+    Clientes:"Cantidad De Clientes",
+    Reportes:"Cantidad De Reportes",
+    Visitas:"Cantidad De Visitas"
+  })
+
+
+}
+
+
+
 
 
   render() {
@@ -179,9 +194,9 @@ Clientes:response.data.a
 
       return(
 
-        <div className="container-fluid fondoBarra  rounded text-center p-2">
+        <div className="container-fluid fondoBarra rounded text-center p-2">
 
-      <Grafica/>
+      <Grafica DataGrafict={this.state.Meses} back={this.Volver}/>
 
 
         </div>

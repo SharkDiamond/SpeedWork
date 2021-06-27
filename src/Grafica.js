@@ -23,13 +23,13 @@ export default class Grafica extends Component  {
 
         const data = {
 
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            labels: [this.props.DataGrafict[0].Mes,this.props.DataGrafict[1].Mes,this.props.DataGrafict[2].Mes,this.props.DataGrafict[3].Mes,this.props.DataGrafict[4].Mes,this.props.DataGrafict[5].Mes,this.props.DataGrafict[6].Mes,this.props.DataGrafict[7].Mes,this.props.DataGrafict[8].Mes,this.props.DataGrafict[9].Mes,this.props.DataGrafict[10].Mes,this.props.DataGrafict[11].Mes],
 
             datasets: [
                 {
                     label: 'Cantidad de Clientes',
 
-                    data: [44, 100, 37, 54, 28, 34,44,35,65,30,50,60],
+                    data: [this.props.DataGrafict[0].Cantidad,this.props.DataGrafict[1].Cantidad,this.props.DataGrafict[2].Cantidad,this.props.DataGrafict[3].Cantidad,this.props.DataGrafict[4].Cantidad,this.props.DataGrafict[5].Cantidad,this.props.DataGrafict[6].Cantidad,this.props.DataGrafict[7].Cantidad,this.props.DataGrafict[8].Cantidad,this.props.DataGrafict[9].Cantidad,this.props.DataGrafict[10].Cantidad,this.props.DataGrafict[11].Cantidad],
                     backgroundColor: [
                         'rgb(120,140,139)',
                         'rgb(171,200,198)',
@@ -62,13 +62,13 @@ export default class Grafica extends Component  {
 
         const data2 = {
 
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            labels: [this.props.DataGrafict[0].Mes,this.props.DataGrafict[1].Mes,this.props.DataGrafict[2].Mes,this.props.DataGrafict[3].Mes,this.props.DataGrafict[4].Mes,this.props.DataGrafict[5].Mes,this.props.DataGrafict[6].Mes,this.props.DataGrafict[7].Mes,this.props.DataGrafict[8].Mes,this.props.DataGrafict[9].Mes,this.props.DataGrafict[10].Mes,this.props.DataGrafict[11].Mes],
 
             datasets: [
                 {
                     label: 'Cantidad de Clientes',
 
-                    data: [44, 100, 37, 54, 28, 34,44,35,65,30,50,60],
+                    data: [this.props.DataGrafict[0].Cantidad,this.props.DataGrafict[1].Cantidad,this.props.DataGrafict[2].Cantidad,this.props.DataGrafict[3].Cantidad,this.props.DataGrafict[4].Cantidad,this.props.DataGrafict[5].Cantidad,this.props.DataGrafict[6].Cantidad,this.props.DataGrafict[7].Cantidad,this.props.DataGrafict[8].Cantidad,this.props.DataGrafict[9].Cantidad,this.props.DataGrafict[10].Cantidad,this.props.DataGrafict[11].Cantidad],
                     backgroundColor: [
                         'rgb(0,186,201)',
                         'rgb(0,186,201)',
@@ -148,7 +148,7 @@ export default class Grafica extends Component  {
 
                   <div className="col-6 pb-2">
 
-                      <button className="float-right btn btn-dark rounded ">Volver</button>
+                      <button className="float-right btn btn-dark rounded " onClick={this.props.back}>Volver</button>
                   </div>
 
 

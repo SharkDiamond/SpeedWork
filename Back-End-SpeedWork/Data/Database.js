@@ -844,6 +844,75 @@ const returnPanelData=()=>{
 
 }
 
+const amountForMonth=(type)=>{
+
+    return new Promise(async(resolve,reject)=>{
+
+        try {
+        
+            const MonthData=[];
+            const recorrer=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+            const Data={
+                
+                "ClientesEnMes":["clientes","FechaCreacionPerfil"],
+                "ReportesEnMes":["reportes","FechaCreacion"],
+                "VisitasEnMes":["reportes","FechaCreacion",24]
+    
+            }
+            
+
+
+            recorrer.forEach(async(elemeto,index)=>{
+                
+                let conexion=await createConeccionUpdate();
+                
+                let mesRepeat=index+1;
+               
+                let complemento=" where MONTH("+Data[type][1]+")="+mesRepeat+" and PertenenciaDepartamento="+Data[type][2];
+
+                if(type!=="VisitasEnMes") complemento=" where MONTH("+Data[type][1]+")="+mesRepeat;
+
+                let query="select count(*) as amounth from "+Data[type][0]+complemento;
+
+                conexion.query(query,(error,result)=>{
+                    
+                    if(error)  return reject(error);
+                    
+                    MonthData[index]={"Mes":elemeto,"Cantidad":result[0].amounth};
+                    if (index==11) {
+
+                        
+                        resolve(MonthData);
+                    }
+                    conexion.release();
+                   
+                });
+                
+
+            });
+
+           
+
+            /*
+            for (let index=0; index<=12; index++) {
+                
+              
+            };
+          */
+          
+
+        } catch (error) {
+            reject(error);
+        }
+
+
+    })
+
+
+}
+
+
+
 
 //EXPORT THE FUNCTIONS
-module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents,returnReports,DepartamentAndAmountReports,returnReport,OOCReport,returnReporstDay,returnPanelData};
+module.exports={searchClientData,CreateClient,validUsers,DataClientType,UpdatePassword,existUser,CreateDepartaments,validDepartament,valideDepartamentExistId,createReport,createCommentary,validReportExist,returnComents,returnReports,DepartamentAndAmountReports,returnReport,OOCReport,returnReporstDay,returnPanelData,amountForMonth};

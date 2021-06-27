@@ -1,5 +1,5 @@
 //const {response}=require("express");
-const {returnReporstDay,returnPanelData}=require("../Data/Database");
+const {returnReporstDay,returnPanelData,amountForMonth}=require("../Data/Database");
 
 
 const ReportsDay=async(req,res)=>{
@@ -40,5 +40,27 @@ const GeneralPanel=async(req,res)=>{
 
 }
 
+const amountData=async(req,res)=>{
 
-module.exports={ReportsDay,GeneralPanel};
+    try {
+        
+        let Data=await amountForMonth(req.body.type);
+
+        res.status(200).json(Data).end();
+
+    } catch (error) {
+        
+        res.status(500);
+
+    }
+
+  
+
+
+
+
+}
+
+
+
+module.exports={ReportsDay,GeneralPanel,amountData};
