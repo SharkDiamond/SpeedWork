@@ -1,6 +1,19 @@
 
 
 
+.tama{
+
+padding-top: 10px;
+
+}
+.tama2{
+
+    padding-bottom: 18px;
+
+}
+
+
+
 .fondo{
 
   background: #ffffff;  /* fallback for old browsers */
@@ -9,6 +22,14 @@
    /* background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2); Chrome 10-25, Safari 5.1-6 */
   /*  background: linear-gradient(to right, #93EDC7, #1CD8D2);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
+}
+
+
+.quitarHi{
+
+
+    text-decoration:none;
+    color: #2e8ece;
 }
 
 .anchura{
@@ -50,7 +71,7 @@ transition: 600ms;
 
 
 .colorVerde{
-
+text-decoration: none;
   color:  #12dd9a;
 
 }

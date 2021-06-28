@@ -2,11 +2,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
+import {toast} from "react-toastify";
+import {Ip} from "./Ip";
+
+
 
 export default class Reporte extends Component  {
 
 constructor(){
-
+  toast.configure();
 super();
 
 this.state={
@@ -19,13 +23,15 @@ ac:null,
 cerradooabierto:""
 
 
-
 }
 
 this.Peticion=this.Peticion.bind(this);
 
 this.AsignarDatos=this.AsignarDatos.bind(this);
 this.MostrarAbiertoOCerrado=this.MostrarAbiertoOCerrado.bind(this);
+this.PeticionComentarios=this.PeticionComentarios.bind(this);
+
+
 
 }
 
@@ -74,15 +80,14 @@ AbrirOCerrarReporte=()=>{
 
 if(this.state.ac==true) {
 
-axios.post("http://localhost:8080/restback/index.php/Departamentos/AbirCerrarReporte",{cambia:false,reporte:this.props.idbusqueda}).then((respuesta)=>{
-
-
-
+axios.post("http://"+Ip+":8081/DepCANTD/OpenOrCloseReport",{cambia:false,reporte:this.props.idbusqueda}).then((respuesta)=>{
 
 this.setState({
 ac:false
 
-})
+});
+
+
 this.MostrarAbiertoOCerrado();
 
 this.props.actualizaLista();
@@ -91,7 +96,6 @@ this.props.actualizaLista();
 
 //SI OCURRE UN PROBLEMA
 
-//alert("problemas");
 console.log(error);
 });
 
@@ -99,7 +103,7 @@ console.log(error);
 } else {
 
 
-axios.post("http://localhost:8080/restback/index.php/Departamentos/AbirCerrarReporte",{cambia:true,reporte:this.props.idbusqueda}).then((respuesta)=>{
+axios.post("http://"+Ip+":8081/DepCANTD/OpenOrCloseReport",{cambia:true,reporte:this.props.idbusqueda}).then((respuesta)=>{
 
 
 this.MostrarAbiertoOCerrado();
@@ -107,7 +111,8 @@ this.MostrarAbiertoOCerrado();
 this.setState({
 ac:true
 
-})
+});
+
 this.MostrarAbiertoOCerrado();
 this.props.actualizaLista();
 
@@ -125,63 +130,62 @@ console.log(error);
 
 }
 
-
-
-enviaComentario= async (e)=>{
+enviaComentario= (e)=>{
 
 e.preventDefault();
-await axios.post("http://localhost:8080/restback/index.php/Departamentos/CrearComentario",{comentario:this.state.describe,reporte:this.props.idbusqueda,usuario:localStorage.getItem("Usuario")}).then((respuesta)=>{
 
 
-this.setState({
-
-Comentarios:respuesta.data
-
-})
+axios.post("http://"+Ip+":8081/Commentarys",{comentario:this.state.describe,reporte:this.props.idbusqueda,usuario:localStorage.getItem("Usuario")}).then((respuesta)=>{
 
 
+this.PeticionComentarios(this.props.idbusqueda);
 
+
+toast.success(respuesta.data);
 
 
 }).catch((error)=>{
 
 //SI OCURRE UN PROBLEMA
 
-//alert("problemas");
-console.log(error);
+
+console.log("error en envia comentario",error);
 });
+
+
+
+
 
 }
 
 
-Peticion(Dato){
+Peticion(Dato){         
 
-
-
-axios.post("http://localhost:8080/restback/index.php/Departamentos/TituloReporte",{IDentificador:Dato}).then((respuesta)=>{
+axios.post("http://"+Ip+":8081/DepCANTD/Report",{idReporte:Dato}).then((respuesta)=>{
 
 //SI TODO SALE BIEN
 
+let newString=respuesta.data.FechaCreacion.replace("T"," ");
 
-respuesta.data.map((elemento)=>{
+let newString2=newString.replace("Z"," ");
 
 this.setState({
 
-Nombre:elemento.NombreReporte,
-FechaC:elemento.FechaCreacion,
-ac:elemento.Estado
-
-
-})
+Nombre:respuesta.data.NombreReporte,
+FechaC:newString2,
+ac:respuesta.data.Estado
 
 
 });
+
+
+
+
+
 
 this.MostrarAbiertoOCerrado();
 
 
-
-
 }).catch((error)=>{
 
 //SI OCURRE UN PROBLEMA
@@ -191,45 +195,64 @@ console.log(error);
 });
 
 
-axios.post("http://localhost:8080/restback/index.php/Departamentos/Comentarios",{IDentificador:Dato}).then((respuesta)=>{
-
-//SI TODO SALE BIEN
-
-
-this.setState({
-
-Comentarios:respuesta.data
-
-})
-
-
-
-
-
-
-}).catch((error)=>{
-
-//SI OCURRE UN PROBLEMA
-
-//alert("problemas");
-
-});
-
-
+this.PeticionComentarios(Dato);
 
 
 }
+
+PeticionComentarios=(Dato)=>{
+  
+axios.get("http://"+Ip+":8081/Departments/Comentarios/"+Dato).then((respuesta)=>{
+
+  //SI TODO SALE BIEN
+  
+  
+  this.setState({
+  
+  Comentarios:respuesta.data
+  
+  });
+  
+  console.log(this.state.Comentarios);
+  
+  }).catch((error)=>{
+  
+  //SI OCURRE UN PROBLEMA
+  
+  alert(Dato,"problemas comentarios");
+  
+  });
+  
+}
+
+
 
 componentDidUpdate(prevProps, prevState){
 
 if (this.props.idbusqueda!==prevProps.idbusqueda) {
 
+  
 	this.Peticion(this.props.idbusqueda);
+
+
+
 }
 
 
 
 
+
+}
+
+
+componentWillMount(){
+
+if (this.props.idbusqueda!=null) {
+  this.Peticion(this.props.idbusqueda);
+}
+  
+
+ 
 
 }
 
@@ -257,8 +280,12 @@ if (this.props.ver===true) {
 
 this.state.Comentarios.map((elemento)=>{
 
+  let newString=elemento.FechaCreacion.replace("T"," ");
 
-return <div className="bg-white p-3 m-3 rounded"><h4 className="d-block">{elemento.DescripcionComentarios}</h4><p className="font-weight-bold d-inline">{elemento.Creador}  </p><p className="d-inline">{elemento.FechaCreacion}</p></div>
+  let newString2=newString.replace("Z"," ");
+  
+
+return <div className="bg-white p-3 m-3 rounded"><h4 className="d-block">{elemento.DescripcionComentarios}</h4><p className="font-weight-bold d-inline">{elemento.Creador}  </p><p className="d-inline">{newString2}</p></div>
 
 })
 

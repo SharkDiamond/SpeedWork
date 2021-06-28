@@ -4,26 +4,105 @@ import axios from "axios";
 import Lista from "./Lista";
 import Reporte from "./Reporte";
 import Barra from "./Barra";
+import {Link} from "react-router-dom";
+import {toast} from "react-toastify";
+import {Ip} from "./Ip";
 
 export default class Departametos extends Component {
 
 
+
 constructor(){
 
+toast.configure();
 
-super();
+  super();
+
+  let searchHash=window.location.hash;
+
+if (searchHash.length>0) {
+  
+  let paramentros=window.location.hash;
+
+  const Ids=this.buscarNumeros(paramentros);
+
+
+  this.state={
+
+    Datos:[],
+    t:1,
+    ClaseTabla:"table fondoBarra",
+    VerReporte:false,
+    REPORTEID:null
+    
+    
+    }
 
 
 
-this.state={
+  if (Ids[1]==10000000000){
+    
+   
 
-Datos:[],
-t:1,
-ClaseTabla:"table fondoBarra",
-VerReporte:false,
-REPORTEID:null
+    this.state={
+
+      Datos:[],
+      t:1,
+      ClaseTabla:"table fondoBarra",
+      VerReporte:false,
+      REPORTEID:null
+      
+      
+      }
+    
+    this.actualiza(Ids[0]);
+
+
+    
+    
+  }
+  
+  
+  else{
+    
+    
+    this.state={
+
+      Datos:[],
+      t:1,
+      ClaseTabla:"d-none",
+      VerReporte:true,
+      REPORTEID:Ids[1]
+      
+      
+      }
+   
+   
+}
 
 }
+
+
+else{
+
+ 
+  this.state={
+
+    Datos:[],
+    t:1,
+    ClaseTabla:"table fondoBarra",
+    VerReporte:false,
+    REPORTEID:null
+    
+    
+    }
+
+
+}
+this.buscarNumeros=this.buscarNumeros.bind(this);
+this.actualiza=this.actualiza.bind(this);
+this.MostrarReporte=this.MostrarReporte.bind(this);
+this.MostrarReporte2=this.MostrarReporte2.bind(this);
 
 
 }
@@ -36,44 +115,99 @@ this.setState({
 ClaseTabla:"d-none",
 REPORTEID:e.target.id,
 VerReporte:true
-})
-
-
-
-
+});
 
 }
 
 
 
-actualiza=(DepartamentoNombre)=>{
+MostrarReporte2=(e)=>{
 
-console.log(DepartamentoNombre);
+  this.setState({
+  
+  ClaseTabla:"d-none",
+  REPORTEID:e,
+  VerReporte:true
+  });
+  
+  }
+  
 
 
-axios.post("http://localhost:8080/restback/index.php/Departamentos/EnviarDatos",{numero:DepartamentoNombre}).then((respuesta)=>{
+buscarNumeros=(cadena)=>{
+
+
+  let dato1="";
+  let dato2="";
+
+  let partir=0;
+  
+  let contadorHash=0;
+
+  for (let index = 1; index < cadena.length; index++) {
+    
+        
+    if (cadena[index]!=="#") {
+      
+      dato1=dato1+cadena[index];
+    
+    
+    }
+    
+    else{
+      
+      contadorHash++;
+
+
+      partir=index;
+
+
+      break;
+      
+  
+    }
+  
+  
+    
+  }
+  
+  if (contadorHash==0) dato2=10000000000;
+
+  else if (contadorHash==1) dato2=cadena.slice(partir+1,cadena.length);
+
+console.log("Cantidad de simbolo",contadorHash);
+
+
+ let ids=[parseInt(dato1),parseInt(dato2)];
+
+
+return ids;
+
+
+}
+
+actualiza=(idDPT)=>{ 
+
+axios.post("http://"+Ip+":8081/DepCANTD/Amount",{idDepartments:idDPT}).then((respuesta)=>{
 
 //SI TODO SALE BIEN
-
-
+  
 this.setState({
 
-Datos:respuesta.data,
+Datos:respuesta.data.resultado,
 ClaseTabla:"table fondoBarra",
 VerReporte:false
 
-
-
-})
+});
 
 
 
 }).catch((error)=>{
 
 //SI OCURRE UN PROBLEMA
-
-alert("problemas");
 console.log(error);
+
+
 });
 
 
@@ -126,9 +260,9 @@ if (localStorage.getItem("Usuario")) {
   this.state.Datos.map((Elemento)=>{
 
   return(
-
+  
       <tr key={Elemento.Id}>
-        <th scope="row" Style="color:orange;">{Elemento.idReporte}<button className="btn btn-outline-success ml-1" id={Elemento.idReporte} onClick={this.MostrarReporte}>Ver</button></th>
+        <th scope="row" Style="color:orange;">{Elemento.idReporte}<Link to={"#"+Elemento.PertenenciaDepartamento+"#"+Elemento.idReporte}><button className="btn btn-outline-success ml-1" id={Elemento.idReporte} onClick={this.MostrarReporte}>Ver</button></Link></th>
 
         <td className="text-primary align-middle">{Elemento.NombreReporte}</td>
         <td className="text-primary align-middle">{Elemento.FechaCreacion}</td>
@@ -150,13 +284,13 @@ if (localStorage.getItem("Usuario")) {
   </div>
 
 
-
+  
 
   <Lista actualizatabla={this.actualiza}/>
 
 
 
-
+  
 
 
 

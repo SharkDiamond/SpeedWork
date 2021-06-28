@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import './App.css';
-
-
+import {toast} from "react-toastify";
+import {Ip} from "./Ip";
 export default class ParteMediaClientes extends Component {
    
 
@@ -62,41 +62,24 @@ console.log(this.state.Telefono);
 }
 
 
-enviar= async (e) =>{
+enviar= (e) =>{
 
 e.preventDefault();
 
-await axios.post("http://localhost:8080/restback/index.php/Clientes/crearclientes",
+axios.post("http://"+Ip+":8081/CreateClients/create",
 {Nombre:this.state.Nombre,
 Apellido:this.state.Apellido,
-Correo:this.state.Correo,
 Direccion:this.state.Direccion,
 Telefono:this.state.Telefono,
+Correo:this.state.Correo,
 Tipo:this.state.tipoCliente
-}).then((respuesta)=>{
-
-
-
-
-alert("todo salio bien");
-
-
-
-}  ).catch(()=>{
-
-
-alert("Problemas");
-
-
-}
-
-
-);
+}).then((respuesta)=>toast.success("Cliente Creado!")).catch(error=>toast.info(error.response.data.Errors[0]));
 
 }
 
 
 render(){
+
 if (this.props.crearOver==true) {
 
 return(
